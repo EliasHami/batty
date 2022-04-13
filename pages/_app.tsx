@@ -3,7 +3,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Nav } from '../components'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function Batty({ Component, pageProps }: AppProps) {
   return (
   <>
     <Head>
@@ -13,9 +13,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div className="app-container bg-light">
       <Nav />
       {/* <Alert /> */}
-      <Component {...pageProps} />
+      <div className='container pt-4 bp-4'>
+        <Component {...pageProps} />
+      </div>
     </div> 
   </>)
 }
 
-export default MyApp
+export default Batty
