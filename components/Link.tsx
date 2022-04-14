@@ -1,11 +1,11 @@
-import NextLink from 'next/link'
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 
-interface NavLinkProps {
+interface LinkProps extends NextLinkProps {
   children: React.ReactNode,
-  href: string,
+  href: string
 }
 
-export default function Link({href, children, ...props} : NavLinkProps) {
+export default function Link({href, children, ...props} : LinkProps) {
   return (
     <NextLink href={href}>
       <a {...props}>{children}</a>
