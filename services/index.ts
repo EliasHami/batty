@@ -1,3 +1,3 @@
-import { constructionService } from "./construction.service"
+import { constructionService, alertService } from "./construction.service"
 
-export { constructionService }
+export { constructionService, alertService }
