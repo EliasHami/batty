@@ -1,5 +1,5 @@
 import { AddEdit } from 'components'
-import constructionService from 'services'
+import { constructionService } from 'services'
 import { GetServerSideProps } from 'next'
 
 export default AddEdit

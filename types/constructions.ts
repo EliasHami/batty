@@ -1,12 +1,17 @@
+import * as Yup from 'yup'
 
-type Construction = {
-  id: number,
-  name: string,
-  address: string,
-  type: string,
-  isDeleting: boolean,
+const constructionSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  address: Yup.string().required('Address is required'),
+  type: Yup.string().required('Type is required'),
+})
+
+type Construction = Yup.InferType<typeof constructionSchema> & {
+  isDeleting : boolean
+
 }
 
 type Constructions = Array<Construction> | null
 
-export type {Construction, Constructions}
+export { constructionSchema }
+export type { Construction, Constructions }

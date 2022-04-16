@@ -13,8 +13,11 @@ const Index:NextPage = () => {
   }, [])
 
   async function deleteConstruction(id: number) {
-    setConstructions(constructions && constructions.map(construction => 
-      construction.id === id ? {...construction, isDeleting: true} : construction))
+    setConstructions(constructions && constructions.map(construction => {
+      if (construction.id === id) construction.isDeleting = true
+
+      return construction
+    }))
     
     await constructionService.delete(id)
     setConstructions(constructions => constructions && constructions.filter(construction => construction.id !== id))
