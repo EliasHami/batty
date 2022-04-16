@@ -1,7 +1,6 @@
 import { Link } from 'components'
-import type { NextPage } from 'next'
 
-const Home: NextPage = () => {
+function Home() {
   return (
     <div>
       <h1>Batty - An app to manage building projects</h1>
