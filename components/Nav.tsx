@@ -1,6 +1,7 @@
+import React from 'react'
 import { NavLink } from '.'
 
-export default function Nav() {
+const Nav:React.FC = () => {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="navbar-nav">
@@ -10,3 +11,5 @@ export default function Nav() {
     </nav>
   )
 }
+
+export default Nav

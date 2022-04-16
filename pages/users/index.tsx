@@ -1,37 +1,23 @@
 import { useState, useEffect } from 'react'
 import {Link } from 'components'
 import { constructionService } from 'services'
+import { NextPage } from 'next'
+import { Constructions } from 'types'
 
-const NO_CONSTRUCTIONS = 'No constructions yet'
-
-interface Construction {
-  id: number,
-  name: string,
-  address: string,
-  type: string,
-  isDeleting: boolean,
-}
-
-interface Constructions extends Array<Construction>{} | string
-
-
-export default Index
-
-function Index() {
-  const [constructions, setConstructions] = useState<Constructions>([])
+const Index:NextPage = () => {
+  const [constructions, setConstructions] = useState<Constructions>(null)
 
   useEffect(() => {
-    const fetchConstructions :Constructions = async () => await constructionService.getAll()
+    constructionService.getAll().then(cs => setConstructions(cs))
 
-    setConstructions(fetchConstructions())
   }, [])
 
   async function deleteConstruction(id: number) {
-    setConstructions(constructions.map(construction => 
+    setConstructions(constructions && constructions.map(construction => 
       construction.id === id ? {...construction, isDeleting: true} : construction))
     
     await constructionService.delete(id)
-    setConstructions(constructions => constructions.filter(construction => construction.id !== id))
+    setConstructions(constructions => constructions && constructions.filter(construction => construction.id !== id))
     
   }
 
@@ -87,3 +73,5 @@ function Index() {
     </div>
   )
 }
+
+export default Index

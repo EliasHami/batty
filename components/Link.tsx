@@ -1,11 +1,12 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
+import React from 'react'
 
-type LinkProps = NextLinkProps & {
+type LinkProps = NextLinkProps & React.HTMLProps<HTMLAnchorElement> & {
   children: React.ReactNode,
   href: string
 }
 
-export default function Link({href, children, ...props} : LinkProps) {
+const Link:React.FC<LinkProps> = ({href, children, ...props}) => {
   return (
     <NextLink href={href}>
       <a {...props}>{children}</a>
@@ -13,3 +14,4 @@ export default function Link({href, children, ...props} : LinkProps) {
   )
 }
 
+export default Link 
