@@ -1,9 +1,11 @@
 import Head from 'next/head'
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { Nav } from '../components'
 
-function Batty({ Component, pageProps }: AppProps) {
+import 'styles/globals.css'
+import type { AppProps } from 'next/app'
+import { Nav } from 'components'
+import { NextPage } from 'next'
+
+const BattyApp:NextPage<AppProps> = ({ Component, pageProps }) => {
   return (
   <>
     <Head>
@@ -20,4 +22,4 @@ function Batty({ Component, pageProps }: AppProps) {
   </>)
 }
 
-export default Batty
+export default BattyApp

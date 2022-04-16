@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router'
+import React from 'react'
 import { Link } from '.'
 
-interface NavLinkProps {
+type NavLinkProps = {
   children: React.ReactNode,
   href: string,
   exact?: boolean,
   className?: string,
 }
 
-export default function NavLink({children, href, exact, ...props}: NavLinkProps) {
+const NavLink:React.FC<NavLinkProps> = ({children, href, exact, ...props}) => {
   const { pathname } = useRouter()
   const isActive = exact ? pathname === href : pathname.startsWith(href)
 
@@ -18,3 +19,5 @@ export default function NavLink({children, href, exact, ...props}: NavLinkProps)
 
   return <Link href={href} {...props}>{children}</Link>
 }
+
+export default NavLink

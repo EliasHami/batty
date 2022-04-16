@@ -1,11 +1,11 @@
-import {Link} from '../components'
-import type { NextPage } from 'next'
+import { Link } from 'components'
+import { NextPage } from 'next'
 
-const Home: NextPage = () => {
+const Home:NextPage = () => {
   return (
     <div>
-      <h1>Batty - An app to manage building projects</h1>
-      <p><Link href="/projects">&gt;&gt; Projects</Link></p>
+      <h1>Batty - An app to manage construction projects</h1>
+      <p><Link href="/constructions">&gt;&gt; Constructions</Link></p>
     </div>
   )
 }
