@@ -1,10 +1,15 @@
 import { Constructions } from 'types'
  
-const getAll: () => Promise<Constructions> = () => {
-  throw new Error('Method not implemented.')
+const getAll = async() => {
+  return Promise.resolve([])
 }
 
-export const constructionService = {
+type ConstructionsService = {
+  getAll: () => Promise<Constructions>,
+  delete: (id: number) => void,
+}
+
+export const constructionService : ConstructionsService= {
   getAll,
   delete: (id:number) => {}
 }
