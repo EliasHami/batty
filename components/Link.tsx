@@ -1,6 +1,6 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 
-interface LinkProps extends NextLinkProps {
+type LinkProps = NextLinkProps & {
   children: React.ReactNode,
   href: string
 }
