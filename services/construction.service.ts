@@ -1,8 +1,8 @@
 import { Constructions, Construction } from 'types'
 import { fetchWrapper } from 'helpers' 
 
-const getAll = async():Promise<Construction> => {
-  return fetchWrapper.get<Construction>('/constructions')
+const getAll = async():Promise<Constructions> => {
+  return fetchWrapper.get<Constructions>('/constructions')
 }
 
 const getById = async(id:number):Promise<Construction> => {
