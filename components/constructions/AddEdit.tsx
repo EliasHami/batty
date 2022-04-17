@@ -64,8 +64,18 @@ const AddEdit:React.FC<AddEditProps> = ({ construction }) => {
           <input type="text" {...register("name" as never)} className={'form-control' + (errors.name ? ' is-invalid' : '')}/>
           <div className="invaid-feedback">{errors.name?.message}</div>
         </div>
+        <div className="form-group col-5">
+          <label>Address</label>
+          <input type="text" {...register("address" as never)} className={'form-control' + (errors.address ? ' is-invalid' : '')}/>
+          <div className="invaid-feedback">{errors.address?.message}</div>
+        </div>
+        <div className="form-group col-2">
+          <label>Type</label>
+          <input type="text" {...register("type" as never)} className={'form-control' + (errors.type ? ' is-invalid' : '')}/>
+          <div className="invaid-feedback">{errors.type?.message}</div>
+        </div>
       </div>
-      </form>
+    </form>
   )
 }
 
