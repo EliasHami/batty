@@ -4,15 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { constructionService, alertService } from 'services'
 import { Construction, constructionSchema } from 'types'
+import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
 
 type AddEditProps = {
   construction?: Construction
-}
-
-const getErrorMessage = (error: unknown) => { // TODO : move to helper
-  if (error instanceof Error) return error.message
-  return String(error)
 }
 
 const AddEdit:React.FC<AddEditProps> = ({ construction }) => {

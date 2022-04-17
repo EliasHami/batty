@@ -1,4 +1,4 @@
-import { AddEdit } from 'components'
+import { AddEdit } from 'components/constructions'
 import { constructionService } from 'services'
 import { GetServerSideProps } from 'next'
 
