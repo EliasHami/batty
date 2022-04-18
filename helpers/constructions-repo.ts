@@ -1,9 +1,10 @@
+import { Construction } from "types"
 
 const getAll = ():void => {}
 
 const getById = (id:number):void => {}
 
-const create = ():void => {}
+const create = (construction:Construction):void => {}
 
 const update = (id:number):void => {}
 
