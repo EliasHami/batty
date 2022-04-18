@@ -6,7 +6,7 @@ const getById = (id:number):void => {}
 
 const create = (construction:Construction):void => {}
 
-const update = (id:number):void => {}
+const update = (id:number, construction:Construction):void => {}
 
 const _delete = (id:number):void => {}
 
