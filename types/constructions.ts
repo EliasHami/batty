@@ -8,7 +8,7 @@ const constructionSchema = Yup.object().shape({
 
 type Construction = Yup.InferType<typeof constructionSchema> & {
   isDeleting : boolean
-
+  id: number
 }
 
 type Constructions = Array<Construction> | null

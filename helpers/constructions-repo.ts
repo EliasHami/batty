@@ -1,8 +1,15 @@
-import { Construction } from "types"
+import fs from 'fs'
+import { Construction, Constructions } from "types"
 
-const getAll = ():void => {}
+const constructions : Constructions = require('data/constructions.json')
 
-const getById = (id:number):void => {}
+const getAll = ():Constructions => {
+  return constructions as Constructions
+}
+
+const getById = (id:number):Construction | null | undefined => {
+  return constructions && constructions.find(c => c.id.toString() === id.toString())
+}
 
 const create = (construction:Construction):void => {}
 
