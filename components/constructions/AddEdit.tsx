@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { SubmitHandler, useForm, UseFormProps } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { constructionService, alertService } from 'services'
+import { constructionService, alertService, Alert } from 'services'
 import { Construction, constructionSchema } from 'types'
 import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
@@ -15,8 +15,10 @@ const AddEdit:React.FC<AddEditProps> = ({ construction }) => {
   const isAddMode = !construction
   const router = useRouter()
 
-
-  const formOptions:UseFormProps<Construction> = { resolver: yupResolver(constructionSchema) }
+  const formOptions:UseFormProps<Construction> = { 
+    resolver: yupResolver(constructionSchema),
+    defaultValues : constructionSchema.cast(construction)
+  }
 
   if(!isAddMode) {
     formOptions.defaultValues = construction
@@ -34,7 +36,7 @@ const AddEdit:React.FC<AddEditProps> = ({ construction }) => {
   const createUser = async (data:Construction) => {
     try {
       await constructionService.create(data)
-      alertService.success('Construction added successfully', { keepAfterRouteChange: true })
+      alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('.')
     } catch (error) {
       alertService.error(getErrorMessage(error))
@@ -44,7 +46,7 @@ const AddEdit:React.FC<AddEditProps> = ({ construction }) => {
   const updateUser = async (id:number, data:Construction) => {
     try {
       await constructionService.update(id, data)
-      alertService.success('Construction updated successfully', { keepAfterRouteChange: true })
+      alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
       router.push('.')
     } catch (error) {
       alertService.error(getErrorMessage(error))
@@ -52,7 +54,7 @@ const AddEdit:React.FC<AddEditProps> = ({ construction }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form id="hook-form" onSubmit={handleSubmit(onSubmit)}>
       <h1>{isAddMode ? 'Add Construction' : 'Edit Construction'}</h1>
       <div className="form-row">
         <div className="form-group col">
@@ -74,7 +76,7 @@ const AddEdit:React.FC<AddEditProps> = ({ construction }) => {
         <div className="form-row">
           <div className="form-group">
             <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary mr-2">
-              {formState.isSubmitted && <span className="spinner-border spinner-border-sm mr-1"></span>}
+              {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
               Save
             </button>
             <button

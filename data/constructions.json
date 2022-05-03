@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "id": 1,
+        "name": "ee",
+        "type": "cc",
+        "address": "dd",
+        "dateCreated": "2022-05-03T14:37:37.959Z",
+        "dateUpdated": "2022-05-03T14:37:37.959Z",
+        "isDeleting": false
+    },
+    {
+        "id": 2,
+        "name": "dd",
+        "type": "dd",
+        "address": "ddf",
+        "dateCreated": "2022-05-03T14:37:55.852Z",
+        "dateUpdated": "2022-05-03T14:37:55.852Z",
+        "isDeleting": false
+    }
+]
