@@ -85,13 +85,14 @@ const AlertComponent:React.FC<AlertComponentProps> = (props) => {
     return classes.join(' ')
   }
 
-  if(alerts.length) return null
+  if(!alerts.length) return null
 
   return (
     <div className="container">
       <div className="m-3">
-        {alerts.map(alert =>
-          <div key={alert.id} className={cssClasses(alert)}>
+        {alerts.map((alert, index) =>
+          <div key={index} className={cssClasses(alert)}>
+            {/* using a uniq alert id to use as key */}
             <a className="close" onClick={() => removeAlert(alert)}>&times;</a>
             <span dangerouslySetInnerHTML={{__html: alert.message}}></span>
           </div>

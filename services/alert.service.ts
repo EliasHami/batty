@@ -34,20 +34,23 @@ function success(message: string, options?: Alert) {
 
 function error(message: string, options?: Alert) {
   if (options) alert({ ...options, type: AlertType.Error, message })
+  else alert({ type: AlertType.Error, message } as Alert)
 }
 
 function info(message: string, options?:Alert) {
   if (options) alert({ ...options, type: AlertType.Info, message })
+  else alert({ type: AlertType.Error, message } as Alert)
 }
 
 function warn(message: string, options?: Alert) {
   if (options) alert({ ...options, type: AlertType.Warning, message })
+  else alert({ type: AlertType.Error, message } as Alert)
 }
 
 // core alert method
 function alert(alert: Alert) {
   alert.id = alert.id || defaultId
-  alert.autoClose = alert.autoClose || true
+  alert.autoClose = alert.autoClose === undefined ? true : alert.autoClose
   alertSubject.next(alert)
 }
 
