@@ -31,13 +31,3 @@ export const constructionService = {
   create,
   update,
 }
-
-type AlertService = {
-  success: (message: string, options:object) => void,
-  error: (message: string) => void,
-}
-
-export const alertService : AlertService = {
-  success: (message) => {},
-  error: (message) => {},
-}
