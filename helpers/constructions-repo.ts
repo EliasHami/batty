@@ -59,10 +59,11 @@ const update = (id:number, { name, type, address}:CreateUpdateArgs):void => {
   saveData()
 }
 
-const _delete = (id:number):void => {
+const _delete = (id:number):Constructions => {
   // filter out deleted construction and save
   constructions = constructions?.filter(c => c.id.toString() !== id.toString()) || null
   saveData()
+  return constructions
 }
 
 

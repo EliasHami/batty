@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router'
+"use client"
+import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm, UseFormProps } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -8,7 +9,7 @@ import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
 
 type AddEditProps = {
-  construction?: Construction
+  construction?: Construction | null
 }
 
 const AddEdit:React.FC<AddEditProps> = ({ construction }) => {

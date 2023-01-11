@@ -1,15 +1,16 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import React from 'react'
 
-type LinkProps = NextLinkProps & React.HTMLProps<HTMLAnchorElement> & {
+type LinkProps = NextLinkProps & {
   children: React.ReactNode,
-  href: string
+  href: string,
+  className?: string
 }
 
-const Link:React.FC<LinkProps> = ({href, children, ...props}) => {
+const Link:React.FC<LinkProps> = ({href, className, children}) => {
   return (
-    <NextLink href={href}>
-      <a {...props}>{children}</a>
+    <NextLink className={className} href={href}>
+      {children}
     </NextLink>
   )
 }

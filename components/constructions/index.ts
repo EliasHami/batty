@@ -1,3 +1,4 @@
 import AddEdit from './AddEdit';
+import Delete from './Delete'
 
-export { AddEdit }
+export { AddEdit, Delete }

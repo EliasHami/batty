@@ -1,7 +1,6 @@
 import { Link } from 'components'
-import { NextPage } from 'next'
 
-const Home:NextPage = () => {
+const Home = () => {
   return (
     <div>
       <h1>Batty - An app to manage construction projects</h1>

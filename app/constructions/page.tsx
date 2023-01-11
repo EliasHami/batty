@@ -1,28 +1,9 @@
-import { useState, useEffect } from 'react'
-import {Link } from 'components'
-import { constructionService } from 'services'
-import { NextPage } from 'next'
-import { Constructions } from 'types'
+import { Link } from 'components'
+import Delete from 'components/constructions/Delete'
+import { constructionRepo } from 'helpers'
 
-const Index:NextPage = () => {
-  const [constructions, setConstructions] = useState<Constructions>(null)
-
-  useEffect(() => {
-    constructionService.getAll().then(cs => setConstructions(cs))
-
-  }, [])
-
-  async function deleteConstruction(id: number) {
-    setConstructions(constructions && constructions.map(construction => {
-      if (construction.id === id) construction.isDeleting = true
-
-      return construction
-    }))
-    
-    await constructionService.delete(id)
-    setConstructions(constructions => constructions && constructions.filter(construction => construction.id !== id))
-    
-  }
+export default function Constructions() {
+  let constructions = constructionRepo.getAll()
 
   return (
     <div>
@@ -45,15 +26,7 @@ const Index:NextPage = () => {
               <td>{construction.type}</td>
               <td style={{ whiteSpace: 'nowrap'}}>
                 <Link href={`/constructions/${construction.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
-                <button 
-                  className="btn btn-sm btn-danger btn-delete-construction" 
-                  onClick={() => deleteConstruction(construction.id)} 
-                  disabled={construction.isDeleting}
-                >
-                  {construction.isDeleting 
-                      ? <span className="spinner-border spinner-border-sm"></span> 
-                      : <span>Delete</span>}
-                </button>
+                <Delete id={construction.id} />
               </td>
             </tr>
           ))}
@@ -76,5 +49,3 @@ const Index:NextPage = () => {
     </div>
   )
 }
-
-export default Index

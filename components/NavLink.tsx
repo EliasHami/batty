@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { usePathname  } from 'next/navigation'
 import React from 'react'
 import { Link } from '.'
 
@@ -10,8 +10,8 @@ type NavLinkProps = {
 }
 
 const NavLink:React.FC<NavLinkProps> = ({children, href, exact, ...props}) => {
-  const { pathname } = useRouter()
-  const isActive = exact ? pathname === href : pathname.startsWith(href)
+  const pathname = usePathname()
+  const isActive = exact ? pathname === href : pathname?.startsWith(href)
 
   if(isActive) {
     props.className += ' active'

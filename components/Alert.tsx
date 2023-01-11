@@ -1,5 +1,6 @@
+"use client"
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { alertService, AlertType, Alert, Alerts, defaultAlertId } from 'services'
 
@@ -40,13 +41,13 @@ const AlertComponent:React.FC<AlertComponentProps> = (props) => {
 
     // clear alerts on location change
     const onRouteChange = () => alertService.clear(id)
-    router.events.on('routeChangeStart', onRouteChange)
+    // router.on('routeChangeStart', onRouteChange) // TODO
 
     // clean up function that runs when the component is unmounted
     return () => {
       // unsubscribe to avoid memory leaks
       subscription.unsubscribe()
-      router.events.off('routeChangeStart', onRouteChange)
+      // router.events.off('routeChangeStart', onRouteChange) // TODO
     }
   })
 
