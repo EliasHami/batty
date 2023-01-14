@@ -41,7 +41,7 @@
         {
           "id": "8295093f-6039-45da-9914-3037355c1451",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "ajouter un crud pour les users",
+          "title": "user authentication",
           "description": "",
           "labels": [],
           "checkboxes": [],
@@ -50,7 +50,16 @@
         {
           "id": "e81c5229-390e-40ac-9665-e868f111df56",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "page detail infos entreprise gc",
+          "title": "Company page/api",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "853bb2cf-1407-48f6-8de7-c0d1d07b7499",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "Customer page / api",
           "description": "",
           "labels": [],
           "checkboxes": [],
@@ -72,25 +81,30 @@
             {
               "id": "dd53d36d-f118-4dc5-8188-259cbbab7ab8",
               "title": "formulaire",
-              "checked": true
+              "checked": false
             },
             {
               "id": "d52e684d-a454-46bf-a4bb-867918606328",
               "title": "liste",
-              "checked": true
-            },
-            {
-              "id": "555ca983-7f47-4ca5-b4e7-94c57a26927c",
-              "title": "api ",
               "checked": false
             },
             {
               "id": "8e7994ba-97c8-48fc-8f2d-b4ea712e91e8",
               "title": "repo",
               "checked": false
+            },
+            {
+              "id": "2162970e-a478-4c5c-9a08-5827e110bb84",
+              "title": "types",
+              "checked": true
             }
           ],
-          "comments": []
+          "comments": [
+            {
+              "id": "d36d9f35-2fe9-42c4-9cd2-767c376fd6c9",
+              "comment": "manque le champ provisions"
+            }
+          ]
         }
       ]
     },
