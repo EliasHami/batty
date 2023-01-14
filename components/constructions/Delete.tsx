@@ -11,7 +11,7 @@ export default function Delete({id}:{id:number}) {
 
   return (
     <button 
-      className="btn btn-sm btn-danger btn-delete-construction" 
+      className="btn btn-sm btn-danger btn-construction" 
       onClick={() => deleteConstruction(id)} 
       disabled={isDeleting}
     >

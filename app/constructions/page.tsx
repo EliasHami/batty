@@ -1,5 +1,5 @@
 import { Link } from 'components'
-import Delete from 'components/constructions/Delete'
+import {Delete, GenerateEstimatePDF} from 'components/constructions'
 import { constructionRepo } from 'helpers'
 
 export default function Constructions() {
@@ -25,6 +25,7 @@ export default function Constructions() {
               <td>{construction.address}</td>
               <td>{construction.type}</td>
               <td style={{ whiteSpace: 'nowrap'}}>
+                <GenerateEstimatePDF construction={construction} />
                 <Link href={`/constructions/${construction.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
                 <Delete id={construction.id} />
               </td>
