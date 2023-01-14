@@ -5,33 +5,6 @@
       "title": "TODO",
       "cards": [
         {
-          "id": "a4b2f83b-e229-47bd-923e-2c5484ef1b79",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "ajouter generation csv",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "d631fda7-b868-4252-801a-f4a3d4c2d6ba",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "voir les factures et devis pour ajouter des champs au crud",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "2dbd3aeb-2934-4da3-9724-4b44eeea914d",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "utiliser useSWR",
-          "description": "https://swr.vercel.app/",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
           "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "Migrate to Material UI",
@@ -73,6 +46,15 @@
           "labels": [],
           "checkboxes": [],
           "comments": []
+        },
+        {
+          "id": "e81c5229-390e-40ac-9665-e868f111df56",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "page detail infos entreprise gc",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
         }
       ]
     },
@@ -81,8 +63,32 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "e95ae4d3-9af5-4c57-bd9a-ff63e14a061c",
+          "id": "d631fda7-b868-4252-801a-f4a3d4c2d6ba",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "voir les factures et devis pour ajouter des champs au crud",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "a4b2f83b-e229-47bd-923e-2c5484ef1b79",
+          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "ajouter generation",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+      "title": "DONE",
+      "cards": [
+        {
+          "id": "e95ae4d3-9af5-4c57-bd9a-ff63e14a061c",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
           "title": "Alert",
           "description": "",
           "labels": [],
@@ -94,30 +100,6 @@
             }
           ]
         },
-        {
-          "id": "98383c8a-db8c-4b9a-a5ba-e2e0332e9026",
-          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "tests",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "3f49313c-760a-48ca-bc9a-8064bd21055e",
-          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "edit ne marche pas",
-          "description": "en gros AddEdit je l'utilise pour la page Add : pas besoin de fetch \npour edit : je dois fetch avec l'id \nsauf que j'utilise getServerSideProps donc ça devrait rendre côté back une page qui normalement se rend cote front donc je sais pas comment ça marche",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        }
-      ]
-    },
-    {
-      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
-      "title": "DONE",
-      "cards": [
         {
           "id": "99275f8a-9af3-456f-8ce9-a467e79580aa",
           "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
@@ -156,6 +138,15 @@
               "checked": true
             }
           ],
+          "comments": []
+        },
+        {
+          "id": "3f49313c-760a-48ca-bc9a-8064bd21055e",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "edit ne marche pas",
+          "description": "en gros AddEdit je l'utilise pour la page Add : pas besoin de fetch \npour edit : je dois fetch avec l'id \nsauf que j'utilise getServerSideProps donc ça devrait rendre côté back une page qui normalement se rend cote front donc je sais pas comment ça marche",
+          "labels": [],
+          "checkboxes": [],
           "comments": []
         },
         {
