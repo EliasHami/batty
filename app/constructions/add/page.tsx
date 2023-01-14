@@ -1,3 +1,3 @@
-import { AddEdit } from 'components/constructions'
+import AddEdit from '../AddEdit'
 
 export default AddEdit

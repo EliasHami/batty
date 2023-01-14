@@ -1,4 +1,10 @@
-import { Construction, Constructions, constructionSchema } from "./constructions"
+import { 
+  Construction,
+  Constructions, 
+  constructionSchema,
+  Parts,
+  Part
+} from "./constructions"
 
 export { constructionSchema }
-export type { Construction, Constructions }
+export type { Construction, Constructions, Part, Parts }

@@ -1,4 +1,4 @@
-import { AddEdit } from 'components/constructions'
+import AddEdit from '../AddEdit'
 import { constructionRepo } from 'helpers'
 
 export default function Edit({params}:{params : { id : string}}) {

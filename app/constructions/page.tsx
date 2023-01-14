@@ -1,5 +1,6 @@
 import { Link } from 'components'
-import {Delete, GenerateEstimatePDF} from 'components/constructions'
+import Delete from './Delete'
+import GenerateEstimatePDF from './GenerateEstimatePDF'
 import { constructionRepo } from 'helpers'
 
 export default function Constructions() {
