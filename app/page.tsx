@@ -1,6 +1,6 @@
 import { Link } from 'components'
 
-const Home = () => {
+export default function Home() {
   return (
     <div>
       <h1>Batty - An app to manage construction projects</h1>
@@ -8,5 +8,3 @@ const Home = () => {
     </div>
   )
 }
-
-export default Home

@@ -35,7 +35,7 @@ const create = ({name, type, address}:CreateUpdateArgs):void => {
   const dateUpdated = new Date().toISOString()
 
   // add and save construction
-  const construction = {id, name, type, address, dateCreated, dateUpdated, isDeleting: false}
+  const construction = {id, name, address, dateCreated, dateUpdated}
   constructions?.push(construction as Construction)
   saveData()
 }

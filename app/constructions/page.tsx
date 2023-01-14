@@ -12,9 +12,10 @@ export default function Constructions() {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th style={{ width: '30%'}}>Name</th>
-            <th style={{ width: '30%'}}>Address</th>
-            <th style={{ width: '30%'}}>Type</th>
+            <th style={{ width: '22%'}}>Name</th>
+            <th style={{ width: '22%'}}>Address</th>
+            <th style={{ width: '22%'}}>Description</th>
+            <th style={{ width: '22%'}}>Customer</th>
             <th style={{ width: '10%'}}></th>
           </tr>
         </thead>
@@ -23,7 +24,8 @@ export default function Constructions() {
             <tr key={construction.id}>
               <td>{construction.name}</td>
               <td>{construction.address}</td>
-              <td>{construction.type}</td>
+              <td>{construction.description}</td>
+              <td>{construction.customer}</td>
               <td style={{ whiteSpace: 'nowrap'}}>
                 <GenerateEstimatePDF construction={construction} />
                 <Link href={`/constructions/${construction.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>

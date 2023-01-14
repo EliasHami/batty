@@ -17,7 +17,7 @@ export default function GenerateEstimatePDF({construction}:{construction:Constru
     className="btn btn-sm btn-secondary btn-construction mr-1" 
     onClick={() => generatePDF()} 
   >
-    Generate PDF
+    Generate estimate
   </button>
   )
 

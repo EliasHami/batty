@@ -32,3 +32,49 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Project structure
+
+## Constructions
+
+Details about constructions projects  
+
+- name
+- description
+- customer
+- address
+- estimate_validity
+- parts (rooms, kitchen, ...) : {
+  name,
+  provisions : [
+    {
+      quantity,
+      service
+    }]}
+
+## Services
+
+Details about each construction services
+
+- name
+- unit
+- unit_price
+
+## Customers
+
+Details about customers
+
+- name
+- address
+- type (particulier/pro)
+
+## Company
+
+Details about the company
+
+- name
+- address
+- phone number
+- SIRET number
+- email
+- logo
