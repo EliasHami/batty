@@ -55,6 +55,33 @@
           "labels": [],
           "checkboxes": [],
           "comments": []
+        },
+        {
+          "id": "e7b5caa1-afd8-4a7d-9d47-15ec600ef2c4",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "Migrate AddEdit form to MaterialUI",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "702fdd48-2be1-43ba-b5a6-1f96516cf9c4",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "Migrate list onstruction to matrialui",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "5fa7a93c-a0ed-447e-83ea-ad688aa05515",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "migrate buttons to mui",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
         }
       ]
     },
@@ -63,18 +90,18 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
+          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "add Material UI tabs for constructions",
+          "title": "change repo to prisma orm and use db",
           "description": "",
           "labels": [],
           "checkboxes": [],
           "comments": []
         },
         {
-          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
+          "id": "52ee30c8-3660-49e5-b643-1c3091cce8c7",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "change repo to prisma orm and use db",
+          "title": "use List/edit view for parts",
           "description": "",
           "labels": [],
           "checkboxes": [],
@@ -115,6 +142,15 @@
               "comment": "manque le champ provisions"
             }
           ]
+        },
+        {
+          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "add Material UI tabs for constructions",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
         },
         {
           "id": "d631fda7-b868-4252-801a-f4a3d4c2d6ba",
