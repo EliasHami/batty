@@ -5,6 +5,15 @@
       "title": "TODO",
       "cards": [
         {
+          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "change repo to prisma orm and use db",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
           "id": "8a1616db-b040-478a-908a-102b146820dc",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "créer un crud générique",
@@ -33,7 +42,7 @@
           "id": "8295093f-6039-45da-9914-3037355c1451",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "user authentication",
-          "description": "",
+          "description": "see mui free templates",
           "labels": [],
           "checkboxes": [],
           "comments": []
@@ -60,7 +69,7 @@
           "id": "e7b5caa1-afd8-4a7d-9d47-15ec600ef2c4",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "Migrate AddEdit form to MaterialUI",
-          "description": "",
+          "description": "utiliser Box component=form",
           "labels": [],
           "checkboxes": [],
           "comments": []
@@ -82,6 +91,24 @@
           "labels": [],
           "checkboxes": [],
           "comments": []
+        },
+        {
+          "id": "4f3dda81-6f91-4887-9c41-3031fbfb837c",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "add navtabs",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "39be6bcd-79ca-452e-ab9d-6c5062945f48",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "use Alert of mui",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
         }
       ]
     },
@@ -90,18 +117,18 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
+          "id": "52ee30c8-3660-49e5-b643-1c3091cce8c7",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "change repo to prisma orm and use db",
+          "title": "use accordion for parts",
           "description": "",
           "labels": [],
           "checkboxes": [],
           "comments": []
         },
         {
-          "id": "52ee30c8-3660-49e5-b643-1c3091cce8c7",
+          "id": "de54e01d-5d7e-4d27-b93f-4a41ab990834",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "use List/edit view for parts",
+          "title": "use stepper instead of tabs for constructions",
           "description": "",
           "labels": [],
           "checkboxes": [],
@@ -113,6 +140,24 @@
       "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
       "title": "DONE",
       "cards": [
+        {
+          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "add Material UI tabs for constructions",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "22c79225-d167-4cb4-bea9-3298a44343c3",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "see mui usage ",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
         {
           "id": "1eb4a4bb-22c9-44c1-a058-11961af8694b",
           "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
@@ -142,15 +187,6 @@
               "comment": "manque le champ provisions"
             }
           ]
-        },
-        {
-          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
-          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
-          "title": "add Material UI tabs for constructions",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
         },
         {
           "id": "d631fda7-b868-4252-801a-f4a3d4c2d6ba",
