@@ -4,7 +4,7 @@ import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-f
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { constructionService, alertService, Alert } from 'services'
-import { Construction, constructionSchema, Parts as PartsType } from 'types'
+import { Construction, constructionSchema } from 'types'
 import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
 import Parts from './Parts'
@@ -93,7 +93,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
           </div>
         </div>
         <div className="form-row">
-          <Parts parts={construction?.parts as PartsType} />
+          <Parts />
         </div>
         <div className="form-row">
           <div className="form-group">

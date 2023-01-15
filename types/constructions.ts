@@ -10,10 +10,6 @@ const partSchema = Yup.object().shape({
   )
 })
 
-interface Part extends Yup.Asserts<typeof partSchema> {}
-
-type Parts = Array<Part> | null
-
 const constructionSchema = Yup.object().shape({
   id: Yup.number().required().default(1),
   dateCreated: Yup.string(),
@@ -31,4 +27,4 @@ interface Construction extends Yup.Asserts<typeof constructionSchema> {}
 type Constructions = Array<Construction> | null
 
 export { constructionSchema }
-export type { Construction, Constructions, Part, Parts }
+export type { Construction, Constructions }

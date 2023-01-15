@@ -81,12 +81,12 @@
             {
               "id": "dd53d36d-f118-4dc5-8188-259cbbab7ab8",
               "title": "formulaire",
-              "checked": false
+              "checked": true
             },
             {
               "id": "d52e684d-a454-46bf-a4bb-867918606328",
               "title": "liste",
-              "checked": false
+              "checked": true
             },
             {
               "id": "8e7994ba-97c8-48fc-8f2d-b4ea712e91e8",
