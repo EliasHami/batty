@@ -5,15 +5,6 @@
       "title": "TODO",
       "cards": [
         {
-          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "Migrate to Material UI",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
           "id": "8a1616db-b040-478a-908a-102b146820dc",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "créer un crud générique",
@@ -72,8 +63,32 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "1eb4a4bb-22c9-44c1-a058-11961af8694b",
+          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "add Material UI tabs for constructions",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
+          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "change repo to prisma orm and use db",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+      "title": "DONE",
+      "cards": [
+        {
+          "id": "1eb4a4bb-22c9-44c1-a058-11961af8694b",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
           "title": "nouveau champs construction",
           "description": "",
           "labels": [],
@@ -89,11 +104,6 @@
               "checked": true
             },
             {
-              "id": "8e7994ba-97c8-48fc-8f2d-b4ea712e91e8",
-              "title": "repo",
-              "checked": false
-            },
-            {
               "id": "2162970e-a478-4c5c-9a08-5827e110bb84",
               "title": "types",
               "checked": true
@@ -105,13 +115,7 @@
               "comment": "manque le champ provisions"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
-      "title": "DONE",
-      "cards": [
+        },
         {
           "id": "d631fda7-b868-4252-801a-f4a3d4c2d6ba",
           "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
