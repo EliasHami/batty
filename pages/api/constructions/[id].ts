@@ -14,7 +14,7 @@ const handler = (req:NextApiRequest, res:NextApiResponse) => {
 
   const updateConstruction = () => {
     try {
-      constructionRepo.update(Number(req.query.id), req.body as Construction)
+      constructionRepo.update(Number(req.query.id), req.body)
       return res.status(200).json({})
     } catch (error) {
       return res.status(400).json({ message: getErrorMessage(error) })

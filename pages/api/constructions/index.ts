@@ -11,7 +11,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
 
   const createConstruction = () => {
     try {
-      constructionRepo.create(req.body as Construction)
+      constructionRepo.create(req.body)
       return res.status(200).json({})
     } catch(error) {
       return res.status(400).json({ message : getErrorMessage(error)})

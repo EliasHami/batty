@@ -33,7 +33,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   }
 
   const methods = useForm<Construction>(formOptions)
-  const { register, handleSubmit, reset, formState } = methods
+  const { register, handleSubmit, formState } = methods
   const { errors } = formState
 
   const onSubmit: SubmitHandler<Construction> = (data) => {
@@ -143,14 +143,13 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                {activeStep === steps.length - 1 ? (
+                <Button onClick={handleNext} disabled={activeStep === steps.length - 1}>
+                    Next
+                </Button>
+                {activeStep === steps.length - 1 && (
                   <Button type="submit" disabled={formState.isSubmitting}>
                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                     Save
-                  </Button>
-                ) : (
-                  <Button onClick={handleNext}>
-                    Next
                   </Button>
                 )}
               </Box>

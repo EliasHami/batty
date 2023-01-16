@@ -5,14 +5,14 @@ export const getErrorMessage = (error: unknown):string => {
 
 const handleResponse = async <T>(response:Response):Promise<T> => {
   const text = await response.text()
-  const data = text && JSON.parse(text)
+  const data:T = text && JSON.parse(text)
 
   if (!response.ok) {
     const errorMessage = getErrorMessage(data) || response.statusText
     return Promise.reject(errorMessage)
   }
 
-  return Promise.resolve(data as T)
+  return Promise.resolve(data)
 }
 
 const get = async <T>(url:string):Promise<T> => {

@@ -110,17 +110,7 @@
     {
       "id": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
       "title": "IN PROGRESS",
-      "cards": [
-        {
-          "id": "52ee30c8-3660-49e5-b643-1c3091cce8c7",
-          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "use accordion for parts",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        }
-      ]
+      "cards": []
     },
     {
       "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
@@ -130,6 +120,15 @@
           "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
           "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
           "title": "add Material UI tabs for constructions",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "52ee30c8-3660-49e5-b643-1c3091cce8c7",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "use accordion for parts",
           "description": "",
           "labels": [],
           "checkboxes": [],

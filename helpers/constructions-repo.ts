@@ -8,23 +8,17 @@ const saveData = ():void => {
 }
 
 const getAll = ():Constructions => {
-  return constructions as Constructions
+  return constructions
 }
 
 const getById = (id:number):Construction | null | undefined => {
   return constructions && constructions.find(c => c.id.toString() === id.toString())
 }
 
-type CreateUpdateArgs = {
-  name: string,
-  address: string,
-  type: string
-}
-
-const create = ({name, type, address}:CreateUpdateArgs):void => {
+const create = (construction:Construction):void => {
   // validate
-  if (constructions?.find(c => c.name === name)) {
-    throw `Construction with name ${name} already exists`
+  if (constructions?.find(c => c.name === construction.name)) {
+    throw `Construction with name ${construction.name} already exists`
   }
 
   // generate new construction id
@@ -35,27 +29,27 @@ const create = ({name, type, address}:CreateUpdateArgs):void => {
   const dateUpdated = new Date().toISOString()
 
   // add and save construction
-  const construction = {id, name, address, dateCreated, dateUpdated}
-  constructions?.push(construction as Construction)
+  const dated_construction = {...construction, id, dateCreated, dateUpdated}
+  constructions?.push(dated_construction as Construction)
   saveData()
 }
 
-const update = (id:number, { name, type, address}:CreateUpdateArgs):void => {
-  const construction = constructions?.find(c => c.id.toString() === id.toString())
+const update = (id:number, construction:Construction):void => {
+  const current_construction = constructions?.find(c => c.id.toString() === id.toString())
   
   if (!construction) {
     throw `Construction with id ${id} does not exist`
   }
 
-  if (name !== construction.name && constructions?.find(c => c.name === name)) {
-    throw `Construction with name ${name} already exists`
+  if (construction.name !== current_construction?.name && constructions?.find(c => c.name === construction.name)) {
+    throw `Construction with name ${construction.name} already exists`
   }
 
   // set date updated
   construction.dateUpdated = new Date().toISOString()
 
   // update construction and save
-  Object.assign(construction, {name, type, address})
+  Object.assign(current_construction, construction)
   saveData()
 }
 
