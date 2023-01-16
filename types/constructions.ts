@@ -16,10 +16,10 @@ const constructionSchema = Yup.object().shape({
   dateUpdated: Yup.string(),
   name: Yup.string().required('Name is required'),
   description: Yup.string().required('Description is required'),
-  customer: Yup.string().required('Name is required'), // TODO new structure
+  customer: Yup.string().required('Customer is required'), // TODO new structure
   address: Yup.string().required('Address is required'),
   estimate_validity: Yup.number().default(30),
-  parts: Yup.array().of(partSchema)
+  parts: Yup.array().of(partSchema).required('Parts are required')
 })
 
 interface Construction extends Yup.Asserts<typeof constructionSchema> {}

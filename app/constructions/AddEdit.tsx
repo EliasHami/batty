@@ -10,7 +10,7 @@ import { Link } from 'components'
 import Parts from './Parts'
 
 import { useState } from 'react'
-import { Step, StepLabel, Stepper,Box, Button } from '@mui/material'
+import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
 
 type AddEditProps = {
   construction?: Construction | null
@@ -70,13 +70,34 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }
 
+  const isStepFailed = (step: number) => {
+    if (step === 0) {
+      return Boolean(errors.name || errors.address || errors.description || errors.customer)
+    } else if (step === 1) return Boolean(errors.parts)
+  }
+
   return (
     <FormProvider {...methods} >
       <form id="hook-form" onSubmit={handleSubmit(onSubmit)}>
+        <Link href="/constructions" className="btn btn-link">&#60;- Back</Link>
         <Box sx={{ width: '100%' }}>
           <h1>{isAddMode ? 'Add Construction' : 'Edit Construction'}</h1>
-          <Stepper activeStep={activeStep}>
-            {steps.map(label => <Step key={label}><StepLabel>{label}</StepLabel></Step>)}
+          <Stepper activeStep={activeStep} sx={{ mb: "100px" }}>
+            {steps.map((label, index) => {
+              const labelProps: {
+                optional?: React.ReactNode
+                error?: boolean
+              } = {}
+              if (isStepFailed(index)) {
+                labelProps.optional = (
+                  <Typography variant="caption" color="error">
+                    Missing required fields
+                  </Typography>
+                );
+                labelProps.error = true;
+              }
+              return <Step key={label}><StepLabel {...labelProps}>{label}</StepLabel></Step>
+            })}
           </Stepper>
           {steps[activeStep] === "Configuration" && (
             <div className="form-row">
@@ -101,11 +122,6 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
                 <div className="invalid-feedback">{errors.customer?.message}</div>
               </div>
               <div className="form-group col">
-                <label>Address</label>
-                <input type="text" {...register("address" as never)} className={'form-control' + (errors.address ? ' is-invalid' : '')} />
-                <div className="invalid-feedback">{errors.address?.message}</div>
-              </div>
-              <div className="form-group col">
                 <label>Estimate&apos;s validity</label>
                 <input type="text" {...register("estimate_validity" as never)} className={'form-control' + (errors.estimate_validity ? ' is-invalid' : '')} />
                 <div className="invalid-feedback">{errors.estimate_validity?.message}</div>
@@ -117,36 +133,27 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
             </div>)}
           <div className="form-row">
             <div className="form-group">
-              {activeStep === steps.length ? (
-                <>
-                  <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary mr-2">
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  Back
+                </Button>
+                <Box sx={{ flex: '1 1 auto' }} />
+                {activeStep === steps.length - 1 ? (
+                  <Button type="submit" disabled={formState.isSubmitting}>
                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                     Save
-                  </button>
-                  <button
-                    onClick={() => reset(formOptions.defaultValues)}
-                    type="button"
-                    disabled={formState.isSubmitting}
-                    className="btn btn-secondary">
-                    Reset
-                  </button>
-                </>) : (
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                  <Button
-                    color="inherit"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    sx={{ mr: 1 }}
-                  >
-                    Back
                   </Button>
-                  <Box sx={{ flex: '1 1 auto' }} />
+                ) : (
                   <Button onClick={handleNext}>
-                     Next
+                    Next
                   </Button>
-                </Box>
-              )}
-              <Link href="/constructions" className="btn btn-link">Cancel</Link>
+                )}
+              </Box>
             </div>
           </div>
         </Box>

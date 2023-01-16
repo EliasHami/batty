@@ -66,48 +66,43 @@
           "comments": []
         },
         {
-          "id": "e7b5caa1-afd8-4a7d-9d47-15ec600ef2c4",
+          "id": "92229333-ed5f-40c5-81a1-5d816a709829",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "Migrate AddEdit form to MaterialUI",
-          "description": "utiliser Box component=form",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "702fdd48-2be1-43ba-b5a6-1f96516cf9c4",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "Migrate list onstruction to matrialui",
+          "title": "migrate components/styles to MUI",
           "description": "",
           "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "5fa7a93c-a0ed-447e-83ea-ad688aa05515",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "migrate buttons to mui",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "4f3dda81-6f91-4887-9c41-3031fbfb837c",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "add navtabs",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "39be6bcd-79ca-452e-ab9d-6c5062945f48",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "use Alert of mui",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
+          "checkboxes": [
+            {
+              "id": "a5a68c4f-661e-408a-af78-b57024e3d47f",
+              "title": "Link",
+              "checked": false
+            },
+            {
+              "id": "b854e60a-535c-4905-b3e0-b79b1eb1d85a",
+              "title": "Alert",
+              "checked": false
+            },
+            {
+              "id": "ebbcf919-5731-4d6d-9e36-66be90ae2f23",
+              "title": "Navtabs",
+              "checked": false
+            },
+            {
+              "id": "cde8feca-a87d-419e-903a-b4bf929f7f7b",
+              "title": "Buttons",
+              "checked": false
+            },
+            {
+              "id": "b39a81b2-5aa4-4415-8a7a-670200c16c46",
+              "title": "construction list",
+              "checked": false
+            },
+            {
+              "id": "0d5daa44-b48b-479a-88f4-2dbe1b0b59c7",
+              "title": "addedit form",
+              "checked": false
+            }
+          ],
           "comments": []
         }
       ]

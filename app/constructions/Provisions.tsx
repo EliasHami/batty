@@ -19,7 +19,7 @@ export default function Provisions({}){
             <div className="invalid-feedback">{errors.provisions?.[index].name}</div>
           </div>
           <div className="form-group col">
-            <label>Provsion service</label>
+            <label>Provision service</label>
             <input type="text" {...register(`provisions.${index}.service`)} className={'form-control' + (errors.provisions?.[index] ? ' is-invalid' : '')} />
             <div className="invalid-feedback">{errors.provisions?.[index].service}</div>
           </div>
