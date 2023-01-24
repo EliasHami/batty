@@ -5,6 +5,8 @@ import { Constructions as ConstructionsType } from 'src/APITypes'
 import { Amplify, withSSRContext } from 'aws-amplify'
 import awsExports from 'src/aws-exports'
 import { listConstructions } from 'src/graphql/queries'
+import { alertService } from 'services'
+import { getErrorMessage } from 'helpers'
 
 Amplify.configure({ ...awsExports, ssr: true })
 
@@ -15,8 +17,8 @@ export default async function Constructions() {
   try {
     const response = await SSR.API.graphql({ query: listConstructions })
     constructions = response.data.listConstructions.items
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    alertService.error(getErrorMessage(error))
   }
 
   return (
