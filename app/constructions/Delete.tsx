@@ -1,18 +1,29 @@
 'use client'
 import { useState } from 'react'
-import { constructionService } from 'services'
+import { API } from 'aws-amplify'
+import { deleteConstruction } from 'src/graphql/mutations'
+import { alertService } from 'services'
+import { getErrorMessage } from 'helpers'
 
-export default function Delete({id}:{id:number}) {
+export default function Delete({id}:{id:string}) {
   const [isDeleting, setIsDeleting] = useState(false)
-  async function deleteConstruction(id: number) {
+  async function handleDelete(id: string) {
     setIsDeleting(true)    
-    await constructionService.delete(id)    
+    try {
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: deleteConstruction,
+        variables: { input: { id } }
+      })
+    } catch (error) {
+      alertService.error(getErrorMessage(error))
+    }    
   }
 
   return (
     <button 
       className="btn btn-sm btn-danger btn-construction" 
-      onClick={() => deleteConstruction(id)} 
+      onClick={() => handleDelete(id)} 
       disabled={isDeleting}
     >
       {isDeleting 

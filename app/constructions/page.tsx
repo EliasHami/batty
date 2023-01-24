@@ -1,10 +1,23 @@
 import { Link } from 'components'
 import Delete from './Delete'
 import GenerateEstimatePDF from './GenerateEstimatePDF'
-import { constructionRepo } from 'helpers'
+import { Constructions as ConstructionsType } from 'src/APITypes'
+import { Amplify, withSSRContext } from 'aws-amplify'
+import awsExports from 'src/aws-exports'
+import { listConstructions } from 'src/graphql/queries'
 
-export default function Constructions() {
-  let constructions = constructionRepo.getAll()
+Amplify.configure({ ...awsExports, ssr: true })
+
+export default async function Constructions() {
+  let constructions : ConstructionsType = []
+  const SSR = withSSRContext({ }) // manque req du contexte
+
+  try {
+    const response = await SSR.API.graphql({ query: listConstructions })
+    constructions = response.data.listConstructions.items
+  } catch (err) {
+    console.log(err)
+  }
 
   return (
     <div>

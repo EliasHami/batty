@@ -20,14 +20,9 @@ const update = async(id:number, params:Construction):Promise<Construction> => {
   return fetchWrapper.put<Construction>(`${baseUrl}/${id}`, params)
 }
 
-const _delete = async(id:number):Promise<Construction> => {
-  return fetchWrapper.delete<Construction>(`${baseUrl}/${id}`)
-}
-
 export const constructionService = {
   getAll,
   getById,
-  delete: _delete,
   create,
   update,
 }

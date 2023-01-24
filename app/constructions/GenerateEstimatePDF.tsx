@@ -1,6 +1,6 @@
 "use client"
 import jsPDF from "jspdf"
-import { Construction } from "types"
+import { Construction } from "src/APITypes"
 
 export default function GenerateEstimatePDF({construction}:{construction:Construction}) {
   const generatePDF = () => {

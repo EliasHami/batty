@@ -9,3 +9,5 @@ export type Construction = DeepOmit<
   Exclude<C, null>,
   '__typename'
 >
+
+export type Constructions = Array<Construction> | null
