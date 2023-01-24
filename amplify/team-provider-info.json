@@ -10,6 +10,11 @@
       "StackName": "amplify-batty-dev-95342",
       "StackId": "arn:aws:cloudformation:eu-west-3:381000629867:stack/amplify-batty-dev-95342/9b3265a0-9bc4-11ed-84f1-0e9c93ee8864",
       "AmplifyAppId": "dwdsv8e4nh6qi"
+    },
+    "categories": {
+      "api": {
+        "batty": {}
+      }
     }
   }
 }

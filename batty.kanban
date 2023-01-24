@@ -59,7 +59,7 @@
         {
           "id": "92229333-ed5f-40c5-81a1-5d816a709829",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "migrate components/styles to MUI",
+          "title": "migrate components/styles to MUI and/or Amplify UI",
           "description": "",
           "labels": [],
           "checkboxes": [
@@ -126,7 +126,28 @@
           "title": "changer repo par bdd sur cloud ",
           "description": "firebase/google cloud run, vercel, aws",
           "labels": [],
-          "checkboxes": [],
+          "checkboxes": [
+            {
+              "id": "bfa0b4ce-57b6-43aa-bca4-c75698948c19",
+              "title": "add aws amplify",
+              "checked": false
+            },
+            {
+              "id": "1adbafdf-0ee3-462b-837d-ee263953acc0",
+              "title": "add aws api",
+              "checked": false
+            },
+            {
+              "id": "54695d8d-b762-47f2-b90e-4c6f43099c3a",
+              "title": "infertype from graphql",
+              "checked": false
+            },
+            {
+              "id": "96958992-2126-42ee-96d0-31e49829728f",
+              "title": "validate yup with types",
+              "checked": false
+            }
+          ],
           "comments": [
             {
               "id": "34df04f4-c847-42bb-a82e-0c97e20674b7",
