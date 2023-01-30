@@ -23,11 +23,13 @@ export const createConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -52,11 +54,13 @@ export const updateConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -81,11 +85,13 @@ export const deleteConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -104,6 +110,7 @@ export const createPart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -111,6 +118,7 @@ export const createPart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
@@ -129,6 +137,7 @@ export const updatePart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -136,6 +145,7 @@ export const updatePart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
@@ -154,6 +164,7 @@ export const deletePart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -161,6 +172,7 @@ export const deletePart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
@@ -176,6 +188,7 @@ export const createProvision = /* GraphQL */ `
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;
@@ -191,6 +204,7 @@ export const updateProvision = /* GraphQL */ `
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;
@@ -206,6 +220,7 @@ export const deleteProvision = /* GraphQL */ `
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;

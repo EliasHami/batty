@@ -20,11 +20,13 @@ export const getConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -49,6 +51,7 @@ export const listConstructions = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -66,6 +69,7 @@ export const getPart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -73,6 +77,7 @@ export const getPart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
@@ -92,6 +97,7 @@ export const listParts = /* GraphQL */ `
         createdAt
         updatedAt
         constructionPartsId
+        owner
       }
       nextToken
     }
@@ -106,6 +112,7 @@ export const getProvision = /* GraphQL */ `
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;
@@ -123,6 +130,7 @@ export const listProvisions = /* GraphQL */ `
         createdAt
         updatedAt
         partProvisionsId
+        owner
       }
       nextToken
     }

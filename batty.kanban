@@ -140,7 +140,7 @@
             {
               "id": "54695d8d-b762-47f2-b90e-4c6f43099c3a",
               "title": "infertype from graphql",
-              "checked": false
+              "checked": true
             },
             {
               "id": "96958992-2126-42ee-96d0-31e49829728f",

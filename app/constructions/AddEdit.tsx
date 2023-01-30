@@ -8,7 +8,8 @@ import { Construction, constructionSchema } from 'types'
 import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
 import Parts from './Parts'
-
+import { API } from 'aws-amplify'
+import { createConstruction, updateConstruction } from 'src/graphql/mutations'
 import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
 
@@ -38,13 +39,22 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const onSubmit: SubmitHandler<Construction> = (data) => {
     return isAddMode
-      ? createUser(data)
-      : updateUser(construction.id, data)
+      ? handleCreateConstruction(data)
+      : handleUpdateConstruction(construction.id, data)
   }
 
-  const createUser = async (data: Construction) => {
+  const handleCreateConstruction = async (data: Construction) => {
     try {
-      await constructionService.create(data)
+      const { parts, ...construction } = data
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: createConstruction,
+        variables: {
+          input: {
+            ...construction
+          }
+        }
+      })
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('./constructions')
     } catch (error) {
@@ -52,9 +62,18 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
     }
   }
 
-  const updateUser = async (id: number, data: Construction) => {
+  const handleUpdateConstruction = async (id: number, data: Construction) => {
     try {
-      await constructionService.update(id, data)
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: updateConstruction,
+        variables: {
+          input: {
+            ...data,
+            id,
+          }
+        }
+      })
       alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
       router.push('./constructions')
     } catch (error) {
@@ -144,7 +163,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
                 <Button onClick={handleNext} disabled={activeStep === steps.length - 1}>
-                    Next
+                  Next
                 </Button>
                 {activeStep === steps.length - 1 && (
                   <Button type="submit" disabled={formState.isSubmitting}>

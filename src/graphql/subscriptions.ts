@@ -5,8 +5,9 @@
 export const onCreateConstruction = /* GraphQL */ `
   subscription OnCreateConstruction(
     $filter: ModelSubscriptionConstructionFilterInput
+    $owner: String
   ) {
-    onCreateConstruction(filter: $filter) {
+    onCreateConstruction(filter: $filter, owner: $owner) {
       id
       name
       dateCreated
@@ -22,19 +23,22 @@ export const onCreateConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateConstruction = /* GraphQL */ `
   subscription OnUpdateConstruction(
     $filter: ModelSubscriptionConstructionFilterInput
+    $owner: String
   ) {
-    onUpdateConstruction(filter: $filter) {
+    onUpdateConstruction(filter: $filter, owner: $owner) {
       id
       name
       dateCreated
@@ -50,19 +54,22 @@ export const onUpdateConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteConstruction = /* GraphQL */ `
   subscription OnDeleteConstruction(
     $filter: ModelSubscriptionConstructionFilterInput
+    $owner: String
   ) {
-    onDeleteConstruction(filter: $filter) {
+    onDeleteConstruction(filter: $filter, owner: $owner) {
       id
       name
       dateCreated
@@ -78,17 +85,22 @@ export const onDeleteConstruction = /* GraphQL */ `
           createdAt
           updatedAt
           constructionPartsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreatePart = /* GraphQL */ `
-  subscription OnCreatePart($filter: ModelSubscriptionPartFilterInput) {
-    onCreatePart(filter: $filter) {
+  subscription OnCreatePart(
+    $filter: ModelSubscriptionPartFilterInput
+    $owner: String
+  ) {
+    onCreatePart(filter: $filter, owner: $owner) {
       name
       provisions {
         items {
@@ -98,6 +110,7 @@ export const onCreatePart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -105,12 +118,16 @@ export const onCreatePart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
 export const onUpdatePart = /* GraphQL */ `
-  subscription OnUpdatePart($filter: ModelSubscriptionPartFilterInput) {
-    onUpdatePart(filter: $filter) {
+  subscription OnUpdatePart(
+    $filter: ModelSubscriptionPartFilterInput
+    $owner: String
+  ) {
+    onUpdatePart(filter: $filter, owner: $owner) {
       name
       provisions {
         items {
@@ -120,6 +137,7 @@ export const onUpdatePart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -127,12 +145,16 @@ export const onUpdatePart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
 export const onDeletePart = /* GraphQL */ `
-  subscription OnDeletePart($filter: ModelSubscriptionPartFilterInput) {
-    onDeletePart(filter: $filter) {
+  subscription OnDeletePart(
+    $filter: ModelSubscriptionPartFilterInput
+    $owner: String
+  ) {
+    onDeletePart(filter: $filter, owner: $owner) {
       name
       provisions {
         items {
@@ -142,6 +164,7 @@ export const onDeletePart = /* GraphQL */ `
           createdAt
           updatedAt
           partProvisionsId
+          owner
         }
         nextToken
       }
@@ -149,48 +172,55 @@ export const onDeletePart = /* GraphQL */ `
       createdAt
       updatedAt
       constructionPartsId
+      owner
     }
   }
 `;
 export const onCreateProvision = /* GraphQL */ `
   subscription OnCreateProvision(
     $filter: ModelSubscriptionProvisionFilterInput
+    $owner: String
   ) {
-    onCreateProvision(filter: $filter) {
+    onCreateProvision(filter: $filter, owner: $owner) {
       name
       service
       id
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;
 export const onUpdateProvision = /* GraphQL */ `
   subscription OnUpdateProvision(
     $filter: ModelSubscriptionProvisionFilterInput
+    $owner: String
   ) {
-    onUpdateProvision(filter: $filter) {
+    onUpdateProvision(filter: $filter, owner: $owner) {
       name
       service
       id
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;
 export const onDeleteProvision = /* GraphQL */ `
   subscription OnDeleteProvision(
     $filter: ModelSubscriptionProvisionFilterInput
+    $owner: String
   ) {
-    onDeleteProvision(filter: $filter) {
+    onDeleteProvision(filter: $filter, owner: $owner) {
       name
       service
       id
       createdAt
       updatedAt
       partProvisionsId
+      owner
     }
   }
 `;

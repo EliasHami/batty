@@ -91,6 +91,7 @@ export type Construction = {
   parts?: ModelPartConnection | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type ModelPartConnection = {
@@ -107,6 +108,7 @@ export type Part = {
   createdAt: string,
   updatedAt: string,
   constructionPartsId: string,
+  owner?: string | null,
 };
 
 export type ModelProvisionConnection = {
@@ -123,6 +125,7 @@ export type Provision = {
   createdAt: string,
   updatedAt: string,
   partProvisionsId?: string | null,
+  owner?: string | null,
 };
 
 export type UpdateConstructionInput = {
@@ -337,11 +340,13 @@ export type CreateConstructionMutation = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -370,11 +375,13 @@ export type UpdateConstructionMutation = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -403,11 +410,13 @@ export type DeleteConstructionMutation = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -430,6 +439,7 @@ export type CreatePartMutation = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -437,6 +447,7 @@ export type CreatePartMutation = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -459,6 +470,7 @@ export type UpdatePartMutation = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -466,6 +478,7 @@ export type UpdatePartMutation = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -488,6 +501,7 @@ export type DeletePartMutation = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -495,6 +509,7 @@ export type DeletePartMutation = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -512,6 +527,7 @@ export type CreateProvisionMutation = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -529,6 +545,7 @@ export type UpdateProvisionMutation = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -546,6 +563,7 @@ export type DeleteProvisionMutation = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -573,11 +591,13 @@ export type GetConstructionQuery = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -606,6 +626,7 @@ export type ListConstructionsQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -629,6 +650,7 @@ export type GetPartQuery = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -636,6 +658,7 @@ export type GetPartQuery = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -659,6 +682,7 @@ export type ListPartsQuery = {
       createdAt: string,
       updatedAt: string,
       constructionPartsId: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -677,6 +701,7 @@ export type GetProvisionQuery = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -697,6 +722,7 @@ export type ListProvisionsQuery = {
       createdAt: string,
       updatedAt: string,
       partProvisionsId?: string | null,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -704,6 +730,7 @@ export type ListProvisionsQuery = {
 
 export type OnCreateConstructionSubscriptionVariables = {
   filter?: ModelSubscriptionConstructionFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateConstructionSubscription = {
@@ -726,16 +753,19 @@ export type OnCreateConstructionSubscription = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateConstructionSubscriptionVariables = {
   filter?: ModelSubscriptionConstructionFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateConstructionSubscription = {
@@ -758,16 +788,19 @@ export type OnUpdateConstructionSubscription = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteConstructionSubscriptionVariables = {
   filter?: ModelSubscriptionConstructionFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteConstructionSubscription = {
@@ -790,16 +823,19 @@ export type OnDeleteConstructionSubscription = {
         createdAt: string,
         updatedAt: string,
         constructionPartsId: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnCreatePartSubscriptionVariables = {
   filter?: ModelSubscriptionPartFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreatePartSubscription = {
@@ -816,6 +852,7 @@ export type OnCreatePartSubscription = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -823,11 +860,13 @@ export type OnCreatePartSubscription = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdatePartSubscriptionVariables = {
   filter?: ModelSubscriptionPartFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdatePartSubscription = {
@@ -844,6 +883,7 @@ export type OnUpdatePartSubscription = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -851,11 +891,13 @@ export type OnUpdatePartSubscription = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeletePartSubscriptionVariables = {
   filter?: ModelSubscriptionPartFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeletePartSubscription = {
@@ -872,6 +914,7 @@ export type OnDeletePartSubscription = {
         createdAt: string,
         updatedAt: string,
         partProvisionsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -879,11 +922,13 @@ export type OnDeletePartSubscription = {
     createdAt: string,
     updatedAt: string,
     constructionPartsId: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnCreateProvisionSubscriptionVariables = {
   filter?: ModelSubscriptionProvisionFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateProvisionSubscription = {
@@ -895,11 +940,13 @@ export type OnCreateProvisionSubscription = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateProvisionSubscriptionVariables = {
   filter?: ModelSubscriptionProvisionFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateProvisionSubscription = {
@@ -911,11 +958,13 @@ export type OnUpdateProvisionSubscription = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteProvisionSubscriptionVariables = {
   filter?: ModelSubscriptionProvisionFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteProvisionSubscription = {
@@ -927,5 +976,6 @@ export type OnDeleteProvisionSubscription = {
     createdAt: string,
     updatedAt: string,
     partProvisionsId?: string | null,
+    owner?: string | null,
   } | null,
 };
