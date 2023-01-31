@@ -10,7 +10,7 @@ export default function Delete({ id }: { id: string }) {
   async function handleDelete(id: string) {
     setIsDeleting(true)
     try {
-      API.graphql({
+      await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: deleteConstruction,
         variables: { input: { id } }
