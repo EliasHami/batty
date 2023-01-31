@@ -13,8 +13,6 @@ type EagerConstruction = {
   };
   readonly id: string;
   readonly name: string;
-  readonly dateCreated?: string | null;
-  readonly dateUpdated?: string | null;
   readonly description: string;
   readonly customer: string;
   readonly address: string;
@@ -31,8 +29,6 @@ type LazyConstruction = {
   };
   readonly id: string;
   readonly name: string;
-  readonly dateCreated?: string | null;
-  readonly dateUpdated?: string | null;
   readonly description: string;
   readonly customer: string;
   readonly address: string;

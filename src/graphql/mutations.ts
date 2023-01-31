@@ -10,8 +10,6 @@ export const createConstruction = /* GraphQL */ `
     createConstruction(input: $input, condition: $condition) {
       id
       name
-      dateCreated
-      dateUpdated
       description
       customer
       address
@@ -19,13 +17,13 @@ export const createConstruction = /* GraphQL */ `
       parts {
         items {
           name
+          constructionID
           id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          constructionPartsId
           owner
         }
         nextToken
@@ -48,8 +46,6 @@ export const updateConstruction = /* GraphQL */ `
     updateConstruction(input: $input, condition: $condition) {
       id
       name
-      dateCreated
-      dateUpdated
       description
       customer
       address
@@ -57,13 +53,13 @@ export const updateConstruction = /* GraphQL */ `
       parts {
         items {
           name
+          constructionID
           id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          constructionPartsId
           owner
         }
         nextToken
@@ -86,8 +82,6 @@ export const deleteConstruction = /* GraphQL */ `
     deleteConstruction(input: $input, condition: $condition) {
       id
       name
-      dateCreated
-      dateUpdated
       description
       customer
       address
@@ -95,13 +89,13 @@ export const deleteConstruction = /* GraphQL */ `
       parts {
         items {
           name
+          constructionID
           id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          constructionPartsId
           owner
         }
         nextToken
@@ -139,13 +133,13 @@ export const createPart = /* GraphQL */ `
         nextToken
         startedAt
       }
+      constructionID
       id
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      constructionPartsId
       owner
     }
   }
@@ -173,13 +167,13 @@ export const updatePart = /* GraphQL */ `
         nextToken
         startedAt
       }
+      constructionID
       id
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      constructionPartsId
       owner
     }
   }
@@ -207,13 +201,13 @@ export const deletePart = /* GraphQL */ `
         nextToken
         startedAt
       }
+      constructionID
       id
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      constructionPartsId
       owner
     }
   }

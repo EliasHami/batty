@@ -17,20 +17,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "dateCreated": {
-                    "name": "dateCreated",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "dateUpdated": {
-                    "name": "dateUpdated",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "description": {
                     "name": "description",
                     "isArray": false,
@@ -330,5 +316,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "a82bb6424abde2dd9fd8198e93759ff1"
+    "version": "ff97e6be4fe946e42468b028e3fe864c"
 };

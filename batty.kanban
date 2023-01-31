@@ -135,7 +135,18 @@
           "title": "migrate api.graphl to datastore",
           "description": "see https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js/",
           "labels": [],
-          "checkboxes": [],
+          "checkboxes": [
+            {
+              "id": "ba1457ac-3945-43fa-bbd6-e0f089677158",
+              "title": "deactivate codegen graphql ",
+              "checked": false
+            },
+            {
+              "id": "e117afab-8d01-4789-9d57-57316ee5e15b",
+              "title": "use types from models",
+              "checked": false
+            }
+          ],
           "comments": [
             {
               "id": "b34f235a-aa22-4261-8d98-6e5ccd0dba7b",

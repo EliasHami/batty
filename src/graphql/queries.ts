@@ -7,8 +7,6 @@ export const getConstruction = /* GraphQL */ `
     getConstruction(id: $id) {
       id
       name
-      dateCreated
-      dateUpdated
       description
       customer
       address
@@ -16,13 +14,13 @@ export const getConstruction = /* GraphQL */ `
       parts {
         items {
           name
+          constructionID
           id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          constructionPartsId
           owner
         }
         nextToken
@@ -47,8 +45,6 @@ export const listConstructions = /* GraphQL */ `
       items {
         id
         name
-        dateCreated
-        dateUpdated
         description
         customer
         address
@@ -85,8 +81,6 @@ export const syncConstructions = /* GraphQL */ `
       items {
         id
         name
-        dateCreated
-        dateUpdated
         description
         customer
         address
@@ -127,13 +121,13 @@ export const getPart = /* GraphQL */ `
         nextToken
         startedAt
       }
+      constructionID
       id
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      constructionPartsId
       owner
     }
   }
@@ -151,13 +145,13 @@ export const listParts = /* GraphQL */ `
           nextToken
           startedAt
         }
+        constructionID
         id
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        constructionPartsId
         owner
       }
       nextToken
@@ -184,13 +178,48 @@ export const syncParts = /* GraphQL */ `
           nextToken
           startedAt
         }
+        constructionID
         id
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        constructionPartsId
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const partsByConstructionID = /* GraphQL */ `
+  query PartsByConstructionID(
+    $constructionID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    partsByConstructionID(
+      constructionID: $constructionID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        name
+        provisions {
+          nextToken
+          startedAt
+        }
+        constructionID
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       nextToken
