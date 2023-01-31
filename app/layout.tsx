@@ -1,6 +1,6 @@
 "use client"
 import './globals.css'
-import { Nav, Alert } from 'components'
+import { Nav, Alert } from 'src/components'
 import CssBaseline from '@mui/material/CssBaseline'
 import "@aws-amplify/ui-react/styles.css"
 import awsExports from "src/aws-exports"

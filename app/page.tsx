@@ -1,5 +1,5 @@
 
-import { Link } from 'components'
+import { Link } from 'src/components'
 
 export default function Home() {
   return (

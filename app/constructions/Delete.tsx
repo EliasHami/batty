@@ -2,8 +2,8 @@
 import { useState } from 'react'
 import { API } from 'aws-amplify'
 import { deleteConstruction } from 'src/graphql/mutations'
-import { alertService } from 'services'
-import { getErrorMessage } from 'helpers'
+import { alertService } from 'src/services'
+import { getErrorMessage } from 'src/helpers'
 
 export default function Delete({ id }: { id: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
