@@ -1,4 +1,4 @@
-import { Link } from 'components'
+import { Link } from 'src/components'
 import Delete from './Delete'
 import GenerateEstimatePDF from './GenerateEstimatePDF'
 import { Constructions as ConstructionsType } from 'src/APITypes'
