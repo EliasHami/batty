@@ -46,7 +46,8 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const handleCreateConstruction = async (data: Construction) => {
     try {
-      const { parts, provisions, ...construction } = data
+      const { parts, provisions, id, ...construction } = data
+      const { provisions: pvs, ...part } = parts[0]
       const constructionResponse = await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createConstruction,
@@ -56,13 +57,13 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
           }
         }
       }) as { data: CreateConstructionMutation }
-      await API.graphql({
+      await API.graphql({ // TODO - this should be a batch mutation
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createPart,
         variables: {
           input: {
-            ...parts[0],
-            constructionId: constructionResponse.data.createConstruction?.id
+            ...part,
+            constructionPartsId: constructionResponse.data.createConstruction?.id
           }
         }
       })
