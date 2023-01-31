@@ -1,6 +1,7 @@
+"use client"
 import './globals.css'
 import { Nav, Alert } from 'components'
-import CssBaseline from './CssBaseline'
+import CssBaseline from '@mui/material/CssBaseline'
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (

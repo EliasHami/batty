@@ -9,9 +9,10 @@ import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
 import Parts from './Parts'
 import { API } from 'aws-amplify'
-import { createConstruction, updateConstruction } from 'src/graphql/mutations'
+import { createConstruction, createPart, updateConstruction } from 'src/graphql/mutations'
 import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
+import { CreateConstructionMutation } from 'src/API'
 
 type AddEditProps = {
   construction?: Construction | null
@@ -45,13 +46,23 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const handleCreateConstruction = async (data: Construction) => {
     try {
-      const { parts, ...construction } = data
-      await API.graphql({
+      const { parts, provisions, ...construction } = data
+      const constructionResponse = await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createConstruction,
         variables: {
           input: {
             ...construction
+          }
+        }
+      }) as { data: CreateConstructionMutation }
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: createPart,
+        variables: {
+          input: {
+            ...parts[0],
+            constructionId: constructionResponse.data.createConstruction?.id
           }
         }
       })

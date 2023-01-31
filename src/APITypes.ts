@@ -1,4 +1,4 @@
-import { DeepOmit } from './graphql/DeepOmit'
+import { DeepOmit } from './DeepOmit'
 import {
   Construction as C,
   Part,
