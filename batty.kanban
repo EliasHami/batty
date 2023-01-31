@@ -5,44 +5,19 @@
       "title": "TODO",
       "cards": [
         {
-          "id": "8a1616db-b040-478a-908a-102b146820dc",
+          "id": "c72b535c-dbc8-4268-8eed-bfed9caa1754",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "créer un crud générique",
-          "description": "quand tu aura besoin d'un dexuième CRUD, autant le faire en générique",
-          "labels": [],
-          "checkboxes": [
-            {
-              "id": "c025ea92-ea26-4e79-98f1-df165b1ecc64",
-              "title": " hook générique pour les services",
-              "checked": false
-            },
-            {
-              "id": "f1bfc9e7-65db-47b0-9ca6-5347be909e4a",
-              "title": "page list générique",
-              "checked": false
-            },
-            {
-              "id": "a8ff0902-b31e-4f16-9305-26d828240819",
-              "title": "composant add/edit générique",
-              "checked": false
-            }
-          ],
-          "comments": []
-        },
-        {
-          "id": "e81c5229-390e-40ac-9665-e868f111df56",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "Company page/api",
+          "title": "migrate react hook form to amplify ui form",
           "description": "",
           "labels": [],
           "checkboxes": [],
           "comments": []
         },
         {
-          "id": "853bb2cf-1407-48f6-8de7-c0d1d07b7499",
+          "id": "e022d0bd-3097-4f67-9411-32c76650b726",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "Customer page / api",
-          "description": "aussi intervenant --> copier archipad",
+          "title": "save parts and provisions alone from constructions",
+          "description": "",
           "labels": [],
           "checkboxes": [],
           "comments": []
@@ -88,6 +63,33 @@
           "comments": []
         },
         {
+          "id": "d4774d34-dd5d-4757-9b41-04451a693458",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "validate yup with types",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "e81c5229-390e-40ac-9665-e868f111df56",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "Company page/api",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "853bb2cf-1407-48f6-8de7-c0d1d07b7499",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "Customer page / api",
+          "description": "aussi intervenant --> copier archipad",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
           "id": "db675f72-37ea-4091-b071-276a027d4823",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "ajouter des lots et un devis par lot , un lot (une description, zones)",
@@ -104,6 +106,31 @@
           "labels": [],
           "checkboxes": [],
           "comments": []
+        },
+        {
+          "id": "8a1616db-b040-478a-908a-102b146820dc",
+          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
+          "title": "créer un crud générique",
+          "description": "quand tu aura besoin d'un dexuième CRUD, autant le faire en générique",
+          "labels": [],
+          "checkboxes": [
+            {
+              "id": "c025ea92-ea26-4e79-98f1-df165b1ecc64",
+              "title": " hook générique pour les services",
+              "checked": false
+            },
+            {
+              "id": "f1bfc9e7-65db-47b0-9ca6-5347be909e4a",
+              "title": "page list générique",
+              "checked": false
+            },
+            {
+              "id": "a8ff0902-b31e-4f16-9305-26d828240819",
+              "title": "composant add/edit générique",
+              "checked": false
+            }
+          ],
+          "comments": []
         }
       ]
     },
@@ -112,27 +139,9 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "d4774d34-dd5d-4757-9b41-04451a693458",
+          "id": "9838ffdd-f6ae-484c-a107-3b438aa7ecce",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "validate yup with types",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "e022d0bd-3097-4f67-9411-32c76650b726",
-          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "save parts and provisions alone from constructions",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "c72b535c-dbc8-4268-8eed-bfed9caa1754",
-          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
-          "title": "utiliser amplify ui component instead of react-hook-form & yup ?",
+          "title": "migrate api.graphl to datastore",
           "description": "",
           "labels": [],
           "checkboxes": [],

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { CheckboxFieldProps, GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -13,17 +13,14 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NewForm1InputValues = {
-    Field0?: boolean;
     Field1?: string;
 };
 export declare type NewForm1ValidationValues = {
-    Field0?: ValidationFunction<boolean>;
     Field1?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NewForm1OverridesProps = {
     NewForm1Grid?: PrimitiveOverrideProps<GridProps>;
-    Field0?: PrimitiveOverrideProps<CheckboxFieldProps>;
     Field1?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NewForm1Props = React.PropsWithChildren<{

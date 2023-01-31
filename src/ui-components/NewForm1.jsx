@@ -6,32 +6,22 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  Button,
-  CheckboxField,
-  Flex,
-  Grid,
-  TextField,
-} from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { fetchByPath, validateField } from "./utils";
 export default function NewForm1(props) {
   const { onSubmit, onCancel, onValidate, onChange, overrides, ...rest } =
     props;
   const initialValues = {
-    Field0: false,
     Field1: "",
   };
-  const [Field0, setField0] = React.useState(initialValues.Field0);
   const [Field1, setField1] = React.useState(initialValues.Field1);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setField0(initialValues.Field0);
     setField1(initialValues.Field1);
     setErrors({});
   };
   const validations = {
-    Field0: [],
     Field1: [],
   };
   const runValidationTasks = async (
@@ -59,7 +49,6 @@ export default function NewForm1(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         const modelFields = {
-          Field0,
           Field1,
         };
         const validationResponses = await Promise.all(
@@ -86,41 +75,14 @@ export default function NewForm1(props) {
       {...getOverrideProps(overrides, "NewForm1")}
       {...rest}
     >
-      <CheckboxField
-        label="Label"
-        name="fieldName"
-        value="fieldName"
-        checked={Field0}
-        onChange={(e) => {
-          let value = e.target.checked;
-          if (onChange) {
-            const modelFields = {
-              Field0: value,
-              Field1,
-            };
-            const result = onChange(modelFields);
-            value = result?.Field0 ?? value;
-          }
-          if (errors.Field0?.hasError) {
-            runValidationTasks("Field0", value);
-          }
-          setField0(value);
-        }}
-        onBlur={() => runValidationTasks("Field0", Field0)}
-        errorMessage={errors.Field0?.errorMessage}
-        hasError={errors.Field0?.hasError}
-        {...getOverrideProps(overrides, "Field0")}
-      ></CheckboxField>
       <TextField
         label="Label"
-        type="number"
-        step="any"
+        isRequired={false}
         value={Field1}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              Field0,
               Field1: value,
             };
             const result = onChange(modelFields);

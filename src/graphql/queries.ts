@@ -19,13 +19,20 @@ export const getConstruction = /* GraphQL */ `
           id
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           constructionPartsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       owner
     }
   }
@@ -48,12 +55,55 @@ export const listConstructions = /* GraphQL */ `
         estimate_validity
         parts {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncConstructions = /* GraphQL */ `
+  query SyncConstructions(
+    $filter: ModelConstructionFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncConstructions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        dateCreated
+        dateUpdated
+        description
+        customer
+        address
+        estimate_validity
+        parts {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -68,14 +118,21 @@ export const getPart = /* GraphQL */ `
           id
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           partProvisionsId
           owner
         }
         nextToken
+        startedAt
       }
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       constructionPartsId
       owner
     }
@@ -92,14 +149,52 @@ export const listParts = /* GraphQL */ `
         name
         provisions {
           nextToken
+          startedAt
         }
         id
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         constructionPartsId
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncParts = /* GraphQL */ `
+  query SyncParts(
+    $filter: ModelPartFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncParts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        name
+        provisions {
+          nextToken
+          startedAt
+        }
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        constructionPartsId
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -111,6 +206,9 @@ export const getProvision = /* GraphQL */ `
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       partProvisionsId
       owner
     }
@@ -129,10 +227,44 @@ export const listProvisions = /* GraphQL */ `
         id
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         partProvisionsId
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncProvisions = /* GraphQL */ `
+  query SyncProvisions(
+    $filter: ModelProvisionFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncProvisions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        name
+        service
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        partProvisionsId
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;

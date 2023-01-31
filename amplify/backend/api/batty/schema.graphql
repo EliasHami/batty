@@ -10,7 +10,7 @@ type Construction @model @auth(rules: [{ allow: owner }, { allow: public }]) {
   description: String!
   customer: String!
   address: String!
-  estimate_validity: Int @default(value: "30")
+  estimate_validity: Int
   parts: [Part]! @hasMany
 }
 
