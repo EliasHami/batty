@@ -3,7 +3,7 @@ import {
   Construction as C,
   Part,
   Provision
-} from './API'
+} from 'src/API'
 
 export type Construction = DeepOmit<
   Exclude<C, null>,

@@ -1,4 +1,4 @@
-import { Construction } from 'src/APITypes'
+import { Construction } from './APITypes'
 import { object, number, string, array, ObjectSchema } from 'yup'
 
 
@@ -13,9 +13,7 @@ const partSchema = object().shape({
 })
 
 const constructionSchema: ObjectSchema<Construction> = object().shape({
-  id: string().required(),
-  dateCreated: string(),
-  dateUpdated: string(),
+  id: string(),
   name: string().required('Name is required'),
   description: string().required('Description is required'),
   customer: string().required('Customer is required'), // TODO new structure

@@ -10,9 +10,13 @@ Amplify.configure({ ...awsExports, ssr: true }) // je dois faire ssr: true pour 
 export default async function Edit({ params }: { params: { id: string } }) {
   const nextCookies = cookies()
   const SSR = withSSRContext({ req: { headers: { cookie: nextCookies } } })
-  console.log('params.id', params.id)
-  const response = await SSR.API.graphql({ query: getConstruction, input: { id: params.id } })
-  const construction = response.data.getConstruction.items
-
+  let data
+  try {
+    const response = await SSR.API.graphql({ query: getConstruction, variables: { id: params.id } })
+    data = response.data.getConstruction
+  } catch (error) {
+    console.log('error', error) // côté serveur pas d'alertService
+  }
+  const { createdAt, updatedAt, owner, ...construction } = data
   return <AddEdit construction={construction} />
 }

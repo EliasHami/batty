@@ -30,15 +30,6 @@
           "comments": []
         },
         {
-          "id": "8295093f-6039-45da-9914-3037355c1451",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "user authentication",
-          "description": "see mui free templates\n--> plusieurs roles par utilisateur (à definir)",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
           "id": "e81c5229-390e-40ac-9665-e868f111df56",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "Company page/api",
@@ -121,8 +112,59 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
+          "id": "d4774d34-dd5d-4757-9b41-04451a693458",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "validate yup with types",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "e022d0bd-3097-4f67-9411-32c76650b726",
+          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "save parts and provisions alone from constructions",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "c72b535c-dbc8-4268-8eed-bfed9caa1754",
+          "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "utiliser amplify ui component instead of react-hook-form & yup ?",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+      "title": "DONE",
+      "cards": [
+        {
+          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "add Material UI tabs for constructions",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "8295093f-6039-45da-9914-3037355c1451",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "user authentication",
+          "description": "see mui free templates\n--> plusieurs roles par utilisateur (à definir)",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "dd4f85ca-116d-4d7f-998e-3289eb718727",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
           "title": "changer repo par bdd sur cloud ",
           "description": "firebase/google cloud run, vercel, aws",
           "labels": [],
@@ -141,11 +183,6 @@
               "id": "54695d8d-b762-47f2-b90e-4c6f43099c3a",
               "title": "infertype from graphql",
               "checked": true
-            },
-            {
-              "id": "96958992-2126-42ee-96d0-31e49829728f",
-              "title": "validate yup with types",
-              "checked": false
             }
           ],
           "comments": [
@@ -154,21 +191,6 @@
               "comment": "je ne peux pas encore deployer next.js 13 sur amplify a cause du repertoire app qui est en beta mais je peux utiliser leur bdd comme si c'était déjà déployé sur amplify"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
-      "title": "DONE",
-      "cards": [
-        {
-          "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
-          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
-          "title": "add Material UI tabs for constructions",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
         },
         {
           "id": "52ee30c8-3660-49e5-b643-1c3091cce8c7",

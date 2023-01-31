@@ -4,8 +4,7 @@ import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-f
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { alertService, Alert } from 'src/services'
-import constructionSchema from 'src/yupSchema'
-import { Construction } from 'src/APITypes'
+import { Construction, constructionSchema } from 'src/types'
 import { getErrorMessage } from 'src/helpers'
 import { Link } from 'src/components'
 import Parts from './Parts'
@@ -28,16 +27,19 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const formOptions: UseFormProps<Construction> = {
     resolver: yupResolver(constructionSchema),
-    // defaultValues: constructionSchema.cast(construction)
   }
 
   if (!isAddMode) {
     formOptions.defaultValues = construction
+  } else {
+    formOptions.defaultValues = constructionSchema.cast(construction)
   }
 
   const methods = useForm<Construction>(formOptions)
   const { register, handleSubmit, formState } = methods
   const { errors } = formState
+
+  console.log({ errors })
 
   const onSubmit: SubmitHandler<Construction> = (data) => {
     return isAddMode
@@ -47,9 +49,9 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const handleCreateConstruction = async (data: Construction) => {
     try {
-      const { parts, id, ...construction } = data
+      const { parts, id, provisions, ...construction } = data
       // const { provisions, ...part } = parts?.[0]
-      const constructionResponse = await API.graphql({
+      await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createConstruction,
         variables: {
@@ -58,7 +60,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
           }
         }
       }) as { data: CreateConstructionMutation }
-      // await API.graphql({ // TODO - this should be a batch mutation
+      // await API.graphql({ // TODO - this should be a batch mutation and should be indepent of the construction creation
       //   authMode: 'AMAZON_COGNITO_USER_POOLS',
       //   query: createPart,
       //   variables: {
@@ -71,18 +73,20 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('./constructions')
     } catch (error) {
+      console.log('error', error)
       alertService.error(getErrorMessage(error))
     }
   }
 
   const handleUpdateConstruction = async (id: string, data: Construction) => {
     try {
+      const { parts, provisions, ...construction } = data
       await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: updateConstruction,
         variables: {
           input: {
-            ...data,
+            ...construction,
             id,
           }
         }
@@ -90,6 +94,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
       alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
       router.push('./constructions')
     } catch (error) {
+      console.log('error', error)
       alertService.error(getErrorMessage(error))
     }
   }

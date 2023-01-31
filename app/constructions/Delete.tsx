@@ -16,6 +16,7 @@ export default function Delete({ id }: { id: string }) {
         variables: { input: { id } }
       })
     } catch (error) {
+      console.log('error', error)
       alertService.error(getErrorMessage(error))
     }
     setIsDeleting(false)

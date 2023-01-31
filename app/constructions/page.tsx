@@ -1,7 +1,7 @@
 import { Link } from 'src/components'
 import Delete from './Delete'
 import GenerateEstimatePDF from './GenerateEstimatePDF'
-import { Constructions as ConstructionsType } from 'src/APITypes'
+import { Constructions as ConstructionsType } from 'src/types'
 import { withSSRContext } from 'aws-amplify'
 import { listConstructions } from 'src/graphql/queries'
 import { cookies } from 'next/headers'
@@ -13,8 +13,13 @@ Amplify.configure({ ...awsExports, ssr: true }) // je dois faire ssr: true pour 
 export default async function Constructions() {
   const nextCookies = cookies()
   const SSR = withSSRContext({ req: { headers: { cookie: nextCookies } } })
-  const response = await SSR.API.graphql({ query: listConstructions })
-  const constructions: ConstructionsType = response.data.listConstructions.items
+  let constructions: ConstructionsType = []
+  try {
+    const response = await SSR.API.graphql({ query: listConstructions }) // TODO subscribe to changes because of delete
+    constructions = response.data.listConstructions.items
+  } catch (error) {
+    console.log('error', error) // côté serveur pas d'alertService
+  }
 
   return (
     <div>
