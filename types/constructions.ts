@@ -1,30 +1,27 @@
-import * as Yup from 'yup'
+import { Construction } from 'src/APITypes'
+import { object, number, string, array, ObjectSchema } from 'yup'
 
-const partSchema = Yup.object().shape({
-  name: Yup.string().required('Parts name are required'),
-  provisions: Yup.array().of(
-    Yup.object({
-      name: Yup.string(),
-      service: Yup.string() // TODO new structure
+
+const partSchema = object().shape({
+  name: string().required('Parts name are required'),
+  provisions: array().of(
+    object({
+      name: string(),
+      service: string() // TODO new structure
     })
   )
 })
 
-const constructionSchema = Yup.object().shape({
-  id: Yup.number().required().default(1),
-  dateCreated: Yup.string(),
-  dateUpdated: Yup.string(),
-  name: Yup.string().required('Name is required'),
-  description: Yup.string().required('Description is required'),
-  customer: Yup.string().required('Customer is required'), // TODO new structure
-  address: Yup.string().required('Address is required'),
-  estimate_validity: Yup.number().default(30),
-  parts: Yup.array().of(partSchema).required('Parts are required')
+const constructionSchema: ObjectSchema<Construction> = object().shape({
+  id: string().required(),
+  dateCreated: string(),
+  dateUpdated: string(),
+  name: string().required('Name is required'),
+  description: string().required('Description is required'),
+  customer: string().required('Customer is required'), // TODO new structure
+  address: string().required('Address is required'),
+  estimate_validity: number().default(30),
+  parts: array().of(partSchema).required('Parts are required')
 })
 
-interface Construction extends Yup.Asserts<typeof constructionSchema> {}
-
-type Constructions = Array<Construction> | null
-
-export { constructionSchema }
-export type { Construction, Constructions }
+export default constructionSchema 

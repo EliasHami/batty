@@ -3,8 +3,9 @@ import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { constructionService, alertService, Alert } from 'services'
-import { Construction, constructionSchema } from 'types'
+import { alertService, Alert } from 'services'
+import { constructionSchema } from 'types'
+import { Construction } from 'src/APITypes'
 import { getErrorMessage } from 'helpers'
 import { Link } from 'components'
 import Parts from './Parts'
@@ -27,7 +28,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const formOptions: UseFormProps<Construction> = {
     resolver: yupResolver(constructionSchema),
-    defaultValues: constructionSchema.cast(construction)
+    // defaultValues: constructionSchema.cast(construction)
   }
 
   if (!isAddMode) {
@@ -46,8 +47,8 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const handleCreateConstruction = async (data: Construction) => {
     try {
-      const { parts, provisions, id, ...construction } = data
-      const { provisions: pvs, ...part } = parts[0]
+      const { parts, id, ...construction } = data
+      // const { provisions, ...part } = parts?.[0]
       const constructionResponse = await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createConstruction,
@@ -57,16 +58,16 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
           }
         }
       }) as { data: CreateConstructionMutation }
-      await API.graphql({ // TODO - this should be a batch mutation
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-        query: createPart,
-        variables: {
-          input: {
-            ...part,
-            constructionPartsId: constructionResponse.data.createConstruction?.id
-          }
-        }
-      })
+      // await API.graphql({ // TODO - this should be a batch mutation
+      //   authMode: 'AMAZON_COGNITO_USER_POOLS',
+      //   query: createPart,
+      //   variables: {
+      //     input: {
+      //       ...part,
+      //       constructionPartsId: constructionResponse.data.createConstruction?.id
+      //     }
+      //   }
+      // })
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('./constructions')
     } catch (error) {
@@ -74,7 +75,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
     }
   }
 
-  const handleUpdateConstruction = async (id: number, data: Construction) => {
+  const handleUpdateConstruction = async (id: string, data: Construction) => {
     try {
       await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',

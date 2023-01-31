@@ -2,24 +2,19 @@ import { Link } from 'components'
 import Delete from './Delete'
 import GenerateEstimatePDF from './GenerateEstimatePDF'
 import { Constructions as ConstructionsType } from 'src/APITypes'
-import { Amplify, withSSRContext } from 'aws-amplify'
-import awsExports from 'src/aws-exports'
+import { withSSRContext } from 'aws-amplify'
 import { listConstructions } from 'src/graphql/queries'
-import { alertService } from 'services'
-import { getErrorMessage } from 'helpers'
+import { cookies } from 'next/headers'
 
-Amplify.configure({ ...awsExports, ssr: true })
+import awsExports from "src/aws-exports"
+import { Amplify } from 'aws-amplify'
+Amplify.configure({ ...awsExports, ssr: true }) // je dois faire ssr: true pour que ça fonctionne
 
 export default async function Constructions() {
-  let constructions : ConstructionsType = []
-  const SSR = withSSRContext({ }) // manque req du contexte
-
-  try {
-    const response = await SSR.API.graphql({ query: listConstructions })
-    constructions = response.data.listConstructions.items
-  } catch (error) {
-    alertService.error(getErrorMessage(error))
-  }
+  const nextCookies = cookies()
+  const SSR = withSSRContext({ req: { headers: { cookie: nextCookies } } })
+  const response = await SSR.API.graphql({ query: listConstructions })
+  const constructions: ConstructionsType = response.data.listConstructions.items
 
   return (
     <div>
@@ -28,11 +23,11 @@ export default async function Constructions() {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th style={{ width: '22%'}}>Name</th>
-            <th style={{ width: '22%'}}>Address</th>
-            <th style={{ width: '22%'}}>Description</th>
-            <th style={{ width: '22%'}}>Customer</th>
-            <th style={{ width: '10%'}}></th>
+            <th style={{ width: '22%' }}>Name</th>
+            <th style={{ width: '22%' }}>Address</th>
+            <th style={{ width: '22%' }}>Description</th>
+            <th style={{ width: '22%' }}>Customer</th>
+            <th style={{ width: '10%' }}></th>
           </tr>
         </thead>
         <tbody>
@@ -42,17 +37,17 @@ export default async function Constructions() {
               <td>{construction.address}</td>
               <td>{construction.description}</td>
               <td>{construction.customer}</td>
-              <td style={{ whiteSpace: 'nowrap'}}>
+              <td style={{ whiteSpace: 'nowrap' }}>
                 <GenerateEstimatePDF construction={construction} />
                 <Link href={`/constructions/${construction.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
                 <Delete id={construction.id} />
               </td>
             </tr>
           ))}
-          {!constructions && 
+          {!constructions &&
             <tr>
               <td colSpan={4}>
-                <div className="spinner-border spinner-border-lg align-center"/>
+                <div className="spinner-border spinner-border-lg align-center" />
               </td>
             </tr>
           }
