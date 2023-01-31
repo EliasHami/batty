@@ -63,15 +63,6 @@
           "comments": []
         },
         {
-          "id": "d4774d34-dd5d-4757-9b41-04451a693458",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "validate yup with types",
-          "description": "",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
           "id": "e81c5229-390e-40ac-9665-e868f111df56",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "Company page/api",
@@ -142,10 +133,19 @@
           "id": "9838ffdd-f6ae-484c-a107-3b438aa7ecce",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
           "title": "migrate api.graphl to datastore",
-          "description": "",
+          "description": "see https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js/",
           "labels": [],
           "checkboxes": [],
-          "comments": []
+          "comments": [
+            {
+              "id": "b34f235a-aa22-4261-8d98-6e5ccd0dba7b",
+              "comment": "ssr see : https://docs.amplify.aws/lib/ssr/q/platform/js/#example"
+            },
+            {
+              "id": "8f838ad5-73f7-4829-999b-e51e827d0a02",
+              "comment": "should i delete graphql generated files ?"
+            }
+          ]
         }
       ]
     },

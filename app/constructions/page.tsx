@@ -9,6 +9,7 @@ import { cookies } from 'next/headers'
 import awsExports from "src/aws-exports"
 import { Amplify } from 'aws-amplify'
 Amplify.configure({ ...awsExports, ssr: true }) // je dois faire ssr: true pour que ça fonctionne
+// should be resolved : https://github.com/vercel/next.js/issues/16977
 
 export default async function Constructions() {
   const nextCookies = cookies()

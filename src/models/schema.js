@@ -65,13 +65,13 @@ export const schema = {
                     "type": {
                         "model": "Part"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
-                    "isArrayNullable": false,
+                    "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "constructionPartsId"
+                            "constructionID"
                         ]
                     }
                 },
@@ -162,6 +162,13 @@ export const schema = {
                         ]
                     }
                 },
+                "constructionID": {
+                    "name": "constructionID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -177,13 +184,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "constructionPartsId": {
-                    "name": "constructionPartsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -196,9 +196,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "gsi-Construction.parts",
+                        "name": "byConstruction",
                         "fields": [
-                            "constructionPartsId"
+                            "constructionID"
                         ]
                     }
                 },
@@ -330,5 +330,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "81b8ce78b7420dee050dbca93f90f96d"
+    "version": "a82bb6424abde2dd9fd8198e93759ff1"
 };

@@ -19,7 +19,7 @@ type EagerConstruction = {
   readonly customer: string;
   readonly address: string;
   readonly estimate_validity?: number | null;
-  readonly parts: (Part | null)[];
+  readonly parts?: Part[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -56,9 +56,9 @@ type EagerPart = {
   readonly id: string;
   readonly name: string;
   readonly provisions?: (Provision | null)[] | null;
+  readonly constructionID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly constructionPartsId?: string | null;
 }
 
 type LazyPart = {
@@ -69,9 +69,9 @@ type LazyPart = {
   readonly id: string;
   readonly name: string;
   readonly provisions: AsyncCollection<Provision>;
+  readonly constructionID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly constructionPartsId?: string | null;
 }
 
 export declare type Part = LazyLoading extends LazyLoadingDisabled ? EagerPart : LazyPart
