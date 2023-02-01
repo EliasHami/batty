@@ -1,15 +1,12 @@
 import { cookies } from 'next/headers'
-import { Amplify, withSSRContext } from 'aws-amplify'
+import { withSSRContext } from 'aws-amplify'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
-import awsExports from "src/aws-exports"
+
 import { Construction } from 'src/models'
-import type { Construction as ConstructionType } from 'src/types'
 import { Link } from 'src/components'
 
 import GenerateEstimatePDF from './GenerateEstimatePDF'
 import Delete from './Delete'
-Amplify.configure({ ...awsExports, ssr: true }) // je dois faire ssr: true pour que ça fonctionne
-// should be resolved : https://github.com/vercel/next.js/issues/16977
 
 export default async function Constructions() {
   const nextCookies = cookies()
