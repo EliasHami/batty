@@ -6,5 +6,6 @@
 
 export { default as studioTheme } from "./studioTheme";
 export { default as ProvisionCreateForm } from "./ProvisionCreateForm";
+export { default as ConstructionUpdate } from "./ConstructionUpdate";
 export { default as ConstructionCreate } from "./ConstructionCreate";
 export { default as ProvisionUpdateForm } from "./ProvisionUpdateForm";

@@ -7,19 +7,20 @@
 import * as React from "react";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+import { Construction } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type ConstructionCreateInputValues = {
+export declare type ConstructionUpdateInputValues = {
     name?: string;
     description?: string;
     customer?: string;
     address?: string;
     estimate_validity?: number;
 };
-export declare type ConstructionCreateValidationValues = {
+export declare type ConstructionUpdateValidationValues = {
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     customer?: ValidationFunction<string>;
@@ -27,23 +28,23 @@ export declare type ConstructionCreateValidationValues = {
     estimate_validity?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type ConstructionCreateOverridesProps = {
-    ConstructionCreateGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type ConstructionUpdateOverridesProps = {
+    ConstructionUpdateGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
     customer?: PrimitiveOverrideProps<TextFieldProps>;
     address?: PrimitiveOverrideProps<TextFieldProps>;
     estimate_validity?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type ConstructionCreateProps = React.PropsWithChildren<{
-    overrides?: ConstructionCreateOverridesProps | undefined | null;
+export declare type ConstructionUpdateProps = React.PropsWithChildren<{
+    overrides?: ConstructionUpdateOverridesProps | undefined | null;
 } & {
-    clearOnSuccess?: boolean;
-    onSubmit?: (fields: ConstructionCreateInputValues) => ConstructionCreateInputValues;
-    onSuccess?: (fields: ConstructionCreateInputValues) => void;
-    onError?: (fields: ConstructionCreateInputValues, errorMessage: string) => void;
-    onCancel?: () => void;
-    onChange?: (fields: ConstructionCreateInputValues) => ConstructionCreateInputValues;
-    onValidate?: ConstructionCreateValidationValues;
+    id?: string;
+    construction?: Construction;
+    onSubmit?: (fields: ConstructionUpdateInputValues) => ConstructionUpdateInputValues;
+    onSuccess?: (fields: ConstructionUpdateInputValues) => void;
+    onError?: (fields: ConstructionUpdateInputValues, errorMessage: string) => void;
+    onChange?: (fields: ConstructionUpdateInputValues) => ConstructionUpdateInputValues;
+    onValidate?: ConstructionUpdateValidationValues;
 } & React.CSSProperties>;
-export default function ConstructionCreate(props: ConstructionCreateProps): React.ReactElement;
+export default function ConstructionUpdate(props: ConstructionUpdateProps): React.ReactElement;

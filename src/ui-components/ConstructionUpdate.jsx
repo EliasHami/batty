@@ -11,13 +11,13 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Construction } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function ConstructionCreate(props) {
+export default function ConstructionUpdate(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    construction,
     onSuccess,
     onError,
     onSubmit,
-    onCancel,
     onValidate,
     onChange,
     overrides,
@@ -41,13 +41,28 @@ export default function ConstructionCreate(props) {
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.name);
-    setDescription(initialValues.description);
-    setCustomer(initialValues.customer);
-    setAddress(initialValues.address);
-    setEstimate_validity(initialValues.estimate_validity);
+    const cleanValues = constructionRecord
+      ? { ...initialValues, ...constructionRecord }
+      : initialValues;
+    setName(cleanValues.name);
+    setDescription(cleanValues.description);
+    setCustomer(cleanValues.customer);
+    setAddress(cleanValues.address);
+    setEstimate_validity(cleanValues.estimate_validity);
     setErrors({});
   };
+  const [constructionRecord, setConstructionRecord] =
+    React.useState(construction);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? await DataStore.query(Construction, idProp)
+        : construction;
+      setConstructionRecord(record);
+    };
+    queryData();
+  }, [idProp, construction]);
+  React.useEffect(resetStateValues, [constructionRecord]);
   const validations = {
     name: [{ type: "Required" }],
     description: [{ type: "Required" }],
@@ -114,12 +129,13 @@ export default function ConstructionCreate(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new Construction(modelFields));
+          await DataStore.save(
+            Construction.copyOf(constructionRecord, (updated) => {
+              Object.assign(updated, modelFields);
+            })
+          );
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -127,7 +143,7 @@ export default function ConstructionCreate(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "ConstructionCreate")}
+      {...getOverrideProps(overrides, "ConstructionUpdate")}
       {...rest}
     >
       <TextField
@@ -281,31 +297,27 @@ export default function ConstructionCreate(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || construction)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
-            children="Cancel"
-            type="button"
-            onClick={() => {
-              onCancel && onCancel();
-            }}
-            {...getOverrideProps(overrides, "CancelButton")}
-          ></Button>
-          <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || construction) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>
