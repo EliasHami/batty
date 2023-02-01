@@ -12,7 +12,7 @@ import { API } from 'aws-amplify'
 import { createConstruction, createPart, updateConstruction } from 'src/graphql/mutations'
 import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
-import { CreateConstructionMutation } from 'src/API'
+import { CreateConstructionMutation } from 'src/types/API'
 
 type AddEditProps = {
   construction?: Construction | null

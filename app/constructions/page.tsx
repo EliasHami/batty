@@ -1,26 +1,21 @@
-import { Link } from 'src/components'
-import Delete from './Delete'
-import GenerateEstimatePDF from './GenerateEstimatePDF'
-import { Constructions as ConstructionsType } from 'src/types'
-import { withSSRContext } from 'aws-amplify'
-import { listConstructions } from 'src/graphql/queries'
 import { cookies } from 'next/headers'
-
+import { Amplify, withSSRContext } from 'aws-amplify'
+import { serializeModel } from "@aws-amplify/datastore/ssr"
 import awsExports from "src/aws-exports"
-import { Amplify } from 'aws-amplify'
+import { Construction } from 'src/models'
+import type { Construction as ConstructionType } from 'src/types'
+import { Link } from 'src/components'
+
+import GenerateEstimatePDF from './GenerateEstimatePDF'
+import Delete from './Delete'
 Amplify.configure({ ...awsExports, ssr: true }) // je dois faire ssr: true pour que ça fonctionne
 // should be resolved : https://github.com/vercel/next.js/issues/16977
 
 export default async function Constructions() {
   const nextCookies = cookies()
   const SSR = withSSRContext({ req: { headers: { cookie: nextCookies } } })
-  let constructions: ConstructionsType = []
-  try {
-    const response = await SSR.API.graphql({ query: listConstructions }) // TODO subscribe to changes because of delete
-    constructions = response.data.listConstructions.items
-  } catch (error) {
-    console.log('error', error) // côté serveur pas d'alertService
-  }
+  const model = await SSR.DataStore.query(Construction)// TODO subscribe to changes because of delete
+  const constructions = serializeModel(model) as any // can't do anything with JSON type
 
   return (
     <div>
@@ -37,6 +32,7 @@ export default async function Constructions() {
           </tr>
         </thead>
         <tbody>
+          {/* @ts-ignore */}
           {constructions && constructions.map(construction => (
             <tr key={construction.id}>
               <td>{construction.name}</td>
