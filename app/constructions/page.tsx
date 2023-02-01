@@ -11,8 +11,18 @@ import Delete from './Delete'
 export default async function Constructions() {
   const nextCookies = cookies()
   const SSR = withSSRContext({ req: { headers: { cookie: nextCookies } } })
-  const model = await SSR.DataStore.query(Construction)// TODO subscribe to changes because of delete
-  const constructions = serializeModel(model) as any // can't do anything with JSON type
+  let constructions
+  try {
+    const model = await SSR.DataStore.query(Construction)// TODO subscribe to changes because of delete
+    constructions = serializeModel(model) as any // can't do anything with JSON type
+  } catch (error) {
+    console.log('error', error) // côté serveur pas d'alertService
+  }
+
+  // const handleDelete = async () => {
+  //   const model = await SSR.DataStore.query(Construction)
+  //   constructions = serializeModel(model) as any
+  // }
 
   return (
     <div>
@@ -39,7 +49,7 @@ export default async function Constructions() {
               <td style={{ whiteSpace: 'nowrap' }}>
                 <GenerateEstimatePDF construction={construction} />
                 <Link href={`/constructions/${construction.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
-                <Delete id={construction.id} />
+                <Delete id={construction.id} /> {/* onDelete={handleDelete} */}
               </td>
             </tr>
           ))}

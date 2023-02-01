@@ -25,33 +25,13 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }
 
-  // const isStepFailed = (step: number) => {
-  //   if (step === 0) {
-  //     return Boolean(errors.name || errors.address || errors.description || errors.customer)
-  //   } else if (step === 1) return Boolean(errors.parts)
-  // }
-
   return (
     <>
       <Link href="/constructions" className="btn btn-link">&#60;- Back</Link>
       <Box sx={{ width: '100%' }}>
         <h1>{construction ? 'Add Construction' : 'Edit Construction'}</h1>
         <Stepper activeStep={activeStep} sx={{ mb: "100px" }}>
-          {steps.map((label, index) => {
-            const labelProps: {
-              optional?: React.ReactNode
-              error?: boolean
-            } = {}
-            // if (isStepFailed(index)) {
-            //   labelProps.optional = (
-            //     <Typography variant="caption" color="error">
-            //       Missing required fields
-            //     </Typography>
-            //   );
-            //   labelProps.error = true;
-            // }
-            return <Step key={label}><StepLabel {...labelProps}>{label}</StepLabel></Step>
-          })}
+          {steps.map((label, index) => <Step key={label}><StepLabel>{label}</StepLabel></Step>)}
         </Stepper>
         {steps[activeStep] === "Configuration" && (
           construction ? <ConstructionUpdate id={construction.id} /> : <ConstructionCreate />

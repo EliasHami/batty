@@ -1,24 +1,22 @@
 'use client'
 import { useState } from 'react'
-import { API } from 'aws-amplify'
-import { deleteConstruction } from 'src/graphql/mutations'
+import { DataStore } from 'aws-amplify'
+
+import { Construction } from 'src/models'
 import { alertService } from 'src/services'
 import { getErrorMessage } from 'src/helpers'
 
-export default function Delete({ id }: { id: string }) {
+export default function Delete({ id }: { id: string }) { // onDelete: () => void
   const [isDeleting, setIsDeleting] = useState(false)
   async function handleDelete(id: string) {
     setIsDeleting(true)
     try {
-      await API.graphql({
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-        query: deleteConstruction,
-        variables: { input: { id } }
-      })
+      await DataStore.delete(Construction, (cons) => cons.id.eq(id))
     } catch (error) {
       console.log('error', error)
       alertService.error(getErrorMessage(error))
     }
+    // onDelete()
     setIsDeleting(false)
   }
 
