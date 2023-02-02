@@ -5,7 +5,6 @@ import { Authenticator } from '@aws-amplify/ui-react'
 import { Button, CssBaseline } from '@mui/material'
 
 import awsExports from "src/aws-exports"
-import './globals.css'
 
 // only third party context providers and css resets that need "use client" should be in this file
 // see : https://beta.nextjs.org/docs/rendering/server-and-client-components#rendering-third-party-context-providers-in-server-components

@@ -1,6 +1,7 @@
 import awsExports from "src/aws-exports"
 import { Amplify } from 'aws-amplify'
 import { Nav, Alert, ContextProvider } from 'src/components'
+import './globals.css'
 
 // configure Amplify for the server
 Amplify.configure({ ...awsExports, ssr: true })

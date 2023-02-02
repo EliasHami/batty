@@ -1,4 +1,5 @@
-import { usePathname  } from 'next/navigation'
+"use client"
+import { usePathname } from 'next/navigation'
 import React from 'react'
 import { Link } from '.'
 
@@ -9,11 +10,11 @@ type NavLinkProps = {
   className?: string,
 }
 
-const NavLink:React.FC<NavLinkProps> = ({children, href, exact, ...props}) => {
+const NavLink: React.FC<NavLinkProps> = ({ children, href, exact, ...props }) => {
   const pathname = usePathname()
   const isActive = exact ? pathname === href : pathname?.startsWith(href)
 
-  if(isActive) {
+  if (isActive) {
     props.className += ' active'
   }
 
