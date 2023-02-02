@@ -1,18 +1,21 @@
 import awsExports from "src/aws-exports"
-import { Amplify, Auth } from 'aws-amplify'
-import App from './App'
+import { Amplify } from 'aws-amplify'
+import { Nav, Alert, ContextProvider } from 'src/components'
 
 // configure Amplify for the server
 Amplify.configure({ ...awsExports, ssr: true })
-// Auth.configure(awsExports) // TODO should i configure Auth for the server?
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <App>
-          {children}
-        </App>
+        <div className="app-container bg-light">
+          <Nav />
+          <ContextProvider>
+            {children}
+          </ContextProvider>
+          <Alert />
+        </div>
       </body>
     </html>
   )

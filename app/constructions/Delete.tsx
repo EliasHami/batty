@@ -4,7 +4,7 @@ import { DataStore } from 'aws-amplify'
 
 import { Construction } from 'src/models'
 import { alertService } from 'src/services'
-import { getErrorMessage } from 'src/helpers'
+import { getErrorMessage } from 'src/utils'
 
 export default function Delete({ id }: { id: string }) { // onDelete: () => void
   const [isDeleting, setIsDeleting] = useState(false)

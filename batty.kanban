@@ -5,19 +5,19 @@
       "title": "TODO",
       "cards": [
         {
-          "id": "c72b535c-dbc8-4268-8eed-bfed9caa1754",
+          "id": "e022d0bd-3097-4f67-9411-32c76650b726",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "migrate react hook form to amplify ui form",
+          "title": "save parts and provisions alone from constructions",
           "description": "",
           "labels": [],
           "checkboxes": [],
           "comments": []
         },
         {
-          "id": "e022d0bd-3097-4f67-9411-32c76650b726",
+          "id": "db675f72-37ea-4091-b071-276a027d4823",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "save parts and provisions alone from constructions",
-          "description": "",
+          "title": "ajouter des lots et un devis par lot , un lot (une description, zones)",
+          "description": "zones ou pièces ou étapes\nen fonction du lot c'est soit zones ou pièces ou étapes",
           "labels": [],
           "checkboxes": [],
           "comments": []
@@ -81,15 +81,6 @@
           "comments": []
         },
         {
-          "id": "db675f72-37ea-4091-b071-276a027d4823",
-          "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
-          "title": "ajouter des lots et un devis par lot , un lot (une description, zones)",
-          "description": "zones ou pièces ou étapes\nen fonction du lot c'est soit zones ou pièces ou étapes",
-          "labels": [],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
           "id": "0bd2eb63-41a2-48f4-a0a0-af22f2216fc4",
           "listId": "452c4dfd-e0b0-439a-a0d6-67abc9be3b98",
           "title": "deployer sur le cloud quand app sera supporté",
@@ -130,8 +121,32 @@
       "title": "IN PROGRESS",
       "cards": [
         {
-          "id": "9838ffdd-f6ae-484c-a107-3b438aa7ecce",
+          "id": "96d26ac3-2d84-4272-938f-b6dda9a9bfb3",
           "listId": "d661ed25-3b4d-4bdc-b7d5-ef1f89a74532",
+          "title": "Rajouter streaming pour chaque route et composant",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+      "title": "DONE",
+      "cards": [
+        {
+          "id": "c72b535c-dbc8-4268-8eed-bfed9caa1754",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
+          "title": "migrate react hook form to amplify ui form",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "9838ffdd-f6ae-484c-a107-3b438aa7ecce",
+          "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
           "title": "migrate api.graphl to datastore",
           "description": "see https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js/",
           "labels": [],
@@ -157,13 +172,7 @@
               "comment": "should i delete graphql generated files ?"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
-      "title": "DONE",
-      "cards": [
+        },
         {
           "id": "e267fc2c-23eb-45d9-9f50-7cd769024332",
           "listId": "3418f5a9-a726-4f09-9d2a-ed55acc62487",
