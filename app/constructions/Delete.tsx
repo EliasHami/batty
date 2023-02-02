@@ -7,7 +7,7 @@ import { alertService } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { useRouter } from 'next/navigation'
 
-export default function Delete({ id }: { id: string }) { // onDelete: () => void
+export default function Delete({ id }: { id: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
