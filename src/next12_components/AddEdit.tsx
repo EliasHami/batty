@@ -1,6 +1,4 @@
-"use client"
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Step, StepLabel, Stepper, Box, Button } from '@mui/material'
 
 import type { Construction } from 'src/models'
@@ -14,7 +12,6 @@ type AddEditProps = {
 const steps = ["Configuration", "Select Parts"]
 
 const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
-  const router = useRouter()
   const [activeStep, setActiveStep] = useState(0)
 
   const handleBack = () => {

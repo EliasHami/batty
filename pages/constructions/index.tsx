@@ -1,23 +1,17 @@
-import { cookies } from 'next/headers'
 import { withSSRContext } from 'aws-amplify'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
 
 import { Construction } from 'src/models'
 import { Link } from 'src/components'
 
-import GenerateEstimatePDF from './GenerateEstimatePDF'
-import Delete from './Delete'
+import { GenerateEstimatePDF, Delete } from 'src/next12_components'
+import type { Construction as ConstructionType } from 'src/models'
 
-export default async function Constructions() {
-  const nextCookies = cookies()
-  const SSR = withSSRContext({ req: { headers: { cookie: nextCookies } } })
-  let constructions
-  try {
-    const model = await SSR.DataStore.query(Construction)
-    constructions = serializeModel(model) as any // can't do anything with JSON type
-  } catch (error) {
-    console.log('error', error) // côté serveur pas d'alertService
-  }
+import { Amplify } from 'aws-amplify'
+import awsExports from "src/aws-exports"
+Amplify.configure({ ...awsExports, ssr: true })
+
+export default function Constructions({ constructions }: { constructions: ConstructionType[] }) {
 
   return (
     <div>
@@ -34,7 +28,6 @@ export default async function Constructions() {
           </tr>
         </thead>
         <tbody>
-          {/* @ts-ignore */}
           {constructions && constructions.map(construction => (
             <tr key={construction.id}>
               <td>{construction.name}</td>
@@ -66,4 +59,18 @@ export default async function Constructions() {
       </table>
     </div>
   )
+}
+
+export async function getServerSideProps({ req }: { req: Object }) {
+  const SSR = withSSRContext({ req })
+  let constructions
+  try {
+    const model = await SSR.DataStore.query(Construction)
+    constructions = serializeModel(model) as any // can't do anything with JSON type
+  } catch (error) {
+    console.log('error', error)
+  }
+  return {
+    props: { constructions }
+  }
 }
