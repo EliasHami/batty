@@ -1,3 +1,3 @@
-import * as Types from './API'
+import { Construction } from './API'
 
-export { Types } 
+export type { Construction } 

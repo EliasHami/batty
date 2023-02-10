@@ -1,8 +1,11 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
-
+export enum Units {
+  KG = "KG",
+  M2 = "M2"
+}
 
 
 
@@ -17,7 +20,9 @@ type EagerConstruction = {
   readonly customer: string;
   readonly address: string;
   readonly estimate_validity?: number | null;
-  readonly parts?: Part[] | null;
+  readonly parts?: string | null;
+  readonly number_lot?: number | null;
+  readonly ConstructionServices?: (ConstructionService | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -33,7 +38,9 @@ type LazyConstruction = {
   readonly customer: string;
   readonly address: string;
   readonly estimate_validity?: number | null;
-  readonly parts: AsyncCollection<Part>;
+  readonly parts?: string | null;
+  readonly number_lot?: number | null;
+  readonly ConstructionServices: AsyncCollection<ConstructionService>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -44,66 +51,68 @@ export declare const Construction: (new (init: ModelInit<Construction>) => Const
   copyOf(source: Construction, mutator: (draft: MutableModel<Construction>) => MutableModel<Construction> | void): Construction;
 }
 
-type EagerPart = {
+type EagerConstructionService = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Part, 'id'>;
+    identifier: ManagedIdentifier<ConstructionService, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly name: string;
-  readonly provisions?: (Provision | null)[] | null;
+  readonly lot?: number | null;
+  readonly parts?: string | null;
+  readonly Service?: Service | null;
   readonly constructionID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly constructionServiceServiceId?: string | null;
 }
 
-type LazyPart = {
+type LazyConstructionService = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Part, 'id'>;
+    identifier: ManagedIdentifier<ConstructionService, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly name: string;
-  readonly provisions: AsyncCollection<Provision>;
+  readonly lot?: number | null;
+  readonly parts?: string | null;
+  readonly Service: AsyncItem<Service | undefined>;
   readonly constructionID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly constructionServiceServiceId?: string | null;
 }
 
-export declare type Part = LazyLoading extends LazyLoadingDisabled ? EagerPart : LazyPart
+export declare type ConstructionService = LazyLoading extends LazyLoadingDisabled ? EagerConstructionService : LazyConstructionService
 
-export declare const Part: (new (init: ModelInit<Part>) => Part) & {
-  copyOf(source: Part, mutator: (draft: MutableModel<Part>) => MutableModel<Part> | void): Part;
+export declare const ConstructionService: (new (init: ModelInit<ConstructionService>) => ConstructionService) & {
+  copyOf(source: ConstructionService, mutator: (draft: MutableModel<ConstructionService>) => MutableModel<ConstructionService> | void): ConstructionService;
 }
 
-type EagerProvision = {
+type EagerService = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Provision, 'id'>;
+    identifier: ManagedIdentifier<Service, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly name?: string | null;
-  readonly service?: string | null;
+  readonly unit?: Units | keyof typeof Units | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly partProvisionsId?: string | null;
 }
 
-type LazyProvision = {
+type LazyService = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Provision, 'id'>;
+    identifier: ManagedIdentifier<Service, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly name?: string | null;
-  readonly service?: string | null;
+  readonly unit?: Units | keyof typeof Units | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly partProvisionsId?: string | null;
 }
 
-export declare type Provision = LazyLoading extends LazyLoadingDisabled ? EagerProvision : LazyProvision
+export declare type Service = LazyLoading extends LazyLoadingDisabled ? EagerService : LazyService
 
-export declare const Provision: (new (init: ModelInit<Provision>) => Provision) & {
-  copyOf(source: Provision, mutator: (draft: MutableModel<Provision>) => MutableModel<Provision> | void): Provision;
+export declare const Service: (new (init: ModelInit<Service>) => Service) & {
+  copyOf(source: Service, mutator: (draft: MutableModel<Service>) => MutableModel<Service> | void): Service;
 }

@@ -47,11 +47,25 @@ export const schema = {
                 },
                 "parts": {
                     "name": "parts",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "number_lot": {
+                    "name": "number_lot",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ConstructionServices": {
+                    "name": "ConstructionServices",
                     "isArray": true,
                     "type": {
-                        "model": "Part"
+                        "model": "ConstructionService"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
@@ -115,8 +129,8 @@ export const schema = {
                 }
             ]
         },
-        "Part": {
-            "name": "Part",
+        "ConstructionService": {
+            "name": "ConstructionService",
             "fields": {
                 "id": {
                     "name": "id",
@@ -125,26 +139,35 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
+                "lot": {
+                    "name": "lot",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
+                    "type": "Int",
+                    "isRequired": false,
                     "attributes": []
                 },
-                "provisions": {
-                    "name": "provisions",
-                    "isArray": true,
+                "parts": {
+                    "name": "parts",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Service": {
+                    "name": "Service",
+                    "isArray": false,
                     "type": {
-                        "model": "Provision"
+                        "model": "Service"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
+                        "connectionType": "HAS_ONE",
                         "associatedWith": [
-                            "partProvisionsId"
+                            "id"
+                        ],
+                        "targetNames": [
+                            "constructionServiceServiceId"
                         ]
                     }
                 },
@@ -170,10 +193,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "constructionServiceServiceId": {
+                    "name": "constructionServiceServiceId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Parts",
+            "pluralName": "ConstructionServices",
             "attributes": [
                 {
                     "type": "model",
@@ -193,18 +223,6 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
                                 "allow": "public",
                                 "operations": [
                                     "create",
@@ -218,8 +236,8 @@ export const schema = {
                 }
             ]
         },
-        "Provision": {
-            "name": "Provision",
+        "Service": {
+            "name": "Service",
             "fields": {
                 "id": {
                     "name": "id",
@@ -235,10 +253,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "service": {
-                    "name": "service",
+                "unit": {
+                    "name": "unit",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "Units"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -257,47 +277,19 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "partProvisionsId": {
-                    "name": "partProvisionsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Provisions",
+            "pluralName": "Services",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "gsi-Part.provisions",
-                        "fields": [
-                            "partProvisionsId"
-                        ]
-                    }
-                },
-                {
                     "type": "auth",
                     "properties": {
                         "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
                             {
                                 "allow": "public",
                                 "operations": [
@@ -313,8 +305,16 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "Units": {
+            "name": "Units",
+            "values": [
+                "KG",
+                "M2"
+            ]
+        }
+    },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "ff97e6be4fe946e42468b028e3fe864c"
+    "version": "124d6f5330b20d662bf28e968f289e62"
 };

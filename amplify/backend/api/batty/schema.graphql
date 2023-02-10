@@ -5,17 +5,27 @@ type Construction @model @auth(rules: [{allow: owner}, {allow: public}]) {
   customer: String!
   address: String!
   estimate_validity: Int
-  parts: [Part!] @hasMany(indexName: "byConstruction", fields: ["id"])
+  parts: String
+  number_lot: Int
+  ConstructionServices: [ConstructionService] @hasMany(indexName: "byConstruction", fields: ["id"])
 }
 
-type Part @model @auth(rules: [{allow: owner}, {allow: public}]) {
-  name: String!
-  provisions: [Provision] @hasMany
+type ConstructionService @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  lot: Int
+  parts: String
+  Service: Service @hasOne
   constructionID: ID! @index(name: "byConstruction")
 }
 
-type Provision @model @auth(rules: [{allow: owner}, {allow: public}]) {
+type Service @model @auth(rules: [{allow: public}]) {
+  id: ID!
   name: String
-  service: String
+  unit: Units
+}
+
+enum Units {
+  KG
+  M2
 }
  

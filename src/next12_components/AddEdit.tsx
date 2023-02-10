@@ -1,58 +1,215 @@
-import { useState } from 'react'
-import { Step, StepLabel, Stepper, Box, Button } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import type { Construction } from 'src/models'
+import { alertService, Alert } from 'src/services'
+import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { ConstructionCreate, ConstructionUpdate } from 'src/ui-components'
+import { API } from 'aws-amplify'
+import { createConstruction, createPart, updateConstruction } from 'src/graphql/mutations'
+import { useState } from 'react'
+import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
+import { CreateConstructionMutation } from 'src/types/API'
+
+
+import { Construction } from 'src/types'
+import { object, number, string, array, ObjectSchema } from 'yup'
+
+
+const partSchema = object().shape({
+  name: string().required('Parts name are required'),
+  provisions: array().of(
+    object({
+      name: string(),
+      service: string() // TODO new structure
+    })
+  )
+})
+
+const constructionSchema: ObjectSchema<Construction> = object().shape({
+  id: string(),
+  name: string().required('Name is required'),
+  description: string().required('Description is required'),
+  customer: string().required('Customer is required'), // TODO new structure
+  address: string().required('Address is required'),
+  estimate_validity: number().default(30),
+  parts: array().of(partSchema).required('Parts are required')
+})
 
 type AddEditProps = {
-  construction?: Construction
+  construction?: Construction | null
 }
 
 const steps = ["Configuration", "Select Parts"]
 
 const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
+  const isAddMode = !construction
+  const router = useRouter()
   const [activeStep, setActiveStep] = useState(0)
+
+  const formOptions: UseFormProps<Construction> = {
+    resolver: yupResolver(constructionSchema),
+  }
+
+  if (!isAddMode) {
+    formOptions.defaultValues = construction
+  } else {
+    formOptions.defaultValues = constructionSchema.cast(construction)
+  }
+
+  const methods = useForm<Construction>(formOptions)
+  const { register, handleSubmit, formState } = methods
+  const { errors } = formState
+
+  const onSubmit: SubmitHandler<Construction> = (data) => {
+    return isAddMode
+      ? handleCreateConstruction(data)
+      : handleUpdateConstruction(construction.id, data)
+  }
+
+  const handleCreateConstruction = async (data: Construction) => {
+    try {
+      const { parts, id, ...construction } = data
+      // const { provisions, ...part } = parts?.[0]
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: createConstruction,
+        variables: {
+          input: {
+            ...construction
+          }
+        }
+      }) as { data: CreateConstructionMutation }
+      // await API.graphql({ // TODO - this should be a batch mutation and should be indepent of the construction creation
+      //   authMode: 'AMAZON_COGNITO_USER_POOLS',
+      //   query: createPart,
+      //   variables: {
+      //     input: {
+      //       ...part,
+      //       constructionPartsId: constructionResponse.data.createConstruction?.id
+      //     }
+      //   }
+      // })
+      alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
+      router.push('./constructions')
+    } catch (error) {
+      console.log('error', error)
+      alertService.error(getErrorMessage(error))
+    }
+  }
+
+  const handleUpdateConstruction = async (id: string, data: Construction) => {
+    try {
+      const { parts, ...construction } = data
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: updateConstruction,
+        variables: {
+          input: {
+            ...construction,
+            id,
+          }
+        }
+      })
+      alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
+      router.push('./constructions')
+    } catch (error) {
+      console.log('error', error)
+      alertService.error(getErrorMessage(error))
+    }
+  }
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }
 
+  const isStepFailed = (step: number) => {
+    if (step === 0) {
+      return Boolean(errors.name || errors.address || errors.description || errors.customer)
+    } else if (step === 1) return Boolean(errors.parts)
+  }
+
   return (
-    <>
-      <Link href="/constructions" className="btn btn-link">&#60;- Back</Link>
-      <Box sx={{ width: '100%' }}>
-        <h1>{construction ? 'Add Construction' : 'Edit Construction'}</h1>
-        <Stepper activeStep={activeStep} sx={{ mb: "100px" }}>
-          {steps.map((label, index) => <Step key={label}><StepLabel>{label}</StepLabel></Step>)}
-        </Stepper>
-        {steps[activeStep] === "Configuration" && (
-          construction ? <ConstructionUpdate id={construction.id} /> : <ConstructionCreate />
-        )}
-        {/* {steps[activeStep] === "Select Parts" && (
+    <FormProvider {...methods} >
+      <form id="hook-form" onSubmit={handleSubmit(onSubmit)}>
+        <Link href="/constructions" className="btn btn-link">&#60;- Back</Link>
+        <Box sx={{ width: '100%' }}>
+          <h1>{isAddMode ? 'Add Construction' : 'Edit Construction'}</h1>
+          <Stepper activeStep={activeStep} sx={{ mb: "100px" }}>
+            {steps.map((label, index) => {
+              const labelProps: {
+                optional?: React.ReactNode
+                error?: boolean
+              } = {}
+              if (isStepFailed(index)) {
+                labelProps.optional = (
+                  <Typography variant="caption" color="error">
+                    Missing required fields
+                  </Typography>
+                );
+                labelProps.error = true;
+              }
+              return <Step key={label}><StepLabel {...labelProps}>{label}</StepLabel></Step>
+            })}
+          </Stepper>
+          {steps[activeStep] === "Configuration" && (
             <div className="form-row">
-              <Parts />
-            </div>)} */}
-        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-          <Button
-            color="inherit"
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            sx={{ mr: 1 }}
-          >
-            Back
-          </Button>
-          <Box sx={{ flex: '1 1 auto' }} />
-          <Button onClick={handleNext} disabled={activeStep === steps.length - 1}>
-            Next
-          </Button>
+              <div className="form-group col">
+                <label>Name</label>
+                <input type="text" {...register("name" as never)} className={'form-control' + (errors.name ? ' is-invalid' : '')} />
+                <div className="invalid-feedback">{errors.name?.message}</div>
+              </div>
+              <div className="form-group col">
+                <label>Address</label>
+                <input type="text" {...register("address" as never)} className={'form-control' + (errors.address ? ' is-invalid' : '')} />
+                <div className="invalid-feedback">{errors.address?.message}</div>
+              </div>
+              <div className="form-group col">
+                <label>Description</label>
+                <input type="text" {...register("description" as never)} className={'form-control' + (errors.description ? ' is-invalid' : '')} />
+                <div className="invalid-feedback">{errors.description?.message}</div>
+              </div>
+              <div className="form-group col">
+                <label>Customer</label>
+                <input type="text" {...register("customer" as never)} className={'form-control' + (errors.customer ? ' is-invalid' : '')} />
+                <div className="invalid-feedback">{errors.customer?.message}</div>
+              </div>
+              <div className="form-group col">
+                <label>Estimate&apos;s validity</label>
+                <input type="text" {...register("estimate_validity" as never)} className={'form-control' + (errors.estimate_validity ? ' is-invalid' : '')} />
+                <div className="invalid-feedback">{errors.estimate_validity?.message}</div>
+              </div>
+            </div>)}
+          <div className="form-row">
+            <div className="form-group">
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  Back
+                </Button>
+                <Box sx={{ flex: '1 1 auto' }} />
+                <Button onClick={handleNext} disabled={activeStep === steps.length - 1}>
+                  Next
+                </Button>
+                {activeStep === steps.length - 1 && (
+                  <Button type="submit" disabled={formState.isSubmitting}>
+                    {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                    Save
+                  </Button>
+                )}
+              </Box>
+            </div>
+          </div>
         </Box>
-      </Box>
-    </>
+      </form>
+    </FormProvider>
   )
 }
 
