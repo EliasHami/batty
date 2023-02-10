@@ -53,7 +53,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   if (!isAddMode) {
     formOptions.defaultValues = construction
   } else {
-    // formOptions.defaultValues = constructionSchema.cast(Construction)
+    // formOptions.defaultValues = constructionSchema.cast(construction)
   }
 
   const methods = useForm<Construction>(formOptions)
@@ -85,7 +85,6 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
       if (!original) return
       await DataStore.save(
         ConstructionModel.copyOf(original, updated => {
-          console.log('updated', updated, 'construction', construction)
           updated.name = construction.name
           updated.description = construction.description
           updated.customer = construction.customer
