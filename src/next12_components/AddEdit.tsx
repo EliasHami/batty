@@ -5,14 +5,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { API } from 'aws-amplify'
+import { API, DataStore } from 'aws-amplify'
 import { createConstruction, createPart, updateConstruction } from 'src/graphql/mutations'
 import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
-import { CreateConstructionMutation } from 'src/types/API'
-
 
 import { Construction } from 'src/types'
+import { Construction as ConstructionModel } from 'src/models'
 import { object, number, string, array, ObjectSchema } from 'yup'
 
 
@@ -33,7 +32,7 @@ const constructionSchema: ObjectSchema<Construction> = object().shape({
   customer: string().required('Customer is required'), // TODO new structure
   address: string().required('Address is required'),
   estimate_validity: number().default(30),
-  parts: array().of(partSchema).required('Parts are required')
+  // parts: array().of(partSchema).required('Parts are required')
 })
 
 type AddEditProps = {
@@ -54,7 +53,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   if (!isAddMode) {
     formOptions.defaultValues = construction
   } else {
-    formOptions.defaultValues = constructionSchema.cast(construction)
+    // formOptions.defaultValues = constructionSchema.cast(Construction)
   }
 
   const methods = useForm<Construction>(formOptions)
@@ -70,28 +69,9 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   const handleCreateConstruction = async (data: Construction) => {
     try {
       const { parts, id, ...construction } = data
-      // const { provisions, ...part } = parts?.[0]
-      await API.graphql({
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-        query: createConstruction,
-        variables: {
-          input: {
-            ...construction
-          }
-        }
-      }) as { data: CreateConstructionMutation }
-      // await API.graphql({ // TODO - this should be a batch mutation and should be indepent of the construction creation
-      //   authMode: 'AMAZON_COGNITO_USER_POOLS',
-      //   query: createPart,
-      //   variables: {
-      //     input: {
-      //       ...part,
-      //       constructionPartsId: constructionResponse.data.createConstruction?.id
-      //     }
-      //   }
-      // })
+      await DataStore.save(new ConstructionModel({ ...construction }))
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
-      router.push('./constructions')
+      router.push('/constructions')
     } catch (error) {
       console.log('error', error)
       alertService.error(getErrorMessage(error))
@@ -101,18 +81,20 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   const handleUpdateConstruction = async (id: string, data: Construction) => {
     try {
       const { parts, ...construction } = data
-      await API.graphql({
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-        query: updateConstruction,
-        variables: {
-          input: {
-            ...construction,
-            id,
-          }
-        }
-      })
+      const original = await DataStore.query(ConstructionModel, id)
+      if (!original) return
+      await DataStore.save(
+        ConstructionModel.copyOf(original, updated => {
+          console.log('updated', updated, 'construction', construction)
+          updated.name = construction.name
+          updated.description = construction.description
+          updated.customer = construction.customer
+          updated.address = construction.address
+          updated.estimate_validity = construction.estimate_validity
+        })
+      )
       alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
-      router.push('./constructions')
+      router.push('/constructions')
     } catch (error) {
       console.log('error', error)
       alertService.error(getErrorMessage(error))
