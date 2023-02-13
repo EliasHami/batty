@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import 'src/next12_components/globals.css'
+import 'src/globals.css'
 import type { AppProps } from 'next/app'
 import { Nav, Alert } from 'src/components'
 import { NextPage } from 'next'

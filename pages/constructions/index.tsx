@@ -4,7 +4,7 @@ import { serializeModel } from "@aws-amplify/datastore/ssr"
 import { Construction } from 'src/models'
 import { Link } from 'src/components'
 
-import { GenerateEstimatePDF, Delete } from 'src/next12_components'
+import { GenerateEstimatePDF, Delete } from 'src/components'
 import type { Construction as ConstructionType } from 'src/models'
 
 import { Amplify } from 'aws-amplify'

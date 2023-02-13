@@ -1,3 +1,3 @@
-import { AddEdit } from 'src/next12_components'
+import { AddEdit } from 'src/components'
 
 export default AddEdit

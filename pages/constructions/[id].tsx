@@ -1,4 +1,4 @@
-import { AddEdit } from 'src/next12_components'
+import { AddEdit } from 'src/components'
 import { withSSRContext } from 'aws-amplify'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
 
