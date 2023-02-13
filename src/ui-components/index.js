@@ -5,6 +5,3 @@
  **************************************************************************/
 
 export { default as studioTheme } from "./studioTheme";
-export { default as ConstructionCreateForm } from "./ConstructionCreateForm";
-export { default as ConstructionUpdate } from "./ConstructionUpdate";
-export { default as ConstructionCreate } from "./ConstructionCreate";
