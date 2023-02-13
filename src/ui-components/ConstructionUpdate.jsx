@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  TextAreaField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Construction } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -29,6 +35,8 @@ export default function ConstructionUpdate(props) {
     customer: "",
     address: "",
     estimate_validity: "",
+    parts: "",
+    number_lot: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
@@ -39,6 +47,8 @@ export default function ConstructionUpdate(props) {
   const [estimate_validity, setEstimate_validity] = React.useState(
     initialValues.estimate_validity
   );
+  const [parts, setParts] = React.useState(initialValues.parts);
+  const [number_lot, setNumber_lot] = React.useState(initialValues.number_lot);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = constructionRecord
@@ -49,6 +59,12 @@ export default function ConstructionUpdate(props) {
     setCustomer(cleanValues.customer);
     setAddress(cleanValues.address);
     setEstimate_validity(cleanValues.estimate_validity);
+    setParts(
+      typeof cleanValues.parts === "string"
+        ? cleanValues.parts
+        : JSON.stringify(cleanValues.parts)
+    );
+    setNumber_lot(cleanValues.number_lot);
     setErrors({});
   };
   const [constructionRecord, setConstructionRecord] =
@@ -69,6 +85,8 @@ export default function ConstructionUpdate(props) {
     customer: [{ type: "Required" }],
     address: [{ type: "Required" }],
     estimate_validity: [],
+    parts: [{ type: "JSON" }],
+    number_lot: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -100,6 +118,8 @@ export default function ConstructionUpdate(props) {
           customer,
           address,
           estimate_validity,
+          parts,
+          number_lot,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -160,6 +180,8 @@ export default function ConstructionUpdate(props) {
               customer,
               address,
               estimate_validity,
+              parts,
+              number_lot,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -188,6 +210,8 @@ export default function ConstructionUpdate(props) {
               customer,
               address,
               estimate_validity,
+              parts,
+              number_lot,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -216,6 +240,8 @@ export default function ConstructionUpdate(props) {
               customer: value,
               address,
               estimate_validity,
+              parts,
+              number_lot,
             };
             const result = onChange(modelFields);
             value = result?.customer ?? value;
@@ -244,6 +270,8 @@ export default function ConstructionUpdate(props) {
               customer,
               address: value,
               estimate_validity,
+              parts,
+              number_lot,
             };
             const result = onChange(modelFields);
             value = result?.address ?? value;
@@ -276,6 +304,8 @@ export default function ConstructionUpdate(props) {
               customer,
               address,
               estimate_validity: value,
+              parts,
+              number_lot,
             };
             const result = onChange(modelFields);
             value = result?.estimate_validity ?? value;
@@ -291,6 +321,70 @@ export default function ConstructionUpdate(props) {
         errorMessage={errors.estimate_validity?.errorMessage}
         hasError={errors.estimate_validity?.hasError}
         {...getOverrideProps(overrides, "estimate_validity")}
+      ></TextField>
+      <TextAreaField
+        label="Parts"
+        isRequired={false}
+        isReadOnly={false}
+        value={parts}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              customer,
+              address,
+              estimate_validity,
+              parts: value,
+              number_lot,
+            };
+            const result = onChange(modelFields);
+            value = result?.parts ?? value;
+          }
+          if (errors.parts?.hasError) {
+            runValidationTasks("parts", value);
+          }
+          setParts(value);
+        }}
+        onBlur={() => runValidationTasks("parts", parts)}
+        errorMessage={errors.parts?.errorMessage}
+        hasError={errors.parts?.hasError}
+        {...getOverrideProps(overrides, "parts")}
+      ></TextAreaField>
+      <TextField
+        label="Number lot"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={number_lot}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              customer,
+              address,
+              estimate_validity,
+              parts,
+              number_lot: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.number_lot ?? value;
+          }
+          if (errors.number_lot?.hasError) {
+            runValidationTasks("number_lot", value);
+          }
+          setNumber_lot(value);
+        }}
+        onBlur={() => runValidationTasks("number_lot", number_lot)}
+        errorMessage={errors.number_lot?.errorMessage}
+        hasError={errors.number_lot?.hasError}
+        {...getOverrideProps(overrides, "number_lot")}
       ></TextField>
       <Flex
         justifyContent="space-between"

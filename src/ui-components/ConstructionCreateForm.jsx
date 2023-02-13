@@ -10,20 +10,19 @@ import {
   Button,
   Flex,
   Grid,
-  TextAreaField,
+  SelectField,
   TextField,
 } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Construction } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function ConstructionCreate(props) {
+export default function ConstructionCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
     onError,
     onSubmit,
-    onCancel,
     onValidate,
     onChange,
     overrides,
@@ -35,8 +34,8 @@ export default function ConstructionCreate(props) {
     customer: "",
     address: "",
     estimate_validity: "",
-    parts: "",
     number_lot: "",
+    customfield: undefined,
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
@@ -47,8 +46,10 @@ export default function ConstructionCreate(props) {
   const [estimate_validity, setEstimate_validity] = React.useState(
     initialValues.estimate_validity
   );
-  const [parts, setParts] = React.useState(initialValues.parts);
   const [number_lot, setNumber_lot] = React.useState(initialValues.number_lot);
+  const [customfield, setCustomfield] = React.useState(
+    initialValues.customfield
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
@@ -56,8 +57,8 @@ export default function ConstructionCreate(props) {
     setCustomer(initialValues.customer);
     setAddress(initialValues.address);
     setEstimate_validity(initialValues.estimate_validity);
-    setParts(initialValues.parts);
     setNumber_lot(initialValues.number_lot);
+    setCustomfield(initialValues.customfield);
     setErrors({});
   };
   const validations = {
@@ -66,8 +67,8 @@ export default function ConstructionCreate(props) {
     customer: [{ type: "Required" }],
     address: [{ type: "Required" }],
     estimate_validity: [],
-    parts: [{ type: "JSON" }],
     number_lot: [],
+    customfield: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -99,8 +100,8 @@ export default function ConstructionCreate(props) {
           customer,
           address,
           estimate_validity,
-          parts,
           number_lot,
+          customfield,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -143,7 +144,7 @@ export default function ConstructionCreate(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "ConstructionCreate")}
+      {...getOverrideProps(overrides, "ConstructionCreateForm")}
       {...rest}
     >
       <TextField
@@ -160,8 +161,8 @@ export default function ConstructionCreate(props) {
               customer,
               address,
               estimate_validity,
-              parts,
               number_lot,
+              customfield,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -190,8 +191,8 @@ export default function ConstructionCreate(props) {
               customer,
               address,
               estimate_validity,
-              parts,
               number_lot,
+              customfield,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -220,8 +221,8 @@ export default function ConstructionCreate(props) {
               customer: value,
               address,
               estimate_validity,
-              parts,
               number_lot,
+              customfield,
             };
             const result = onChange(modelFields);
             value = result?.customer ?? value;
@@ -250,8 +251,8 @@ export default function ConstructionCreate(props) {
               customer,
               address: value,
               estimate_validity,
-              parts,
               number_lot,
+              customfield,
             };
             const result = onChange(modelFields);
             value = result?.address ?? value;
@@ -284,8 +285,8 @@ export default function ConstructionCreate(props) {
               customer,
               address,
               estimate_validity: value,
-              parts,
               number_lot,
+              customfield,
             };
             const result = onChange(modelFields);
             value = result?.estimate_validity ?? value;
@@ -302,35 +303,6 @@ export default function ConstructionCreate(props) {
         hasError={errors.estimate_validity?.hasError}
         {...getOverrideProps(overrides, "estimate_validity")}
       ></TextField>
-      <TextAreaField
-        label="Parts"
-        isRequired={false}
-        isReadOnly={false}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              customer,
-              address,
-              estimate_validity,
-              parts: value,
-              number_lot,
-            };
-            const result = onChange(modelFields);
-            value = result?.parts ?? value;
-          }
-          if (errors.parts?.hasError) {
-            runValidationTasks("parts", value);
-          }
-          setParts(value);
-        }}
-        onBlur={() => runValidationTasks("parts", parts)}
-        errorMessage={errors.parts?.errorMessage}
-        hasError={errors.parts?.hasError}
-        {...getOverrideProps(overrides, "parts")}
-      ></TextAreaField>
       <TextField
         label="Number lot"
         isRequired={false}
@@ -349,8 +321,8 @@ export default function ConstructionCreate(props) {
               customer,
               address,
               estimate_validity,
-              parts,
               number_lot: value,
+              customfield,
             };
             const result = onChange(modelFields);
             value = result?.number_lot ?? value;
@@ -365,6 +337,35 @@ export default function ConstructionCreate(props) {
         hasError={errors.number_lot?.hasError}
         {...getOverrideProps(overrides, "number_lot")}
       ></TextField>
+      <SelectField
+        label="select to overide"
+        placeholder="Please select an option"
+        value={customfield}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              customer,
+              address,
+              estimate_validity,
+              number_lot,
+              customfield: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.customfield ?? value;
+          }
+          if (errors.customfield?.hasError) {
+            runValidationTasks("customfield", value);
+          }
+          setCustomfield(value);
+        }}
+        onBlur={() => runValidationTasks("customfield", customfield)}
+        errorMessage={errors.customfield?.errorMessage}
+        hasError={errors.customfield?.hasError}
+        {...getOverrideProps(overrides, "customfield")}
+      ></SelectField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
@@ -382,14 +383,6 @@ export default function ConstructionCreate(props) {
           gap="15px"
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
-          <Button
-            children="Cancel"
-            type="button"
-            onClick={() => {
-              onCancel && onCancel();
-            }}
-            {...getOverrideProps(overrides, "CancelButton")}
-          ></Button>
           <Button
             children="Submit"
             type="submit"

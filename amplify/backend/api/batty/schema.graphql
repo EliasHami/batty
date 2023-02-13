@@ -5,7 +5,7 @@ type Construction @model @auth(rules: [{allow: owner}, {allow: public}]) {
   customer: String!
   address: String!
   estimate_validity: Int
-  parts: String
+  parts: AWSJSON
   number_lot: Int
   ConstructionServices: [ConstructionService] @hasMany(indexName: "byConstruction", fields: ["id"])
 }
@@ -13,7 +13,7 @@ type Construction @model @auth(rules: [{allow: owner}, {allow: public}]) {
 type ConstructionService @model @auth(rules: [{allow: public}]) {
   id: ID!
   lot: Int
-  parts: String
+  parts: AWSJSON
   Service: Service @hasOne
   constructionID: ID! @index(name: "byConstruction")
 }

@@ -5,26 +5,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { API, DataStore } from 'aws-amplify'
-import { createConstruction, createPart, updateConstruction } from 'src/graphql/mutations'
+import { DataStore } from 'aws-amplify'
 import { useState } from 'react'
-import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
+import { Step, StepLabel, Stepper, Box, Button, Typography, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material'
 
-import { Construction } from 'src/types'
-import { Construction as ConstructionModel } from 'src/models'
+import { Construction, ConstructionService } from 'src/models'
 import { object, number, string, array, ObjectSchema } from 'yup'
 
-
-const partSchema = object().shape({
-  name: string().required('Parts name are required'),
-  provisions: array().of(
-    object({
-      name: string(),
-      service: string() // TODO new structure
-    })
-  )
+const constructionServiceSchema: ObjectSchema<ConstructionService> = object().shape({
+  lot: number().required('Lot is required'),
+  Service: string(),
+  parts: array().of(string()).required('Parts are required')
 })
-
 const constructionSchema: ObjectSchema<Construction> = object().shape({
   id: string(),
   name: string().required('Name is required'),
@@ -32,16 +24,22 @@ const constructionSchema: ObjectSchema<Construction> = object().shape({
   customer: string().required('Customer is required'), // TODO new structure
   address: string().required('Address is required'),
   estimate_validity: number().default(30),
-  // parts: array().of(partSchema).required('Parts are required')
+  number_lot: number().required('Number of lots is required'),
+  parts: array().of(string()).required('Parts are required'),
+  ConstructionServices: array().of(constructionServiceSchema).required('Construction Services are required'),
+  createdAt: string(),
+  updatedAt: string(),
 })
 
 type AddEditProps = {
-  construction?: Construction | null
+  construction?: Construction | null,
+  constructionServices?: ConstructionService[] | null
 }
 
 const steps = ["Configuration", "Select Parts"]
 
-const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
+const AddEdit: React.FC<AddEditProps> = ({ construction, constructionServices }) => {
+  console.log({ construction, constructionServices })
   const isAddMode = !construction
   const router = useRouter()
   const [activeStep, setActiveStep] = useState(0)
@@ -66,10 +64,9 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
       : handleUpdateConstruction(construction.id, data)
   }
 
-  const handleCreateConstruction = async (data: Construction) => {
+  const handleCreateConstruction = async (construction: Construction) => {
     try {
-      const { parts, id, ...construction } = data
-      await DataStore.save(new ConstructionModel({ ...construction }))
+      await DataStore.save(new Construction(construction))
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/constructions')
     } catch (error) {
@@ -78,13 +75,12 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
     }
   }
 
-  const handleUpdateConstruction = async (id: string, data: Construction) => {
+  const handleUpdateConstruction = async (id: string, construction: Construction) => {
     try {
-      const { parts, ...construction } = data
-      const original = await DataStore.query(ConstructionModel, id)
+      const original = await DataStore.query(Construction, id)
       if (!original) return
       await DataStore.save(
-        ConstructionModel.copyOf(original, updated => {
+        Construction.copyOf(original, updated => {
           updated.name = construction.name
           updated.description = construction.description
           updated.customer = construction.customer
@@ -164,6 +160,34 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
                 <div className="invalid-feedback">{errors.estimate_validity?.message}</div>
               </div>
             </div>)}
+          <div className="form-row">
+            <div className="form-group">
+              {constructionServices && constructionServices.map((constructionService, index) => (
+                <Box key={index} >
+                  <Typography variant="h5">
+                    Services
+                  </Typography>
+                  <Box >
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Service</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Age"
+                        error={Boolean(errors.ConstructionServices?.[index]?.service)}
+                        {...register(`ConstructionService.${index}.lot` as never)}
+                      >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                      <FormHelperText>{errors.ConstructionServices?.[index]?.service?.message}</FormHelperText>
+                    </FormControl>
+                  </Box>
+                </Box>
+              ))}
+            </div>
+          </div>
           <div className="form-row">
             <div className="form-group">
               <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>

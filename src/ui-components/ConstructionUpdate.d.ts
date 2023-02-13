@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { Construction } from "../models";
 export declare type ValidationResponse = {
@@ -19,6 +19,8 @@ export declare type ConstructionUpdateInputValues = {
     customer?: string;
     address?: string;
     estimate_validity?: number;
+    parts?: string;
+    number_lot?: number;
 };
 export declare type ConstructionUpdateValidationValues = {
     name?: ValidationFunction<string>;
@@ -26,6 +28,8 @@ export declare type ConstructionUpdateValidationValues = {
     customer?: ValidationFunction<string>;
     address?: ValidationFunction<string>;
     estimate_validity?: ValidationFunction<number>;
+    parts?: ValidationFunction<string>;
+    number_lot?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ConstructionUpdateOverridesProps = {
@@ -35,6 +39,8 @@ export declare type ConstructionUpdateOverridesProps = {
     customer?: PrimitiveOverrideProps<TextFieldProps>;
     address?: PrimitiveOverrideProps<TextFieldProps>;
     estimate_validity?: PrimitiveOverrideProps<TextFieldProps>;
+    parts?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    number_lot?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ConstructionUpdateProps = React.PropsWithChildren<{
     overrides?: ConstructionUpdateOverridesProps | undefined | null;

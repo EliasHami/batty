@@ -5,51 +5,50 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type ConstructionCreateInputValues = {
+export declare type ConstructionCreateFormInputValues = {
     name?: string;
     description?: string;
     customer?: string;
     address?: string;
     estimate_validity?: number;
-    parts?: string;
     number_lot?: number;
+    customfield?: string;
 };
-export declare type ConstructionCreateValidationValues = {
+export declare type ConstructionCreateFormValidationValues = {
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     customer?: ValidationFunction<string>;
     address?: ValidationFunction<string>;
     estimate_validity?: ValidationFunction<number>;
-    parts?: ValidationFunction<string>;
     number_lot?: ValidationFunction<number>;
+    customfield?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type ConstructionCreateOverridesProps = {
-    ConstructionCreateGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type ConstructionCreateFormOverridesProps = {
+    ConstructionCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
     customer?: PrimitiveOverrideProps<TextFieldProps>;
     address?: PrimitiveOverrideProps<TextFieldProps>;
     estimate_validity?: PrimitiveOverrideProps<TextFieldProps>;
-    parts?: PrimitiveOverrideProps<TextAreaFieldProps>;
     number_lot?: PrimitiveOverrideProps<TextFieldProps>;
+    customfield?: PrimitiveOverrideProps<SelectFieldProps>;
 } & EscapeHatchProps;
-export declare type ConstructionCreateProps = React.PropsWithChildren<{
-    overrides?: ConstructionCreateOverridesProps | undefined | null;
+export declare type ConstructionCreateFormProps = React.PropsWithChildren<{
+    overrides?: ConstructionCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: ConstructionCreateInputValues) => ConstructionCreateInputValues;
-    onSuccess?: (fields: ConstructionCreateInputValues) => void;
-    onError?: (fields: ConstructionCreateInputValues, errorMessage: string) => void;
-    onCancel?: () => void;
-    onChange?: (fields: ConstructionCreateInputValues) => ConstructionCreateInputValues;
-    onValidate?: ConstructionCreateValidationValues;
+    onSubmit?: (fields: ConstructionCreateFormInputValues) => ConstructionCreateFormInputValues;
+    onSuccess?: (fields: ConstructionCreateFormInputValues) => void;
+    onError?: (fields: ConstructionCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: ConstructionCreateFormInputValues) => ConstructionCreateFormInputValues;
+    onValidate?: ConstructionCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function ConstructionCreate(props: ConstructionCreateProps): React.ReactElement;
+export default function ConstructionCreateForm(props: ConstructionCreateFormProps): React.ReactElement;

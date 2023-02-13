@@ -2,16 +2,8 @@
 Le projet a pour but premier de generer des devis et factures pour des entreprises dans le domaine du génie civil.  
 Par la suite j'ajouterai toutes les fonctionnalités de génie civil. Il sera par exemple possible de générer des rapports de chantier.  
 Il est basé sur le framework Next.js et utilise AWS Amplify pour le backend et l'hébergement.  
-Pour le design j'utilise Figma pour créer des composants qui me génère un code React qui est ensuite intégré dans le projet.
-Je l'utilise aussi pour créer un thème qui s'applique sur tout les composants Amplify-ui.
-MUI est utilisé pour les composants que je ne trouve pas dans Amplify-ui.
-
-# Cycle de développement 
-1. Crée ton model dans amplify studio 
-2. Crée ton formulaire et ta liste dans figma et lie les inputs au champs du model
-3. Importe le formulaire et la liste dans le projet
-4. Crée les routes dans le projet
-5. Surcharge les évènements et le contenu de la liste et du formulaire
+Pour le css j'utilise Material-UI.
+Pour le formulaire j'utilise React-hook-form et Yup.
 
 # Deadline
 - 20 avril 2023 : version alpha (MVP) --> à faire tester par assiya et yanis
@@ -93,3 +85,9 @@ MUI est utilisé pour les composants que je ne trouve pas dans Amplify-ui.
   - Pouvoir envoyer le devis / facture par mail depuis la liste des chantiers
   - Pouvoir personaliser le mail
 
+du coup euh ils ne mettent pas les infos des lots et des services dans le chantier mais dans le devis 
+du coup c'est plus souple en plus les select sont directement lié au ressources client, bibliotheque ...
+je sais pas si j'aurai fais mieux 
+j'aurai probablement fait la meme chose 
+bah en faite pour le faire le devis tu as besoin du client et des lots et des services
+donc je sais pas trop sur quoi comment faire autrement qu'une vu client, un vue chantier, une vue devis et une vue services 

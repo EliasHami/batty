@@ -48,7 +48,7 @@ export const schema = {
                 "parts": {
                     "name": "parts",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSJSON",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -149,7 +149,7 @@ export const schema = {
                 "parts": {
                     "name": "parts",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSJSON",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -316,5 +316,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "124d6f5330b20d662bf28e968f289e62"
+    "version": "49f03232dd066734f768bc1045b5260a"
 };
