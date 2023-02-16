@@ -12,9 +12,6 @@
       "AmplifyAppId": "dwdsv8e4nh6qi"
     },
     "categories": {
-      "api": {
-        "batty": {}
-      },
       "auth": {
         "batty6077cc1f": {}
       }

@@ -2,7 +2,8 @@ import { withSSRContext } from 'aws-amplify'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
 
 import { Construction } from 'src/models'
-import { Link, Delete } from 'src/components'
+import { Link } from 'src/components'
+import Delete from 'src/components/constructions/Delete'
 import GenerateEstimatePDF from 'src/components/constructions/GenerateEstimatePDF'
 
 import { Amplify } from 'aws-amplify'
