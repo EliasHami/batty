@@ -1,7 +1,7 @@
-import { AddEdit } from 'src/components'
 import { withSSRContext } from 'aws-amplify'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
 
+import { AddEdit } from 'src/components'
 import { Construction } from 'src/models'
 
 export default AddEdit

@@ -2,16 +2,14 @@ import { withSSRContext } from 'aws-amplify'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
 
 import { Construction } from 'src/models'
-import { Link } from 'src/components'
-
-import { GenerateEstimatePDF, Delete } from 'src/components'
-import type { Construction as ConstructionType } from 'src/models'
+import { Link, Delete } from 'src/components'
+import GenerateEstimatePDF from 'src/components/constructions/GenerateEstimatePDF'
 
 import { Amplify } from 'aws-amplify'
 import awsExports from "src/aws-exports"
 Amplify.configure({ ...awsExports, ssr: true })
 
-export default function Constructions({ constructions }: { constructions: ConstructionType[] }) {
+export default function Constructions({ constructions }: { constructions: Construction[] }) {
 
   return (
     <div>
