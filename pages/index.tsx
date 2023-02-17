@@ -6,6 +6,7 @@ const Home: NextPage = () => {
     <div>
       <h1>Batty - An app to manage construction projects</h1>
       <p><Link href="/constructions">&gt;&gt; Constructions</Link></p>
+      <p><Link href="/invoices">&gt;&gt; Invoices</Link></p>
     </div>
   )
 }

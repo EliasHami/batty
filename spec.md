@@ -1,4 +1,5 @@
-# But du projet 
+# But du projet
+
 Le projet a pour but premier de generer des devis et factures pour des entreprises dans le domaine du génie civil.  
 Par la suite j'ajouterai toutes les fonctionnalités de génie civil. Il sera par exemple possible de générer des rapports de chantier.  
 Il est basé sur le framework Next.js et utilise AWS Amplify pour le backend et l'hébergement.  
@@ -6,11 +7,12 @@ Pour le css j'utilise Material-UI.
 Pour le formulaire j'utilise React-hook-form et Yup.
 
 # Deadline
+
 - 20 avril 2023 : version alpha (MVP) --> à faire tester par assiya et yanis
   - p1 : CRUD chantier
-  - p2 : CRUD client
-  - p3 : CRUD service
-  - p4 : Génération d'un devis / facture (sans la personnalisation)
+  - p2 : CRUD devis / facture (sans la personnalisation)
+  - p3 : CRUD client
+  - p4 : CRUD service
   - p5 : Menu de navigation chantier,...
 - 20 juin 2023 : version 0.1.0
   - p1 : Authentification
@@ -26,12 +28,13 @@ Pour le formulaire j'utilise React-hook-form et Yup.
   - p2 : Newsletter
 
 # Specs
+
 - Gestion de l'abonnement
   - Créer un plan d'abonnement et afficher sous forme de modale
   - bloquer certaines pages quand la periode d'essai est finie
-- Landing page 
+- Landing page
   - Créer la page pour le domaine batty.xxx et lier à l'application (app.batty.xxx)
-    - quand on va dans l'application pour créer un compte : afficher que c'est version d'essai 
+    - quand on va dans l'application pour créer un compte : afficher que c'est version d'essai
   - Afficher les fonctionnalités de l'application
   - Afficher les tarifs
   - Afficher les témoignages
@@ -42,21 +45,21 @@ Pour le formulaire j'utilise React-hook-form et Yup.
       CGU
       Données personnelles
       Cookies
-      © 2023 batty 
+      © 2023 batty
 - Newsletter
   - personnaliser les emails de confirmation d'inscription, d'accueil et de réinitialisation de mot de passe
   - créer une newsletter lié au blog et aux mises à jour de l'application
-- Design 
+- Design
   - Créer un thème de base pour l'application
     - remplacer les classes bootstrap et les composants MUI (sauf ceux que je ne trouve pas) par des composants Amplify-ui
   - Créer un logo
-- Navigation 
+- Navigation
   - Créer un menu de navigation pour les chantiers, les clients, les services, les devis et les factures
   - Créer un menu de navigation pour la gestion de compte
   - Afficher des squellettes pendant le chargement des pages
   - Gérer les erreurs de chargement des pages
 - Authentification
-  - Inscription 
+  - Inscription
     - Il faut pouvoir s'inscrire avec un email et un mot de passe et ajouter sont entreprise via le SIRET et pouvoir ajouter les informations de l'entreprise si pas trouvé via le SIRET
       - Modifier le formulaire d'aws pour ajouter les champs de l'entreprise
   - Connexion
@@ -66,7 +69,7 @@ Pour le formulaire j'utilise React-hook-form et Yup.
   - Modification des informations de l'entreprise
   - Modification des informations personnelles
 - CRUD chantier
-  - Créer les champs de configuration 
+  - Créer les champs de configuration
   - Créer les lots du chantier
 - CRUD client
   - Créer les champs de configuration
@@ -85,9 +88,9 @@ Pour le formulaire j'utilise React-hook-form et Yup.
   - Pouvoir envoyer le devis / facture par mail depuis la liste des chantiers
   - Pouvoir personaliser le mail
 
-du coup euh ils ne mettent pas les infos des lots et des services dans le chantier mais dans le devis 
+du coup euh ils ne mettent pas les infos des lots et des services dans le chantier mais dans le devis
 du coup c'est plus souple en plus les select sont directement lié au ressources client, bibliotheque ...
-je sais pas si j'aurai fais mieux 
-j'aurai probablement fait la meme chose 
+je sais pas si j'aurai fais mieux
+j'aurai probablement fait la meme chose
 bah en faite pour le faire le devis tu as besoin du client et des lots et des services
-donc je sais pas trop sur quoi comment faire autrement qu'une vu client, un vue chantier, une vue devis et une vue services 
+donc je sais pas trop sur quoi comment faire autrement qu'une vu client, un vue chantier, une vue devis et une vue services

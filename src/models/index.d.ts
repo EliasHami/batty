@@ -1,6 +1,21 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
+
+export enum Statuses {
+  DRAFT = "DRAFT",
+  FINALIZED = "FINALIZED",
+  SENT = "SENT",
+  ACCEPTED = "ACCEPTED",
+  REFUSED = "REFUSED",
+  CANCELLED = "CANCELLED"
+}
+
+export enum DurationUnits {
+  DAYS = "DAYS",
+  WEEKS = "WEEKS",
+  HOURS = "HOURS"
+}
 
 export enum Units {
   KG = "KG",
@@ -8,6 +23,82 @@ export enum Units {
 }
 
 
+
+type EagerCustomer = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Customer, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Invoices?: (Invoice | null)[] | null;
+  readonly Constructions?: (Construction | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyCustomer = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Customer, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Invoices: AsyncCollection<Invoice>;
+  readonly Constructions: AsyncCollection<Construction>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Customer = LazyLoading extends LazyLoadingDisabled ? EagerCustomer : LazyCustomer
+
+export declare const Customer: (new (init: ModelInit<Customer>) => Customer) & {
+  copyOf(source: Customer, mutator: (draft: MutableModel<Customer>) => MutableModel<Customer> | void): Customer;
+}
+
+type EagerInvoice = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Invoice, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly number?: string | null;
+  readonly amount?: number | null;
+  readonly issueDate?: string | null;
+  readonly expirationDate?: string | null;
+  readonly status?: Statuses | keyof typeof Statuses | null;
+  readonly workStartDate?: string | null;
+  readonly workDuration?: number | null;
+  readonly workDurationUnit?: DurationUnits | keyof typeof DurationUnits | null;
+  readonly customerID?: string | null;
+  readonly constructionID?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyInvoice = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Invoice, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly number?: string | null;
+  readonly amount?: number | null;
+  readonly issueDate?: string | null;
+  readonly expirationDate?: string | null;
+  readonly status?: Statuses | keyof typeof Statuses | null;
+  readonly workStartDate?: string | null;
+  readonly workDuration?: number | null;
+  readonly workDurationUnit?: DurationUnits | keyof typeof DurationUnits | null;
+  readonly customerID?: string | null;
+  readonly constructionID?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Invoice = LazyLoading extends LazyLoadingDisabled ? EagerInvoice : LazyInvoice
+
+export declare const Invoice: (new (init: ModelInit<Invoice>) => Invoice) & {
+  copyOf(source: Invoice, mutator: (draft: MutableModel<Invoice>) => MutableModel<Invoice> | void): Invoice;
+}
 
 type EagerConstruction = {
   readonly [__modelMeta__]: {
@@ -22,7 +113,8 @@ type EagerConstruction = {
   readonly estimate_validity?: number | null;
   readonly parts?: string | null;
   readonly number_lot?: number | null;
-  readonly ConstructionServices?: (ConstructionService | null)[] | null;
+  readonly customerID?: string | null;
+  readonly Invoices?: (Invoice | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -40,7 +132,8 @@ type LazyConstruction = {
   readonly estimate_validity?: number | null;
   readonly parts?: string | null;
   readonly number_lot?: number | null;
-  readonly ConstructionServices: AsyncCollection<ConstructionService>;
+  readonly customerID?: string | null;
+  readonly Invoices: AsyncCollection<Invoice>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -49,42 +142,6 @@ export declare type Construction = LazyLoading extends LazyLoadingDisabled ? Eag
 
 export declare const Construction: (new (init: ModelInit<Construction>) => Construction) & {
   copyOf(source: Construction, mutator: (draft: MutableModel<Construction>) => MutableModel<Construction> | void): Construction;
-}
-
-type EagerConstructionService = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<ConstructionService, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly lot?: number | null;
-  readonly parts?: string | null;
-  readonly Service?: Service | null;
-  readonly constructionID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly constructionServiceServiceId?: string | null;
-}
-
-type LazyConstructionService = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<ConstructionService, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly lot?: number | null;
-  readonly parts?: string | null;
-  readonly Service: AsyncItem<Service | undefined>;
-  readonly constructionID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly constructionServiceServiceId?: string | null;
-}
-
-export declare type ConstructionService = LazyLoading extends LazyLoadingDisabled ? EagerConstructionService : LazyConstructionService
-
-export declare const ConstructionService: (new (init: ModelInit<ConstructionService>) => ConstructionService) & {
-  copyOf(source: ConstructionService, mutator: (draft: MutableModel<ConstructionService>) => MutableModel<ConstructionService> | void): ConstructionService;
 }
 
 type EagerService = {

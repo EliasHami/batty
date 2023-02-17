@@ -10,19 +10,20 @@ import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
 
 import { Construction } from 'src/models'
-import { object, number, string, array } from 'yup'
+import { object, number, string, array, date } from 'yup'
 
 const constructionSchema = object().shape({
   id: string(),
-  name: string().required('Name is required'),
-  description: string().required('Description is required'),
-  customer: string().required('Customer is required'), // TODO new structure
-  address: string().required('Address is required'),
-  estimate_validity: number().default(30),
-  number_lot: number().required('Number of lots is required'),
-  parts: array().of(string()).required('Parts are required'),
-  createdAt: string(),
-  updatedAt: string(),
+  number: string().required(),
+  amount: number().required(),
+  customerId: string().required(),
+  constructionId: string().required(),
+  issueDate: date().required(),
+  expirationDate: date().required(),
+  status: string().required(),
+  workStartDate: date().required(),
+  workDuration: number().required(),
+  workDurationUnit: string()
 })
 
 type AddEditProps = {

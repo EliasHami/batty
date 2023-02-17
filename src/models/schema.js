@@ -1,5 +1,233 @@
 export const schema = {
     "models": {
+        "Customer": {
+            "name": "Customer",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Invoices": {
+                    "name": "Invoices",
+                    "isArray": true,
+                    "type": {
+                        "model": "Invoice"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "customerID"
+                        ]
+                    }
+                },
+                "Constructions": {
+                    "name": "Constructions",
+                    "isArray": true,
+                    "type": {
+                        "model": "Construction"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "customerID"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Customers",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Invoice": {
+            "name": "Invoice",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "number": {
+                    "name": "number",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "amount": {
+                    "name": "amount",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "issueDate": {
+                    "name": "issueDate",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "expirationDate": {
+                    "name": "expirationDate",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Statuses"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "workStartDate": {
+                    "name": "workStartDate",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "workDuration": {
+                    "name": "workDuration",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "workDurationUnit": {
+                    "name": "workDurationUnit",
+                    "isArray": false,
+                    "type": {
+                        "enum": "DurationUnits"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "customerID": {
+                    "name": "customerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "constructionID": {
+                    "name": "constructionID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Invoices",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCustomer",
+                        "fields": [
+                            "customerID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byConstruction",
+                        "fields": [
+                            "constructionID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Construction": {
             "name": "Construction",
             "fields": {
@@ -59,11 +287,18 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "ConstructionServices": {
-                    "name": "ConstructionServices",
+                "customerID": {
+                    "name": "customerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Invoices": {
+                    "name": "Invoices",
                     "isArray": true,
                     "type": {
-                        "model": "ConstructionService"
+                        "model": "Invoice"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -100,6 +335,15 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCustomer",
+                        "fields": [
+                            "customerID"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -115,113 +359,6 @@ export const schema = {
                                     "read"
                                 ]
                             },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "ConstructionService": {
-            "name": "ConstructionService",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "lot": {
-                    "name": "lot",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "parts": {
-                    "name": "parts",
-                    "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Service": {
-                    "name": "Service",
-                    "isArray": false,
-                    "type": {
-                        "model": "Service"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
-                        "targetNames": [
-                            "constructionServiceServiceId"
-                        ]
-                    }
-                },
-                "constructionID": {
-                    "name": "constructionID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "constructionServiceServiceId": {
-                    "name": "constructionServiceServiceId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "ConstructionServices",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byConstruction",
-                        "fields": [
-                            "constructionID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
                             {
                                 "allow": "public",
                                 "operations": [
@@ -306,6 +443,25 @@ export const schema = {
         }
     },
     "enums": {
+        "Statuses": {
+            "name": "Statuses",
+            "values": [
+                "DRAFT",
+                "FINALIZED",
+                "SENT",
+                "ACCEPTED",
+                "REFUSED",
+                "CANCELLED"
+            ]
+        },
+        "DurationUnits": {
+            "name": "DurationUnits",
+            "values": [
+                "DAYS",
+                "WEEKS",
+                "HOURS"
+            ]
+        },
         "Units": {
             "name": "Units",
             "values": [
@@ -316,5 +472,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "49f03232dd066734f768bc1045b5260a"
+    "version": "4b220163eb755b9ab6c852e1d7be688d"
 };
