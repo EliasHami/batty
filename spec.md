@@ -51,7 +51,7 @@ Pour le formulaire j'utilise React-hook-form et Yup.
   - créer une newsletter lié au blog et aux mises à jour de l'application
 - Design
   - Créer un thème de base pour l'application
-    - remplacer les classes bootstrap et les composants MUI (sauf ceux que je ne trouve pas) par des composants Amplify-ui
+    - remplacer les classes bootstrap
   - Créer un logo
 - Navigation
   - Créer un menu de navigation pour les chantiers, les clients, les services, les devis et les factures
