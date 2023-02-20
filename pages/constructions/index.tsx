@@ -1,12 +1,13 @@
 import { withSSRContext } from 'aws-amplify'
 
+import { Amplify } from '@aws-amplify/core'
+
 import { Construction } from 'src/types'
 import { listConstructions } from 'src/graphql/queries'
 import { Link } from 'src/components'
 import Delete from 'src/components/constructions/Delete'
 import GenerateEstimatePDF from 'src/components/constructions/GenerateEstimatePDF'
 
-import { Amplify } from 'aws-amplify'
 import awsExports from "src/aws-exports"
 Amplify.configure({ ...awsExports, ssr: true })
 

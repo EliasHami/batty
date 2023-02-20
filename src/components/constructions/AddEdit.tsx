@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { API } from 'aws-amplify'
+import { API } from '@aws-amplify/api'
 
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'

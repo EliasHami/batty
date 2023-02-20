@@ -1,10 +1,11 @@
 import { withSSRContext } from 'aws-amplify'
 
+import { Amplify } from '@aws-amplify/core'
+
 import { AddEdit } from 'src/components'
 import { getConstruction } from 'src/graphql/queries'
 
 import awsExports from "src/aws-exports"
-import { Amplify } from 'aws-amplify'
 Amplify.configure({ ...awsExports, ssr: true })
 
 export default AddEdit

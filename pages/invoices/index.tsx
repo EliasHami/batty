@@ -1,11 +1,11 @@
 import { withSSRContext } from 'aws-amplify'
+import { Amplify } from '@aws-amplify/core'
 import { serializeModel } from "@aws-amplify/datastore/ssr"
 
 import { Invoice } from 'src/models'
 import { Link } from 'src/components'
 // import Delete from 'src/components/constructions/Delete'
 
-import { Amplify } from 'aws-amplify'
 import awsExports from "src/aws-exports"
 
 import Table from '@mui/material/Table'
