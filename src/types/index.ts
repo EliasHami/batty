@@ -18,7 +18,7 @@ export type Invoice = DeepOmit<
 >
 
 
-const invoiceSchema: ObjectSchema<Invoice> = object().shape({
+const invoiceSchema: ObjectSchema<Invoice> = object({
   id: string().required('Id is required'),
   number: string(),
   amount: number(),
@@ -32,7 +32,7 @@ const invoiceSchema: ObjectSchema<Invoice> = object().shape({
   constructionID: string(),
 })
 
-const constructionSchema: ObjectSchema<Construction> = object().shape({
+const constructionSchema: ObjectSchema<Construction> = object({
   id: string().required('Id is required'),
   name: string().required('Name is required'),
   description: string().required('Description is required'),
@@ -41,8 +41,8 @@ const constructionSchema: ObjectSchema<Construction> = object().shape({
   parts: string(),
   number_lot: number(),
   customerID: string(),
-  Invoices: object().shape({
-    items: array<Invoice>().required()
+  Invoices: object({
+    items: array<Invoice>().required() // .of(invoiceSchema) passe tout les sous-champs à optionnel typescript number?:
   }),
 })
 
