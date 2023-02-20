@@ -5,13 +5,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { DataStore } from 'aws-amplify'
-import { useState } from 'react'
-import { Step, StepLabel, Stepper, Box, Button, Typography, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@mui/material'
+import { API } from '@aws-amplify/api'
+import { Box, Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@mui/material'
 
-import { Invoice } from 'src/models'
+import { Invoice } from 'src/types/index'
 import { object, number, string, array, date } from 'yup'
 import { DatePicker } from '@mui/x-date-pickers'
+import { createInvoice, updateConstruction, updateInvoice } from 'src/graphql/mutations'
 
 const invoiceSchema = object().shape({
   id: string(),
@@ -41,8 +41,6 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
 
   if (!isAddMode) {
     formOptions.defaultValues = invoice
-  } else {
-    // formOptions.defaultValues = invoiceSchema.cast(invoice)
   }
 
   const methods = useForm<Invoice>(formOptions)
@@ -57,8 +55,15 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
 
   const handleCreateInvoice = async (invoice: Invoice) => {
     try {
-      // @ts-ignore
-      await DataStore.save(new Invoice(invoice))
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: createInvoice,
+        variables: {
+          input: {
+            ...invoice
+          }
+        }
+      })
       alertService.success('Invoice added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/invoices')
     } catch (error) {
@@ -69,22 +74,16 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
 
   const handleUpdateInvoice = async (id: string, invoice: Invoice) => {
     try {
-      const original = await DataStore.query(Invoice, id)
-      if (!original) return
-      await DataStore.save(
-        Invoice.copyOf(original, updated => {
-          updated.number = invoice.number
-          updated.amount = invoice.amount
-          updated.customerID = invoice.customerID
-          updated.constructionID = invoice.constructionID
-          updated.issueDate = invoice.issueDate
-          updated.expirationDate = invoice.expirationDate
-          updated.status = invoice.status
-          updated.workStartDate = invoice.workStartDate
-          updated.workDuration = invoice.workDuration
-          updated.workDurationUnit = invoice.workDurationUnit
-        })
-      )
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: updateInvoice,
+        variables: {
+          input: {
+            ...invoice,
+            id,
+          }
+        }
+      })
       alertService.success('Invoice updated successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/invoices')
     } catch (error) {
@@ -169,35 +168,6 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
               {errors.amount && <FormHelperText id="amount-error">{errors.amount.message}</FormHelperText>}
             </FormControl>
           </Box>
-          {/* <div className="form-row">
-            <div className="form-group col">
-              <label>Name</label>
-              <input type="text" {...register("name" as never)} className={'form-control' + (errors.name ? ' is-invalid' : '')} />
-              <div className="invalid-feedback">{errors.name?.message}</div>
-            </div>
-            <div className="form-group col">
-              <label>Address</label>
-              <input type="text" {...register("address" as never)} className={'form-control' + (errors.address ? ' is-invalid' : '')} />
-              <div className="invalid-feedback">{errors.address?.message}</div>
-            </div>
-            <div className="form-group col">
-              <label>Description</label>
-              <input type="text" {...register("description" as never)} className={'form-control' + (errors.description ? ' is-invalid' : '')} />
-              <div className="invalid-feedback">{errors.description?.message}</div>
-            </div>
-            <div className="form-group col">
-              <label>Customer</label>
-              <input type="text" {...register("customer" as never)} className={'form-control' + (errors.customer ? ' is-invalid' : '')} />
-              <div className="invalid-feedback">{errors.customer?.message}</div>
-            </div>
-            <div className="form-group col">
-              <label>Estimate&apos;s validity</label>
-              <input type="text" {...register("estimate_validity" as never)} className={'form-control' + (errors.estimate_validity ? ' is-invalid' : '')} />
-              <div className="invalid-feedback">{errors.estimate_validity?.message}</div>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group"> */}
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 
             <Button type="submit" disabled={formState.isSubmitting}>
@@ -206,9 +176,6 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
             </Button>
 
           </Box>
-          {/* </div>
-          </div>
-        </Box> */}
         </Box>
       </Box>
     </FormProvider>
