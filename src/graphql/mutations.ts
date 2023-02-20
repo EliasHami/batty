@@ -32,7 +32,6 @@ export const createCustomer = /* GraphQL */ `
           id
           name
           description
-          customer
           address
           estimate_validity
           parts
@@ -79,7 +78,6 @@ export const updateCustomer = /* GraphQL */ `
           id
           name
           description
-          customer
           address
           estimate_validity
           parts
@@ -126,7 +124,6 @@ export const deleteCustomer = /* GraphQL */ `
           id
           name
           description
-          customer
           address
           estimate_validity
           parts
@@ -218,7 +215,6 @@ export const createConstruction = /* GraphQL */ `
       id
       name
       description
-      customer
       address
       estimate_validity
       parts
@@ -257,7 +253,6 @@ export const updateConstruction = /* GraphQL */ `
       id
       name
       description
-      customer
       address
       estimate_validity
       parts
@@ -296,7 +291,6 @@ export const deleteConstruction = /* GraphQL */ `
       id
       name
       description
-      customer
       address
       estimate_validity
       parts

@@ -29,7 +29,6 @@ export const getCustomer = /* GraphQL */ `
           id
           name
           description
-          customer
           address
           estimate_validity
           parts
@@ -187,7 +186,6 @@ export const getConstruction = /* GraphQL */ `
       id
       name
       description
-      customer
       address
       estimate_validity
       parts
@@ -228,7 +226,6 @@ export const listConstructions = /* GraphQL */ `
         id
         name
         description
-        customer
         address
         estimate_validity
         parts
@@ -264,7 +261,6 @@ export const constructionsByCustomerID = /* GraphQL */ `
         id
         name
         description
-        customer
         address
         estimate_validity
         parts

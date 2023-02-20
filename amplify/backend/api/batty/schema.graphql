@@ -37,7 +37,6 @@ type Construction @model @auth(rules: [{allow: owner}, {allow: public}]) {
   id: ID!
   name: String!
   description: String!
-  customer: String!
   address: String!
   estimate_validity: Int
   parts: AWSJSON

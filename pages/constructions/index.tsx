@@ -1,6 +1,6 @@
 import { withSSRContext } from 'aws-amplify'
 
-import { Construction } from 'src/types/API'
+import { Construction } from 'src/types'
 import { listConstructions } from 'src/graphql/queries'
 import { Link } from 'src/components'
 import Delete from 'src/components/constructions/Delete'
@@ -32,7 +32,7 @@ export default function Constructions({ constructions }: { constructions: Constr
               <td>{construction.name}</td>
               <td>{construction.address}</td>
               <td>{construction.description}</td>
-              <td>{construction.customer}</td>
+              <td>{construction.customerID}</td>
               <td style={{ whiteSpace: 'nowrap' }}>
                 <GenerateEstimatePDF construction={construction} />
                 <Link href={`/constructions/${construction.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>

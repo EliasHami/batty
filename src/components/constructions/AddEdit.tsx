@@ -9,22 +9,8 @@ import { Link } from 'src/components'
 import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
 
-import { Construction } from 'src/types/API'
+import { Construction, constructionSchema } from 'src/types'
 import { createConstruction, updateConstruction } from 'src/graphql/mutations'
-import { object, number, string, array, ObjectSchema } from 'yup'
-
-const constructionSchema: ObjectSchema<Construction> = object().shape({
-  id: string(),
-  name: string().required('Name is required'),
-  description: string().required('Description is required'),
-  customerID: string().required('Customer is required'), // TODO new structure
-  address: string().required('Address is required'),
-  estimate_validity: number().default(30),
-  number_lot: number().required('Number of lots is required'),
-  parts: array().of(string()).required('Parts are required'),
-  createdAt: string(),
-  updatedAt: string(),
-})
 
 type AddEditProps = {
   construction?: Construction | null
@@ -103,7 +89,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const isStepFailed = (step: number) => {
     if (step === 0) {
-      return Boolean(errors.name || errors.address || errors.description || errors.customer)
+      return Boolean(errors.name || errors.address || errors.description || errors.customerID)
     } else if (step === 1) return Boolean(errors.parts)
   }
 
@@ -149,8 +135,8 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
               </div>
               <div className="form-group col">
                 <label>Customer</label>
-                <input type="text" {...register("customer" as never)} className={'form-control' + (errors.customer ? ' is-invalid' : '')} />
-                <div className="invalid-feedback">{errors.customer?.message}</div>
+                <input type="text" {...register("customerID" as never)} className={'form-control' + (errors.customerID ? ' is-invalid' : '')} />
+                <div className="invalid-feedback">{errors.customerID?.message}</div>
               </div>
               <div className="form-group col">
                 <label>Estimate&apos;s validity</label>
