@@ -1,7 +1,7 @@
 import { withSSRContext } from 'aws-amplify'
-import { serializeModel } from "@aws-amplify/datastore/ssr"
 
-import { Construction } from 'src/models'
+import { Construction } from 'src/types/API'
+import { listConstructions } from 'src/graphql/queries'
 import { Link } from 'src/components'
 import Delete from 'src/components/constructions/Delete'
 import GenerateEstimatePDF from 'src/components/constructions/GenerateEstimatePDF'
@@ -62,10 +62,10 @@ export default function Constructions({ constructions }: { constructions: Constr
 
 export async function getServerSideProps({ req }: { req: Object }) {
   const SSR = withSSRContext({ req })
-  let constructions
+  let constructions: Construction[] = []
   try {
-    const model = await SSR.DataStore.query(Construction)
-    constructions = serializeModel(model) as any // can't do anything with JSON type
+    const response = await SSR.API.graphql({ query: listConstructions })
+    constructions = response.data.listConstructions.items
   } catch (error) {
     console.log('error', error)
   }

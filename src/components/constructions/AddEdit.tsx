@@ -1,22 +1,23 @@
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { API } from 'aws-amplify'
 
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { DataStore } from 'aws-amplify'
 import { useState } from 'react'
 import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
 
-import { Construction } from 'src/models'
-import { object, number, string, array } from 'yup'
+import { Construction } from 'src/types/API'
+import { createConstruction, updateConstruction } from 'src/graphql/mutations'
+import { object, number, string, array, ObjectSchema } from 'yup'
 
-const constructionSchema = object().shape({
+const constructionSchema: ObjectSchema<Construction> = object().shape({
   id: string(),
   name: string().required('Name is required'),
   description: string().required('Description is required'),
-  customer: string().required('Customer is required'), // TODO new structure
+  customerID: string().required('Customer is required'), // TODO new structure
   address: string().required('Address is required'),
   estimate_validity: number().default(30),
   number_lot: number().required('Number of lots is required'),
@@ -42,8 +43,6 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   if (!isAddMode) {
     formOptions.defaultValues = construction
-  } else {
-    // formOptions.defaultValues = constructionSchema.cast(construction)
   }
 
   const methods = useForm<Construction>(formOptions)
@@ -58,8 +57,15 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const handleCreateConstruction = async (construction: Construction) => {
     try {
-      // @ts-ignore
-      await DataStore.save(new Construction(construction))
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: createConstruction,
+        variables: {
+          input: {
+            ...construction
+          }
+        }
+      })
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/constructions')
     } catch (error) {
@@ -70,17 +76,16 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
 
   const handleUpdateConstruction = async (id: string, construction: Construction) => {
     try {
-      const original = await DataStore.query(Construction, id)
-      if (!original) return
-      await DataStore.save(
-        Construction.copyOf(original, updated => {
-          updated.name = construction.name
-          updated.description = construction.description
-          updated.customer = construction.customer
-          updated.address = construction.address
-          updated.estimate_validity = construction.estimate_validity
-        })
-      )
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: updateConstruction,
+        variables: {
+          input: {
+            ...construction,
+            id,
+          }
+        }
+      })
       alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/constructions')
     } catch (error) {

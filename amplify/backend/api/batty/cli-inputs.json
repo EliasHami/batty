@@ -17,10 +17,6 @@
         "cognitoUserPoolId": "authbatty6077cc1f"
       }
     ],
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      }
-    }
+    "conflictResolution": {}
   }
 }

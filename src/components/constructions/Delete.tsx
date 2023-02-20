@@ -1,7 +1,6 @@
 import { useState, useTransition } from 'react'
-import { DataStore } from 'aws-amplify'
-
-import { Construction } from 'src/models'
+import { API } from 'aws-amplify'
+import { deleteConstruction } from 'src/graphql/mutations'
 import { alertService } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { useRouter } from 'next/navigation'
@@ -13,7 +12,11 @@ export default function Delete({ id }: { id: string }) {
   async function handleDelete(id: string) {
     setIsDeleting(true)
     try {
-      await DataStore.delete(Construction, (cons) => cons.id.eq(id))
+      await API.graphql({
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: deleteConstruction,
+        variables: { input: { id } }
+      })
     } catch (error) {
       console.log('error', error)
       alertService.error(getErrorMessage(error))

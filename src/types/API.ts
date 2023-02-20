@@ -2,25 +2,124 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateConstructionInput = {
+export type CreateCustomerInput = {
   id?: string | null,
+};
+
+export type ModelCustomerConditionInput = {
+  and?: Array< ModelCustomerConditionInput | null > | null,
+  or?: Array< ModelCustomerConditionInput | null > | null,
+  not?: ModelCustomerConditionInput | null,
+};
+
+export type Customer = {
+  __typename: "Customer",
+  id: string,
+  Invoices?: ModelInvoiceConnection | null,
+  Constructions?: ModelConstructionConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelInvoiceConnection = {
+  __typename: "ModelInvoiceConnection",
+  items:  Array<Invoice | null >,
+  nextToken?: string | null,
+};
+
+export type Invoice = {
+  __typename: "Invoice",
+  id: string,
+  number?: string | null,
+  amount?: number | null,
+  issueDate?: string | null,
+  expirationDate?: string | null,
+  status?: Statuses | null,
+  workStartDate?: string | null,
+  workDuration?: number | null,
+  workDurationUnit?: DurationUnits | null,
+  customerID?: string | null,
+  constructionID?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export enum Statuses {
+  DRAFT = "DRAFT",
+  FINALIZED = "FINALIZED",
+  SENT = "SENT",
+  ACCEPTED = "ACCEPTED",
+  REFUSED = "REFUSED",
+  CANCELLED = "CANCELLED",
+}
+
+
+export enum DurationUnits {
+  DAYS = "DAYS",
+  WEEKS = "WEEKS",
+  HOURS = "HOURS",
+}
+
+
+export type ModelConstructionConnection = {
+  __typename: "ModelConstructionConnection",
+  items:  Array<Construction | null >,
+  nextToken?: string | null,
+};
+
+export type Construction = {
+  __typename: "Construction",
+  id: string,
   name: string,
   description: string,
   customer: string,
   address: string,
   estimate_validity?: number | null,
-  _version?: number | null,
+  parts?: string | null,
+  number_lot?: number | null,
+  customerID?: string | null,
+  Invoices?: ModelInvoiceConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
 };
 
-export type ModelConstructionConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  customer?: ModelStringInput | null,
-  address?: ModelStringInput | null,
-  estimate_validity?: ModelIntInput | null,
-  and?: Array< ModelConstructionConditionInput | null > | null,
-  or?: Array< ModelConstructionConditionInput | null > | null,
-  not?: ModelConstructionConditionInput | null,
+export type UpdateCustomerInput = {
+  id: string,
+};
+
+export type DeleteCustomerInput = {
+  id: string,
+};
+
+export type CreateInvoiceInput = {
+  id?: string | null,
+  number?: string | null,
+  amount?: number | null,
+  issueDate?: string | null,
+  expirationDate?: string | null,
+  status?: Statuses | null,
+  workStartDate?: string | null,
+  workDuration?: number | null,
+  workDurationUnit?: DurationUnits | null,
+  customerID?: string | null,
+  constructionID?: string | null,
+};
+
+export type ModelInvoiceConditionInput = {
+  number?: ModelStringInput | null,
+  amount?: ModelFloatInput | null,
+  issueDate?: ModelStringInput | null,
+  expirationDate?: ModelStringInput | null,
+  status?: ModelStatusesInput | null,
+  workStartDate?: ModelStringInput | null,
+  workDuration?: ModelIntInput | null,
+  workDurationUnit?: ModelDurationUnitsInput | null,
+  customerID?: ModelIDInput | null,
+  constructionID?: ModelIDInput | null,
+  and?: Array< ModelInvoiceConditionInput | null > | null,
+  or?: Array< ModelInvoiceConditionInput | null > | null,
+  not?: ModelInvoiceConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -63,6 +162,23 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelStatusesInput = {
+  eq?: Statuses | null,
+  ne?: Statuses | null,
+};
+
 export type ModelIntInput = {
   ne?: number | null,
   eq?: number | null,
@@ -75,93 +191,9 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type Construction = {
-  __typename: "Construction",
-  id: string,
-  name: string,
-  description: string,
-  customer: string,
-  address: string,
-  estimate_validity?: number | null,
-  parts?: ModelPartConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  owner?: string | null,
-};
-
-export type ModelPartConnection = {
-  __typename: "ModelPartConnection",
-  items:  Array<Part | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type Part = {
-  __typename: "Part",
-  name: string,
-  provisions?: ModelProvisionConnection | null,
-  constructionID: string,
-  id: string,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  owner?: string | null,
-};
-
-export type ModelProvisionConnection = {
-  __typename: "ModelProvisionConnection",
-  items:  Array<Provision | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type Provision = {
-  __typename: "Provision",
-  name?: string | null,
-  service?: string | null,
-  id: string,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  partProvisionsId?: string | null,
-  owner?: string | null,
-};
-
-export type UpdateConstructionInput = {
-  id: string,
-  name?: string | null,
-  description?: string | null,
-  customer?: string | null,
-  address?: string | null,
-  estimate_validity?: number | null,
-  _version?: number | null,
-};
-
-export type DeleteConstructionInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreatePartInput = {
-  name: string,
-  constructionID: string,
-  id?: string | null,
-  _version?: number | null,
-};
-
-export type ModelPartConditionInput = {
-  name?: ModelStringInput | null,
-  constructionID?: ModelIDInput | null,
-  and?: Array< ModelPartConditionInput | null > | null,
-  or?: Array< ModelPartConditionInput | null > | null,
-  not?: ModelPartConditionInput | null,
+export type ModelDurationUnitsInput = {
+  eq?: DurationUnits | null,
+  ne?: DurationUnits | null,
 };
 
 export type ModelIDInput = {
@@ -180,73 +212,138 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type UpdatePartInput = {
-  name?: string | null,
+export type UpdateInvoiceInput = {
+  id: string,
+  number?: string | null,
+  amount?: number | null,
+  issueDate?: string | null,
+  expirationDate?: string | null,
+  status?: Statuses | null,
+  workStartDate?: string | null,
+  workDuration?: number | null,
+  workDurationUnit?: DurationUnits | null,
+  customerID?: string | null,
   constructionID?: string | null,
-  id: string,
-  _version?: number | null,
 };
 
-export type DeletePartInput = {
+export type DeleteInvoiceInput = {
   id: string,
-  _version?: number | null,
 };
 
-export type CreateProvisionInput = {
-  name?: string | null,
-  service?: string | null,
+export type CreateConstructionInput = {
   id?: string | null,
-  _version?: number | null,
-  partProvisionsId?: string | null,
+  name: string,
+  description: string,
+  customer: string,
+  address: string,
+  estimate_validity?: number | null,
+  parts?: string | null,
+  number_lot?: number | null,
+  customerID?: string | null,
 };
 
-export type ModelProvisionConditionInput = {
-  name?: ModelStringInput | null,
-  service?: ModelStringInput | null,
-  and?: Array< ModelProvisionConditionInput | null > | null,
-  or?: Array< ModelProvisionConditionInput | null > | null,
-  not?: ModelProvisionConditionInput | null,
-  partProvisionsId?: ModelIDInput | null,
-};
-
-export type UpdateProvisionInput = {
-  name?: string | null,
-  service?: string | null,
-  id: string,
-  _version?: number | null,
-  partProvisionsId?: string | null,
-};
-
-export type DeleteProvisionInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type ModelConstructionFilterInput = {
-  id?: ModelIDInput | null,
+export type ModelConstructionConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   customer?: ModelStringInput | null,
   address?: ModelStringInput | null,
   estimate_validity?: ModelIntInput | null,
-  and?: Array< ModelConstructionFilterInput | null > | null,
-  or?: Array< ModelConstructionFilterInput | null > | null,
-  not?: ModelConstructionFilterInput | null,
+  parts?: ModelStringInput | null,
+  number_lot?: ModelIntInput | null,
+  customerID?: ModelIDInput | null,
+  and?: Array< ModelConstructionConditionInput | null > | null,
+  or?: Array< ModelConstructionConditionInput | null > | null,
+  not?: ModelConstructionConditionInput | null,
 };
 
-export type ModelConstructionConnection = {
-  __typename: "ModelConstructionConnection",
-  items:  Array<Construction | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
+export type UpdateConstructionInput = {
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  customer?: string | null,
+  address?: string | null,
+  estimate_validity?: number | null,
+  parts?: string | null,
+  number_lot?: number | null,
+  customerID?: string | null,
 };
 
-export type ModelPartFilterInput = {
+export type DeleteConstructionInput = {
+  id: string,
+};
+
+export type CreateServiceInput = {
+  id?: string | null,
+  name?: string | null,
+  unit?: Units | null,
+};
+
+export enum Units {
+  KG = "KG",
+  M2 = "M2",
+}
+
+
+export type ModelServiceConditionInput = {
   name?: ModelStringInput | null,
+  unit?: ModelUnitsInput | null,
+  and?: Array< ModelServiceConditionInput | null > | null,
+  or?: Array< ModelServiceConditionInput | null > | null,
+  not?: ModelServiceConditionInput | null,
+};
+
+export type ModelUnitsInput = {
+  eq?: Units | null,
+  ne?: Units | null,
+};
+
+export type Service = {
+  __typename: "Service",
+  id: string,
+  name?: string | null,
+  unit?: Units | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateServiceInput = {
+  id: string,
+  name?: string | null,
+  unit?: Units | null,
+};
+
+export type DeleteServiceInput = {
+  id: string,
+};
+
+export type ModelCustomerFilterInput = {
+  id?: ModelIDInput | null,
+  and?: Array< ModelCustomerFilterInput | null > | null,
+  or?: Array< ModelCustomerFilterInput | null > | null,
+  not?: ModelCustomerFilterInput | null,
+};
+
+export type ModelCustomerConnection = {
+  __typename: "ModelCustomerConnection",
+  items:  Array<Customer | null >,
+  nextToken?: string | null,
+};
+
+export type ModelInvoiceFilterInput = {
+  id?: ModelIDInput | null,
+  number?: ModelStringInput | null,
+  amount?: ModelFloatInput | null,
+  issueDate?: ModelStringInput | null,
+  expirationDate?: ModelStringInput | null,
+  status?: ModelStatusesInput | null,
+  workStartDate?: ModelStringInput | null,
+  workDuration?: ModelIntInput | null,
+  workDurationUnit?: ModelDurationUnitsInput | null,
+  customerID?: ModelIDInput | null,
   constructionID?: ModelIDInput | null,
-  and?: Array< ModelPartFilterInput | null > | null,
-  or?: Array< ModelPartFilterInput | null > | null,
-  not?: ModelPartFilterInput | null,
+  and?: Array< ModelInvoiceFilterInput | null > | null,
+  or?: Array< ModelInvoiceFilterInput | null > | null,
+  not?: ModelInvoiceFilterInput | null,
 };
 
 export enum ModelSortDirection {
@@ -255,24 +352,40 @@ export enum ModelSortDirection {
 }
 
 
-export type ModelProvisionFilterInput = {
+export type ModelConstructionFilterInput = {
+  id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  service?: ModelStringInput | null,
-  and?: Array< ModelProvisionFilterInput | null > | null,
-  or?: Array< ModelProvisionFilterInput | null > | null,
-  not?: ModelProvisionFilterInput | null,
-  partProvisionsId?: ModelIDInput | null,
+  description?: ModelStringInput | null,
+  customer?: ModelStringInput | null,
+  address?: ModelStringInput | null,
+  estimate_validity?: ModelIntInput | null,
+  parts?: ModelStringInput | null,
+  number_lot?: ModelIntInput | null,
+  customerID?: ModelIDInput | null,
+  and?: Array< ModelConstructionFilterInput | null > | null,
+  or?: Array< ModelConstructionFilterInput | null > | null,
+  not?: ModelConstructionFilterInput | null,
 };
 
-export type ModelSubscriptionConstructionFilterInput = {
+export type ModelServiceFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  unit?: ModelUnitsInput | null,
+  and?: Array< ModelServiceFilterInput | null > | null,
+  or?: Array< ModelServiceFilterInput | null > | null,
+  not?: ModelServiceFilterInput | null,
+};
+
+export type ModelServiceConnection = {
+  __typename: "ModelServiceConnection",
+  items:  Array<Service | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSubscriptionCustomerFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  customer?: ModelSubscriptionStringInput | null,
-  address?: ModelSubscriptionStringInput | null,
-  estimate_validity?: ModelSubscriptionIntInput | null,
-  and?: Array< ModelSubscriptionConstructionFilterInput | null > | null,
-  or?: Array< ModelSubscriptionConstructionFilterInput | null > | null,
+  and?: Array< ModelSubscriptionCustomerFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCustomerFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -290,6 +403,22 @@ export type ModelSubscriptionIDInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionInvoiceFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  number?: ModelSubscriptionStringInput | null,
+  amount?: ModelSubscriptionFloatInput | null,
+  issueDate?: ModelSubscriptionStringInput | null,
+  expirationDate?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  workStartDate?: ModelSubscriptionStringInput | null,
+  workDuration?: ModelSubscriptionIntInput | null,
+  workDurationUnit?: ModelSubscriptionStringInput | null,
+  customerID?: ModelSubscriptionIDInput | null,
+  constructionID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionInvoiceFilterInput | null > | null,
+  or?: Array< ModelSubscriptionInvoiceFilterInput | null > | null,
+};
+
 export type ModelSubscriptionStringInput = {
   ne?: string | null,
   eq?: string | null,
@@ -305,6 +434,18 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
 export type ModelSubscriptionIntInput = {
   ne?: number | null,
   eq?: number | null,
@@ -317,18 +458,257 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
-export type ModelSubscriptionPartFilterInput = {
+export type ModelSubscriptionConstructionFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  constructionID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionPartFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPartFilterInput | null > | null,
+  description?: ModelSubscriptionStringInput | null,
+  customer?: ModelSubscriptionStringInput | null,
+  address?: ModelSubscriptionStringInput | null,
+  estimate_validity?: ModelSubscriptionIntInput | null,
+  parts?: ModelSubscriptionStringInput | null,
+  number_lot?: ModelSubscriptionIntInput | null,
+  customerID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionConstructionFilterInput | null > | null,
+  or?: Array< ModelSubscriptionConstructionFilterInput | null > | null,
 };
 
-export type ModelSubscriptionProvisionFilterInput = {
+export type ModelSubscriptionServiceFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  service?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionProvisionFilterInput | null > | null,
-  or?: Array< ModelSubscriptionProvisionFilterInput | null > | null,
+  unit?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionServiceFilterInput | null > | null,
+  or?: Array< ModelSubscriptionServiceFilterInput | null > | null,
+};
+
+export type CreateCustomerMutationVariables = {
+  input: CreateCustomerInput,
+  condition?: ModelCustomerConditionInput | null,
+};
+
+export type CreateCustomerMutation = {
+  createCustomer?:  {
+    __typename: "Customer",
+    id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
+      items:  Array< {
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
+        name: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCustomerMutationVariables = {
+  input: UpdateCustomerInput,
+  condition?: ModelCustomerConditionInput | null,
+};
+
+export type UpdateCustomerMutation = {
+  updateCustomer?:  {
+    __typename: "Customer",
+    id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
+      items:  Array< {
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
+        name: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCustomerMutationVariables = {
+  input: DeleteCustomerInput,
+  condition?: ModelCustomerConditionInput | null,
+};
+
+export type DeleteCustomerMutation = {
+  deleteCustomer?:  {
+    __typename: "Customer",
+    id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
+      items:  Array< {
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
+        name: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateInvoiceMutationVariables = {
+  input: CreateInvoiceInput,
+  condition?: ModelInvoiceConditionInput | null,
+};
+
+export type CreateInvoiceMutation = {
+  createInvoice?:  {
+    __typename: "Invoice",
+    id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateInvoiceMutationVariables = {
+  input: UpdateInvoiceInput,
+  condition?: ModelInvoiceConditionInput | null,
+};
+
+export type UpdateInvoiceMutation = {
+  updateInvoice?:  {
+    __typename: "Invoice",
+    id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteInvoiceMutationVariables = {
+  input: DeleteInvoiceInput,
+  condition?: ModelInvoiceConditionInput | null,
+};
+
+export type DeleteInvoiceMutation = {
+  deleteInvoice?:  {
+    __typename: "Invoice",
+    id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateConstructionMutationVariables = {
@@ -345,28 +725,31 @@ export type CreateConstructionMutation = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
-        name: string,
-        constructionID: string,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -385,28 +768,31 @@ export type UpdateConstructionMutation = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
-        name: string,
-        constructionID: string,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -425,206 +811,273 @@ export type DeleteConstructionMutation = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateServiceMutationVariables = {
+  input: CreateServiceInput,
+  condition?: ModelServiceConditionInput | null,
+};
+
+export type CreateServiceMutation = {
+  createService?:  {
+    __typename: "Service",
+    id: string,
+    name?: string | null,
+    unit?: Units | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateServiceMutationVariables = {
+  input: UpdateServiceInput,
+  condition?: ModelServiceConditionInput | null,
+};
+
+export type UpdateServiceMutation = {
+  updateService?:  {
+    __typename: "Service",
+    id: string,
+    name?: string | null,
+    unit?: Units | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteServiceMutationVariables = {
+  input: DeleteServiceInput,
+  condition?: ModelServiceConditionInput | null,
+};
+
+export type DeleteServiceMutation = {
+  deleteService?:  {
+    __typename: "Service",
+    id: string,
+    name?: string | null,
+    unit?: Units | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetCustomerQueryVariables = {
+  id: string,
+};
+
+export type GetCustomerQuery = {
+  getCustomer?:  {
+    __typename: "Customer",
+    id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
+      items:  Array< {
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
         name: string,
-        constructionID: string,
-        id: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
   } | null,
 };
 
-export type CreatePartMutationVariables = {
-  input: CreatePartInput,
-  condition?: ModelPartConditionInput | null,
+export type ListCustomersQueryVariables = {
+  filter?: ModelCustomerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type CreatePartMutation = {
-  createPart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
-      items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    constructionID: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
+export type ListCustomersQuery = {
+  listCustomers?:  {
+    __typename: "ModelCustomerConnection",
+    items:  Array< {
+      __typename: "Customer",
+      id: string,
+      Invoices?:  {
+        __typename: "ModelInvoiceConnection",
+        nextToken?: string | null,
+      } | null,
+      Constructions?:  {
+        __typename: "ModelConstructionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
-export type UpdatePartMutationVariables = {
-  input: UpdatePartInput,
-  condition?: ModelPartConditionInput | null,
+export type GetInvoiceQueryVariables = {
+  id: string,
 };
 
-export type UpdatePartMutation = {
-  updatePart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
-      items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    constructionID: string,
+export type GetInvoiceQuery = {
+  getInvoice?:  {
+    __typename: "Invoice",
     id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
   } | null,
 };
 
-export type DeletePartMutationVariables = {
-  input: DeletePartInput,
-  condition?: ModelPartConditionInput | null,
+export type ListInvoicesQueryVariables = {
+  filter?: ModelInvoiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type DeletePartMutation = {
-  deletePart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
-      items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    constructionID: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
+export type ListInvoicesQuery = {
+  listInvoices?:  {
+    __typename: "ModelInvoiceConnection",
+    items:  Array< {
+      __typename: "Invoice",
+      id: string,
+      number?: string | null,
+      amount?: number | null,
+      issueDate?: string | null,
+      expirationDate?: string | null,
+      status?: Statuses | null,
+      workStartDate?: string | null,
+      workDuration?: number | null,
+      workDurationUnit?: DurationUnits | null,
+      customerID?: string | null,
+      constructionID?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
-export type CreateProvisionMutationVariables = {
-  input: CreateProvisionInput,
-  condition?: ModelProvisionConditionInput | null,
+export type InvoicesByCustomerIDQueryVariables = {
+  customerID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelInvoiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type CreateProvisionMutation = {
-  createProvision?:  {
-    __typename: "Provision",
-    name?: string | null,
-    service?: string | null,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
+export type InvoicesByCustomerIDQuery = {
+  invoicesByCustomerID?:  {
+    __typename: "ModelInvoiceConnection",
+    items:  Array< {
+      __typename: "Invoice",
+      id: string,
+      number?: string | null,
+      amount?: number | null,
+      issueDate?: string | null,
+      expirationDate?: string | null,
+      status?: Statuses | null,
+      workStartDate?: string | null,
+      workDuration?: number | null,
+      workDurationUnit?: DurationUnits | null,
+      customerID?: string | null,
+      constructionID?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
-export type UpdateProvisionMutationVariables = {
-  input: UpdateProvisionInput,
-  condition?: ModelProvisionConditionInput | null,
+export type InvoicesByConstructionIDQueryVariables = {
+  constructionID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelInvoiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type UpdateProvisionMutation = {
-  updateProvision?:  {
-    __typename: "Provision",
-    name?: string | null,
-    service?: string | null,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type DeleteProvisionMutationVariables = {
-  input: DeleteProvisionInput,
-  condition?: ModelProvisionConditionInput | null,
-};
-
-export type DeleteProvisionMutation = {
-  deleteProvision?:  {
-    __typename: "Provision",
-    name?: string | null,
-    service?: string | null,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
+export type InvoicesByConstructionIDQuery = {
+  invoicesByConstructionID?:  {
+    __typename: "ModelInvoiceConnection",
+    items:  Array< {
+      __typename: "Invoice",
+      id: string,
+      number?: string | null,
+      amount?: number | null,
+      issueDate?: string | null,
+      expirationDate?: string | null,
+      status?: Statuses | null,
+      workStartDate?: string | null,
+      workDuration?: number | null,
+      workDurationUnit?: DurationUnits | null,
+      customerID?: string | null,
+      constructionID?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -641,28 +1094,31 @@ export type GetConstructionQuery = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
-        name: string,
-        constructionID: string,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -684,32 +1140,31 @@ export type ListConstructionsQuery = {
       customer: string,
       address: string,
       estimate_validity?: number | null,
-      parts?:  {
-        __typename: "ModelPartConnection",
+      parts?: string | null,
+      number_lot?: number | null,
+      customerID?: string | null,
+      Invoices?:  {
+        __typename: "ModelInvoiceConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
-export type SyncConstructionsQueryVariables = {
+export type ConstructionsByCustomerIDQueryVariables = {
+  customerID: string,
+  sortDirection?: ModelSortDirection | null,
   filter?: ModelConstructionFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
-  lastSync?: number | null,
 };
 
-export type SyncConstructionsQuery = {
-  syncConstructions?:  {
+export type ConstructionsByCustomerIDQuery = {
+  constructionsByCustomerID?:  {
     __typename: "ModelConstructionConnection",
     items:  Array< {
       __typename: "Construction",
@@ -719,228 +1174,279 @@ export type SyncConstructionsQuery = {
       customer: string,
       address: string,
       estimate_validity?: number | null,
-      parts?:  {
-        __typename: "ModelPartConnection",
+      parts?: string | null,
+      number_lot?: number | null,
+      customerID?: string | null,
+      Invoices?:  {
+        __typename: "ModelInvoiceConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
-export type GetPartQueryVariables = {
+export type GetServiceQueryVariables = {
   id: string,
 };
 
-export type GetPartQuery = {
-  getPart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
+export type GetServiceQuery = {
+  getService?:  {
+    __typename: "Service",
+    id: string,
+    name?: string | null,
+    unit?: Units | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListServicesQueryVariables = {
+  filter?: ModelServiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListServicesQuery = {
+  listServices?:  {
+    __typename: "ModelServiceConnection",
+    items:  Array< {
+      __typename: "Service",
+      id: string,
+      name?: string | null,
+      unit?: Units | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null,
+};
+
+export type OnCreateCustomerSubscription = {
+  onCreateCustomer?:  {
+    __typename: "Customer",
+    id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
+        name: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
+        createdAt: string,
+        updatedAt: string,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
-    constructionID: string,
-    id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
   } | null,
 };
 
-export type ListPartsQueryVariables = {
-  filter?: ModelPartFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+export type OnUpdateCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null,
 };
 
-export type ListPartsQuery = {
-  listParts?:  {
-    __typename: "ModelPartConnection",
-    items:  Array< {
-      __typename: "Part",
-      name: string,
-      provisions?:  {
-        __typename: "ModelProvisionConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      constructionID: string,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncPartsQueryVariables = {
-  filter?: ModelPartFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncPartsQuery = {
-  syncParts?:  {
-    __typename: "ModelPartConnection",
-    items:  Array< {
-      __typename: "Part",
-      name: string,
-      provisions?:  {
-        __typename: "ModelProvisionConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      constructionID: string,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type PartsByConstructionIDQueryVariables = {
-  constructionID: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPartFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type PartsByConstructionIDQuery = {
-  partsByConstructionID?:  {
-    __typename: "ModelPartConnection",
-    items:  Array< {
-      __typename: "Part",
-      name: string,
-      provisions?:  {
-        __typename: "ModelProvisionConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      constructionID: string,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetProvisionQueryVariables = {
-  id: string,
-};
-
-export type GetProvisionQuery = {
-  getProvision?:  {
-    __typename: "Provision",
-    name?: string | null,
-    service?: string | null,
+export type OnUpdateCustomerSubscription = {
+  onUpdateCustomer?:  {
+    __typename: "Customer",
     id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
+      items:  Array< {
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
+        name: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
-export type ListProvisionsQueryVariables = {
-  filter?: ModelProvisionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+export type OnDeleteCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null,
 };
 
-export type ListProvisionsQuery = {
-  listProvisions?:  {
-    __typename: "ModelProvisionConnection",
-    items:  Array< {
-      __typename: "Provision",
-      name?: string | null,
-      service?: string | null,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      partProvisionsId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
+export type OnDeleteCustomerSubscription = {
+  onDeleteCustomer?:  {
+    __typename: "Customer",
+    id: string,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
+      items:  Array< {
+        __typename: "Invoice",
+        id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    Constructions?:  {
+      __typename: "ModelConstructionConnection",
+      items:  Array< {
+        __typename: "Construction",
+        id: string,
+        name: string,
+        description: string,
+        customer: string,
+        address: string,
+        estimate_validity?: number | null,
+        parts?: string | null,
+        number_lot?: number | null,
+        customerID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type SyncProvisionsQueryVariables = {
-  filter?: ModelProvisionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
+export type OnCreateInvoiceSubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceFilterInput | null,
 };
 
-export type SyncProvisionsQuery = {
-  syncProvisions?:  {
-    __typename: "ModelProvisionConnection",
-    items:  Array< {
-      __typename: "Provision",
-      name?: string | null,
-      service?: string | null,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      partProvisionsId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
+export type OnCreateInvoiceSubscription = {
+  onCreateInvoice?:  {
+    __typename: "Invoice",
+    id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateInvoiceSubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceFilterInput | null,
+};
+
+export type OnUpdateInvoiceSubscription = {
+  onUpdateInvoice?:  {
+    __typename: "Invoice",
+    id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteInvoiceSubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceFilterInput | null,
+};
+
+export type OnDeleteInvoiceSubscription = {
+  onDeleteInvoice?:  {
+    __typename: "Invoice",
+    id: string,
+    number?: string | null,
+    amount?: number | null,
+    issueDate?: string | null,
+    expirationDate?: string | null,
+    status?: Statuses | null,
+    workStartDate?: string | null,
+    workDuration?: number | null,
+    workDurationUnit?: DurationUnits | null,
+    customerID?: string | null,
+    constructionID?: string | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -958,28 +1464,31 @@ export type OnCreateConstructionSubscription = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
-        name: string,
-        constructionID: string,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -998,28 +1507,31 @@ export type OnUpdateConstructionSubscription = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
-        name: string,
-        constructionID: string,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -1038,205 +1550,76 @@ export type OnDeleteConstructionSubscription = {
     customer: string,
     address: string,
     estimate_validity?: number | null,
-    parts?:  {
-      __typename: "ModelPartConnection",
+    parts?: string | null,
+    number_lot?: number | null,
+    customerID?: string | null,
+    Invoices?:  {
+      __typename: "ModelInvoiceConnection",
       items:  Array< {
-        __typename: "Part",
-        name: string,
-        constructionID: string,
+        __typename: "Invoice",
         id: string,
+        number?: string | null,
+        amount?: number | null,
+        issueDate?: string | null,
+        expirationDate?: string | null,
+        status?: Statuses | null,
+        workStartDate?: string | null,
+        workDuration?: number | null,
+        workDurationUnit?: DurationUnits | null,
+        customerID?: string | null,
+        constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        owner?: string | null,
       } | null >,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
 
-export type OnCreatePartSubscriptionVariables = {
-  filter?: ModelSubscriptionPartFilterInput | null,
-  owner?: string | null,
+export type OnCreateServiceSubscriptionVariables = {
+  filter?: ModelSubscriptionServiceFilterInput | null,
 };
 
-export type OnCreatePartSubscription = {
-  onCreatePart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
-      items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    constructionID: string,
+export type OnCreateServiceSubscription = {
+  onCreateService?:  {
+    __typename: "Service",
     id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdatePartSubscriptionVariables = {
-  filter?: ModelSubscriptionPartFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnUpdatePartSubscription = {
-  onUpdatePart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
-      items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    constructionID: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeletePartSubscriptionVariables = {
-  filter?: ModelSubscriptionPartFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnDeletePartSubscription = {
-  onDeletePart?:  {
-    __typename: "Part",
-    name: string,
-    provisions?:  {
-      __typename: "ModelProvisionConnection",
-      items:  Array< {
-        __typename: "Provision",
-        name?: string | null,
-        service?: string | null,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        partProvisionsId?: string | null,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    constructionID: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateProvisionSubscriptionVariables = {
-  filter?: ModelSubscriptionProvisionFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnCreateProvisionSubscription = {
-  onCreateProvision?:  {
-    __typename: "Provision",
     name?: string | null,
-    service?: string | null,
-    id: string,
+    unit?: Units | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
-export type OnUpdateProvisionSubscriptionVariables = {
-  filter?: ModelSubscriptionProvisionFilterInput | null,
-  owner?: string | null,
+export type OnUpdateServiceSubscriptionVariables = {
+  filter?: ModelSubscriptionServiceFilterInput | null,
 };
 
-export type OnUpdateProvisionSubscription = {
-  onUpdateProvision?:  {
-    __typename: "Provision",
-    name?: string | null,
-    service?: string | null,
+export type OnUpdateServiceSubscription = {
+  onUpdateService?:  {
+    __typename: "Service",
     id: string,
+    name?: string | null,
+    unit?: Units | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
-export type OnDeleteProvisionSubscriptionVariables = {
-  filter?: ModelSubscriptionProvisionFilterInput | null,
-  owner?: string | null,
+export type OnDeleteServiceSubscriptionVariables = {
+  filter?: ModelSubscriptionServiceFilterInput | null,
 };
 
-export type OnDeleteProvisionSubscription = {
-  onDeleteProvision?:  {
-    __typename: "Provision",
-    name?: string | null,
-    service?: string | null,
+export type OnDeleteServiceSubscription = {
+  onDeleteService?:  {
+    __typename: "Service",
     id: string,
+    name?: string | null,
+    unit?: Units | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    partProvisionsId?: string | null,
-    owner?: string | null,
   } | null,
 };
