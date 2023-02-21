@@ -21,6 +21,7 @@ export const getCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -83,6 +84,7 @@ export const getInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -107,6 +109,7 @@ export const listInvoices = /* GraphQL */ `
         constructionID
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -141,6 +144,7 @@ export const invoicesByCustomerID = /* GraphQL */ `
         constructionID
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -175,6 +179,7 @@ export const invoicesByConstructionID = /* GraphQL */ `
         constructionID
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -206,6 +211,7 @@ export const getConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }

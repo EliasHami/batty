@@ -73,7 +73,7 @@ export async function getServerSideProps({ req }: { req: Object }) {
     const response = await SSR.API.graphql({ query: listInvoices })
     invoices = response.data.listInvoices.items
   } catch (error) {
-    console.log('error', error)
+    console.error('error', error)
   }
   return {
     props: { invoices }

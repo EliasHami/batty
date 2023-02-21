@@ -21,6 +21,7 @@ export const onCreateCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -64,6 +65,7 @@ export const onUpdateCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -107,6 +109,7 @@ export const onDeleteCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -132,8 +135,11 @@ export const onDeleteCustomer = /* GraphQL */ `
   }
 `;
 export const onCreateInvoice = /* GraphQL */ `
-  subscription OnCreateInvoice($filter: ModelSubscriptionInvoiceFilterInput) {
-    onCreateInvoice(filter: $filter) {
+  subscription OnCreateInvoice(
+    $filter: ModelSubscriptionInvoiceFilterInput
+    $owner: String
+  ) {
+    onCreateInvoice(filter: $filter, owner: $owner) {
       id
       number
       amount
@@ -147,12 +153,16 @@ export const onCreateInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateInvoice = /* GraphQL */ `
-  subscription OnUpdateInvoice($filter: ModelSubscriptionInvoiceFilterInput) {
-    onUpdateInvoice(filter: $filter) {
+  subscription OnUpdateInvoice(
+    $filter: ModelSubscriptionInvoiceFilterInput
+    $owner: String
+  ) {
+    onUpdateInvoice(filter: $filter, owner: $owner) {
       id
       number
       amount
@@ -166,12 +176,16 @@ export const onUpdateInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteInvoice = /* GraphQL */ `
-  subscription OnDeleteInvoice($filter: ModelSubscriptionInvoiceFilterInput) {
-    onDeleteInvoice(filter: $filter) {
+  subscription OnDeleteInvoice(
+    $filter: ModelSubscriptionInvoiceFilterInput
+    $owner: String
+  ) {
+    onDeleteInvoice(filter: $filter, owner: $owner) {
       id
       number
       amount
@@ -185,6 +199,7 @@ export const onDeleteInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -217,6 +232,7 @@ export const onCreateConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -255,6 +271,7 @@ export const onUpdateConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -293,6 +310,7 @@ export const onDeleteConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }

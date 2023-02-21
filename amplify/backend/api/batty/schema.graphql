@@ -19,7 +19,7 @@ enum Statuses {
   CANCELLED
 }
 
-type Invoice @model @auth(rules: [{allow: public}]) {
+type Invoice @model @auth(rules: [{allow: owner}, {allow: public}]) {
   id: ID!
   number: String
   amount: Float

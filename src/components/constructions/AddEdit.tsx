@@ -55,7 +55,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
       alertService.success('Construction added successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/constructions')
     } catch (error) {
-      console.log('error', error)
+      console.error('error', error)
       alertService.error(getErrorMessage(error))
     }
   }
@@ -75,7 +75,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
       alertService.success('Construction updated successfully', { keepAfterRouteChange: true } as Alert)
       router.push('/constructions')
     } catch (error) {
-      console.log('error', error)
+      console.error('error', error)
       alertService.error(getErrorMessage(error))
     }
   }

@@ -12,7 +12,7 @@ export const getServerSideProps = async ({ params, req }: { params: { id?: Strin
     const response = await SSR.API.graphql({ query: getInvoice, variables: { id: params.id } })
     data = response.data.getInvoice
   } catch (error) {
-    console.log('error', error)
+    console.error('error', error)
   }
   const { createdAt, updatedAt, owner, ...invoice } = data
   return { props: { invoice } }

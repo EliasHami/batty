@@ -24,6 +24,7 @@ export const createCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -70,6 +71,7 @@ export const updateCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -116,6 +118,7 @@ export const deleteCustomer = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -159,6 +162,7 @@ export const createInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -181,6 +185,7 @@ export const updateInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -203,6 +208,7 @@ export const deleteInvoice = /* GraphQL */ `
       constructionID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -235,6 +241,7 @@ export const createConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -273,6 +280,7 @@ export const updateConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -311,6 +319,7 @@ export const deleteConstruction = /* GraphQL */ `
           constructionID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }

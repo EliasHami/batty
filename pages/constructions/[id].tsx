@@ -15,7 +15,7 @@ export const getServerSideProps = async ({ params, req }: { params: { id?: Strin
     const response = await SSR.API.graphql({ query: getConstruction, variables: { id: params.id } })
     data = response.data.getConstruction
   } catch (error) {
-    console.log('error', error)
+    console.error('error', error)
   }
   const { createdAt, updatedAt, owner, ...construction } = data
   return { props: { construction } }

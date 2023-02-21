@@ -1,5 +1,12 @@
+import { GraphQLResult } from '@aws-amplify/api-graphql'
+
 export const getErrorMessage = (error: unknown):string => {
   if (error instanceof Error) return error.message
+  else if (typeof error === 'string') return error
+  else if (Array.isArray((error as GraphQLResult).errors)) {
+      const errors = (error as GraphQLResult).errors
+      if (errors) return errors.map(err => err.message).join(' ') 
+  }
   return String(error)
 }
 

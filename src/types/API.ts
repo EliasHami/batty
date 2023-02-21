@@ -42,6 +42,7 @@ export type Invoice = {
   constructionID?: string | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export enum Statuses {
@@ -500,6 +501,7 @@ export type CreateCustomerMutation = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -552,6 +554,7 @@ export type UpdateCustomerMutation = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -604,6 +607,7 @@ export type DeleteCustomerMutation = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -651,6 +655,7 @@ export type CreateInvoiceMutation = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -675,6 +680,7 @@ export type UpdateInvoiceMutation = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -699,6 +705,7 @@ export type DeleteInvoiceMutation = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -735,6 +742,7 @@ export type CreateConstructionMutation = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -777,6 +785,7 @@ export type UpdateConstructionMutation = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -819,6 +828,7 @@ export type DeleteConstructionMutation = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -901,6 +911,7 @@ export type GetCustomerQuery = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -974,6 +985,7 @@ export type GetInvoiceQuery = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1001,6 +1013,7 @@ export type ListInvoicesQuery = {
       constructionID?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1032,6 +1045,7 @@ export type InvoicesByCustomerIDQuery = {
       constructionID?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1063,6 +1077,7 @@ export type InvoicesByConstructionIDQuery = {
       constructionID?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1100,6 +1115,7 @@ export type GetConstructionQuery = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1234,6 +1250,7 @@ export type OnCreateCustomerSubscription = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1285,6 +1302,7 @@ export type OnUpdateCustomerSubscription = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1336,6 +1354,7 @@ export type OnDeleteCustomerSubscription = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1364,6 +1383,7 @@ export type OnDeleteCustomerSubscription = {
 
 export type OnCreateInvoiceSubscriptionVariables = {
   filter?: ModelSubscriptionInvoiceFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateInvoiceSubscription = {
@@ -1382,11 +1402,13 @@ export type OnCreateInvoiceSubscription = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateInvoiceSubscriptionVariables = {
   filter?: ModelSubscriptionInvoiceFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateInvoiceSubscription = {
@@ -1405,11 +1427,13 @@ export type OnUpdateInvoiceSubscription = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteInvoiceSubscriptionVariables = {
   filter?: ModelSubscriptionInvoiceFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteInvoiceSubscription = {
@@ -1428,6 +1452,7 @@ export type OnDeleteInvoiceSubscription = {
     constructionID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1464,6 +1489,7 @@ export type OnCreateConstructionSubscription = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1506,6 +1532,7 @@ export type OnUpdateConstructionSubscription = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1548,6 +1575,7 @@ export type OnDeleteConstructionSubscription = {
         constructionID?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
