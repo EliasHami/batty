@@ -1,6 +1,6 @@
 import { withSSRContext } from 'aws-amplify'
 
-import { AddEdit } from 'src/components'
+import AddEdit from 'src/components/invoices/AddEdit'
 import { getInvoice } from 'src/graphql/queries'
 
 export default AddEdit
@@ -10,7 +10,7 @@ export const getServerSideProps = async ({ params, req }: { params: { id?: Strin
   let data
   try {
     const response = await SSR.API.graphql({ query: getInvoice, variables: { id: params.id } })
-    data = response.data.getConstruction
+    data = response.data.getInvoice
   } catch (error) {
     console.log('error', error)
   }

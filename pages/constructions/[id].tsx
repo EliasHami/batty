@@ -1,6 +1,6 @@
 import { withSSRContext, Amplify } from 'aws-amplify'
 
-import { AddEdit } from 'src/components'
+import AddEdit from 'src/components/constructions/AddEdit'
 import { getConstruction } from 'src/graphql/queries'
 
 import awsExports from "src/aws-exports"

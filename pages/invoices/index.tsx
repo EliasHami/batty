@@ -19,7 +19,7 @@ export default function Invoices({ invoices }: { invoices: Invoice[] }) {
     <Box>
       <Typography>Invoices</Typography>
       <Button>
-        <Link href="/invoices/add">Add Construction</Link>
+        <Link href="/invoices/add">Add Invoice</Link>
       </Button>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="invoices table">
@@ -71,7 +71,7 @@ export async function getServerSideProps({ req }: { req: Object }) {
   let invoices: Invoice[] = []
   try {
     const response = await SSR.API.graphql({ query: listInvoices })
-    invoices = response.data.listConstructions.items
+    invoices = response.data.listInvoices.items
   } catch (error) {
     console.log('error', error)
   }
