@@ -10,7 +10,6 @@ export const getCustomer = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status
@@ -73,7 +72,6 @@ export const getInvoice = /* GraphQL */ `
     getInvoice(id: $id) {
       id
       number
-      amount
       issueDate
       expirationDate
       status
@@ -98,7 +96,6 @@ export const listInvoices = /* GraphQL */ `
       items {
         id
         number
-        amount
         issueDate
         expirationDate
         status
@@ -133,7 +130,6 @@ export const invoicesByCustomerID = /* GraphQL */ `
       items {
         id
         number
-        amount
         issueDate
         expirationDate
         status
@@ -168,7 +164,6 @@ export const invoicesByConstructionID = /* GraphQL */ `
       items {
         id
         number
-        amount
         issueDate
         expirationDate
         status
@@ -200,7 +195,6 @@ export const getConstruction = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status

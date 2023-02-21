@@ -10,7 +10,6 @@ export const onCreateCustomer = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status
@@ -54,7 +53,6 @@ export const onUpdateCustomer = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status
@@ -98,7 +96,6 @@ export const onDeleteCustomer = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status
@@ -142,7 +139,6 @@ export const onCreateInvoice = /* GraphQL */ `
     onCreateInvoice(filter: $filter, owner: $owner) {
       id
       number
-      amount
       issueDate
       expirationDate
       status
@@ -165,7 +161,6 @@ export const onUpdateInvoice = /* GraphQL */ `
     onUpdateInvoice(filter: $filter, owner: $owner) {
       id
       number
-      amount
       issueDate
       expirationDate
       status
@@ -188,7 +183,6 @@ export const onDeleteInvoice = /* GraphQL */ `
     onDeleteInvoice(filter: $filter, owner: $owner) {
       id
       number
-      amount
       issueDate
       expirationDate
       status
@@ -221,7 +215,6 @@ export const onCreateConstruction = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status
@@ -260,7 +253,6 @@ export const onUpdateConstruction = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status
@@ -299,7 +291,6 @@ export const onDeleteConstruction = /* GraphQL */ `
         items {
           id
           number
-          amount
           issueDate
           expirationDate
           status

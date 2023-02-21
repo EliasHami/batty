@@ -17,14 +17,16 @@ export type Invoice = DeepOmit<
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
+export type InvoiceForm = DeepOmit<
+  Exclude<Invoice, null>,
+  'id' | 'status'
+>
 
-const invoiceSchema: ObjectSchema<Invoice> = object({
-  id: string().required('Id is required').default('id'), // permet de save le formulaire sans avoir à remplir le champ
+
+const invoiceSchema: ObjectSchema<InvoiceForm> = object({
   number: string(),
-  amount: number(),
   issueDate: string(),
   expirationDate: string(),
-  status: string().oneOf(Object.values(Statuses)),
   workStartDate: string(),
   workDuration: number(),
   workDurationUnit: string().oneOf(Object.values(DurationUnits)),
