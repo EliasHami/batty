@@ -9,9 +9,13 @@ const nextConfig = {
   //   appDir: true,
   // },
   modularizeImports: {
+    'src/components': {
+      transform: 'src/components/{{member}}',
+    },
     '@mui/material': {
       transform: '@mui/material/{{member}}',
     },
+    // aws-amplify --> marche pas
   }
 }
 

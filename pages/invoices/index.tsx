@@ -2,7 +2,7 @@ import { withSSRContext, Amplify } from 'aws-amplify'
 
 import { Invoice } from 'src/types'
 import { Link } from 'src/components'
-// import Delete from 'src/components/constructions/Delete'
+import Delete from 'src/components/invoices/Delete'
 
 import awsExports from "src/aws-exports"
 
@@ -54,7 +54,7 @@ export default function Invoices({ invoices }: { invoices: Invoice[] }) {
                   <Button>
                     <Link href={`/invoices/${invoice.id}`}>Edit</Link>
                   </Button>
-                  {/* <Delete id={invoice.id} /> */}
+                  <Delete id={invoice.id} />
                 </TableCell>
               </TableRow>
             ))}
