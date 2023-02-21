@@ -1,21 +1,13 @@
-import { withSSRContext } from 'aws-amplify'
-import { Amplify } from '@aws-amplify/core'
-import { serializeModel } from "@aws-amplify/datastore/ssr"
+import { withSSRContext, Amplify } from 'aws-amplify'
 
-import { Invoice } from 'src/models'
+import { Invoice } from 'src/types'
 import { Link } from 'src/components'
 // import Delete from 'src/components/constructions/Delete'
 
 import awsExports from "src/aws-exports"
 
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+import { listInvoices } from 'src/graphql/queries'
 
 
 Amplify.configure({ ...awsExports, ssr: true })
@@ -76,10 +68,10 @@ export default function Invoices({ invoices }: { invoices: Invoice[] }) {
 
 export async function getServerSideProps({ req }: { req: Object }) {
   const SSR = withSSRContext({ req })
-  let invoices
+  let invoices: Invoice[] = []
   try {
-    const model = await SSR.DataStore.query(Invoice)
-    invoices = serializeModel(model) as any // can't do anything with JSON type
+    const response = await SSR.API.graphql({ query: listInvoices })
+    invoices = response.data.listConstructions.items
   } catch (error) {
     console.log('error', error)
   }

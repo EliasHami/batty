@@ -1,6 +1,4 @@
-import { withSSRContext } from 'aws-amplify'
-
-import { Amplify } from '@aws-amplify/core'
+import { withSSRContext, Amplify } from 'aws-amplify'
 
 import { Construction } from 'src/types'
 import { listConstructions } from 'src/graphql/queries'

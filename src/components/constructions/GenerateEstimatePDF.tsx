@@ -1,5 +1,5 @@
 import jsPDF from "jspdf"
-import { Construction } from "src/models"
+import { Construction } from "src/types"
 
 export default function GenerateEstimatePDF({ construction }: { construction: Construction }) {
   const generatePDF = () => {

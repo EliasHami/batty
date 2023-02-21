@@ -1,5 +1,5 @@
 import { useState, useTransition } from 'react'
-import { API } from '@aws-amplify/api'
+import { API } from 'aws-amplify'
 import { deleteConstruction } from 'src/graphql/mutations'
 import { alertService } from 'src/services'
 import { getErrorMessage } from 'src/utils'

@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { API } from '@aws-amplify/api'
+import { API } from 'aws-amplify'
 import { Box, Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@mui/material'
 
 import { Invoice } from 'src/types/index'
@@ -129,12 +129,12 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
             </FormControl>
             <FormControl error={Boolean(errors.issueDate)} variant="standard">
               <InputLabel htmlFor="issueDate">Amount</InputLabel>
-              <DatePicker
+              {/* <DatePicker
                 label="Basic example"
 
                 renderInput={(params) => <Input id="issueDate" {...params} />}
                 {...register("issueDate" as never)}
-              />
+              /> */}
               {errors.issueDate && <FormHelperText id="issueDate-error">{errors.issueDate.message}</FormHelperText>}
             </FormControl>
             <FormControl error={Boolean(errors.amount)} variant="standard">

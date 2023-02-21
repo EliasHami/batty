@@ -1,7 +1,6 @@
 "use client"
 import "@aws-amplify/ui-react/styles.css"
-import { Amplify } from '@aws-amplify/core'
-import { Auth } from '@aws-amplify/auth'
+import { Amplify, Auth } from 'aws-amplify'
 import { Authenticator } from '@aws-amplify/ui-react'
 import { Button, CssBaseline } from '@mui/material'
 
