@@ -1,16 +1,17 @@
 import { useRouter } from 'next/navigation'
-import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-form'
+import { SubmitHandler, useForm, UseFormProps, FormProvider, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
 import { API } from 'aws-amplify'
-import { Box, Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@mui/material'
+import { Box, Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem, Grid, TextField, Typography, CircularProgress } from '@mui/material'
 
 import { Invoice, invoiceSchema } from 'src/types'
 import { createInvoice, updateInvoice } from 'src/graphql/mutations'
 import { DurationUnits, Statuses } from 'src/types/API'
+import { DatePicker } from '@mui/x-date-pickers'
 
 type AddEditProps = {
   invoice?: Invoice | null
@@ -29,10 +30,11 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
   }
 
   const methods = useForm<Invoice>(formOptions)
-  const { register, handleSubmit, formState } = methods
+  const { register, handleSubmit, formState, control } = methods
   const { errors } = formState
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
+    console.log('data', data)
     return isAddMode
       ? handleCreateInvoice(data)
       : handleUpdateInvoice(invoice.id, data)
@@ -45,7 +47,8 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
         query: createInvoice,
         variables: {
           input: {
-            ...invoice
+            ...invoice,
+            status: Statuses.DRAFT,
           }
         }
       })
@@ -65,6 +68,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
         variables: {
           input: {
             ...invoice,
+            status: Statuses.DRAFT,
             id,
           }
         }
@@ -78,115 +82,182 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
     }
   }
 
+  console.log('errors', errors)
+
   return (
-    <FormProvider {...methods} >
-      <Box
-        component="form"
-        id="hook-form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <Link href="/invoices" className="btn btn-link">&#60;- Back</Link>
-        <Box sx={{ width: '100%' }}>
-          <h1>{isAddMode ? 'Add Invoice' : invoice.number}</h1>
-          <Box sx={{ display: 'flex', flexDirection: 'column', pt: 2, justifyContent: 'space-between' }}>
-            <FormControl error={Boolean(errors.amount)} variant="standard">
-              <InputLabel htmlFor="amount">Amount</InputLabel>
-              <Input
-                id="amount"
-                aria-describedby="amount-error"
-                {...register("amount" as never)}
+    <Box
+      component="form"
+      id="hook-form"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <Link href="/invoices" className="btn btn-link">&#60;- Back</Link>
+      <Typography variant='h3'>{isAddMode ? 'Add Invoice' : invoice.number}</Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Controller
+            control={control}
+            name="number"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="number"
+                label="Number"
+                error={Boolean(errors.number)}
+                helperText={errors.number?.message}
+                fullWidth
               />
-              {errors.amount && <FormHelperText id="amount-error">{errors.amount.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.constructionID)} variant="standard">
-              <InputLabel htmlFor="constructionID">Construction</InputLabel>
-              <Select
-                input={<Input id="constructionID" />}
-                aria-describedby="constructionID-error"
-                {...register("constructionID" as never)}
-              >
-                <MenuItem value={10}>Construction 1</MenuItem>
-                <MenuItem value={20}>Construction 2</MenuItem>
-                <MenuItem value={30}>Construction 3</MenuItem>
-              </Select>
-              {errors.constructionID && <FormHelperText id="constructionID-error">{errors.constructionID.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.customerID)} variant="standard">
-              <InputLabel htmlFor="customerID">Customer</InputLabel>
-              <Select
-                input={<Input id="customerID" />}
-                aria-describedby="customerID-error"
-                {...register("customerID" as never)}
-              >
-                <MenuItem value={10}>Customer 1</MenuItem>
-                <MenuItem value={20}>Customer 2</MenuItem>
-                <MenuItem value={30}>Customer 3</MenuItem>
-              </Select>
-              {errors.customerID && <FormHelperText id="customerID-error">{errors.customerID.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.issueDate)} variant="standard">
-              <InputLabel htmlFor="issueDate">Issue Date</InputLabel>
-              <Input
-                id="issueDate"
-                type="date"
-                aria-describedby="issueDate-error"
-                {...register("issueDate" as never)}
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            control={control}
+            name="issueDate"
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    id="issueDate"
+                    error={Boolean(errors.issueDate)}
+                    helperText={errors.issueDate?.message}
+                    label="Issue Date"
+                    fullWidth
+                  />
+                )}
               />
-              {errors.issueDate && <FormHelperText id="issueDate-error">{errors.issueDate.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.expirationDate)} variant="standard">
-              <InputLabel htmlFor="expirationDate">Expiration Date</InputLabel>
-              <Input
-                id="expirationDate"
-                type="date"
-                aria-describedby="expirationDate-error"
-                {...register("expirationDate" as never)}
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            control={control}
+            name="expirationDate"
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    id="expirationDate"
+                    error={Boolean(errors.expirationDate)}
+                    helperText={errors.expirationDate?.message}
+                    label="Expiration Date"
+                    fullWidth
+                  />
+                )}
               />
-              {errors.expirationDate && <FormHelperText id="expirationDate-error">{errors.expirationDate.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.workStartDate)} variant="standard">
-              <InputLabel htmlFor="workStartDate">Work start date</InputLabel>
-              <Input
-                id="workStartDate"
-                type="date"
-                aria-describedby="workStartDate-error"
-                {...register("workStartDate" as never)}
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            control={control}
+            name="workStartDate"
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    id="workStartDate"
+                    error={Boolean(errors.workStartDate)}
+                    helperText={errors.workStartDate?.message}
+                    label="Work start date"
+                    fullWidth
+                  />
+                )}
               />
-              {errors.workStartDate && <FormHelperText id="workStartDate-error">{errors.workStartDate.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.workDuration)} variant="standard">
-              <InputLabel htmlFor="workDuration">Work duration</InputLabel>
-              <Input
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            control={control}
+            name="workDuration"
+            render={({ field }) => (
+              <TextField
+                {...field}
                 id="workDuration"
                 type="number"
-                aria-describedby="workDuration-error"
-                {...register("workDuration" as never)}
+                label="Work duration"
+                error={Boolean(errors.workDuration)}
+                helperText={errors.workDuration?.message}
+                fullWidth
               />
-              {errors.workDuration && <FormHelperText id="workDuration-error">{errors.workDuration.message}</FormHelperText>}
-            </FormControl>
-            <FormControl error={Boolean(errors.workDurationUnit)} variant="standard">
-              <InputLabel htmlFor="workDurationUnit">Work duration unit</InputLabel>
-              <Select
-                aria-describedby="workDurationUnit-error"
-                input={<Input id="workDurationUnit" />}
-                {...register("workDurationUnit" as never)}
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            control={control}
+            name="workDurationUnit"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="workDurationUnit"
+                select
+                label="Work duration"
+                error={Boolean(errors.workDurationUnit)}
+                helperText={errors.workDurationUnit?.message}
+                fullWidth
               >
                 {(Object.keys(DurationUnits) as Array<keyof typeof DurationUnits>).map(key =>
                   <MenuItem key={key} value={DurationUnits[key]}>{key}</MenuItem>)
                 }
-              </Select>
-              {errors.workDurationUnit && <FormHelperText id="workDurationUnit-error">{errors.workDurationUnit.message}</FormHelperText>}
-            </FormControl>
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button type="submit" disabled={formState.isSubmitting}>
-              {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-              Save
-            </Button>
-          </Box>
-        </Box>
-      </Box>
-    </FormProvider>
+              </TextField>
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            control={control}
+            name="constructionID"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="constructionID"
+                select
+                label="Construction"
+                error={Boolean(errors.constructionID)}
+                helperText={errors.constructionID?.message}
+                fullWidth
+              >
+                <MenuItem value={10}>Construction 1</MenuItem>
+                <MenuItem value={20}>Construction 2</MenuItem>
+                <MenuItem value={30}>Construction 3</MenuItem>
+              </TextField>
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Controller
+            control={control}
+            name="customerID"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="customerID"
+                select
+                label="Customer"
+                error={Boolean(errors.customerID)}
+                helperText={errors.customerID?.message}
+                fullWidth
+              >
+                <MenuItem value={10}>Customer 1</MenuItem>
+                <MenuItem value={20}>Customer 2</MenuItem>
+                <MenuItem value={30}>Customer 3</MenuItem>
+              </TextField>
+            )}
+          />
+        </Grid>
+      </Grid>
+      <Button type="submit" disabled={formState.isSubmitting}>
+        {formState.isSubmitting && <CircularProgress />}
+        Save
+      </Button>
+    </Box >
   )
 }
 

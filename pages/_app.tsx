@@ -22,7 +22,6 @@ const BattyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
       </Head>
       <div className="app-container bg-light">
         <Nav />
-        <Alert />
         <CssBaseline />
         <Authenticator>
           <Button onClick={() => Auth.signOut()} >
@@ -34,6 +33,7 @@ const BattyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
             </LocalizationProvider>
           </div>
         </Authenticator>
+        <Alert />
       </div>
     </>)
 }

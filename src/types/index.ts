@@ -19,7 +19,7 @@ export type Invoice = DeepOmit<
 
 
 const invoiceSchema: ObjectSchema<Invoice> = object({
-  id: string().required('Id is required'),
+  id: string().required('Id is required').default('id'), // permet de save le formulaire sans avoir à remplir le champ
   number: string(),
   amount: number(),
   issueDate: string(),

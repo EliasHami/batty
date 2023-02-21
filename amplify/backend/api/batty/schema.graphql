@@ -22,7 +22,6 @@ enum Statuses {
 type Invoice @model @auth(rules: [{allow: owner}, {allow: public}]) {
   id: ID!
   number: String
-  amount: Float
   issueDate: AWSDate
   expirationDate: AWSDate
   status: Statuses
