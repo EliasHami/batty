@@ -6,7 +6,7 @@ import { Nav, Alert } from 'src/components'
 import { NextPage } from 'next'
 import { Amplify, Auth } from 'aws-amplify'
 import { Authenticator } from '@aws-amplify/ui-react'
-import { Button, CssBaseline } from '@mui/material'
+import { Button, Container, CssBaseline } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import awsExports from "src/aws-exports"
@@ -27,11 +27,11 @@ const BattyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
           <Button onClick={() => Auth.signOut()} >
             Sign out
           </Button>
-          <div className='container pt-4 bp-4'>
+          <Container maxWidth="lg">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Component {...pageProps} />
             </LocalizationProvider>
-          </div>
+          </Container>
         </Authenticator>
         <Alert />
       </div>
