@@ -10,15 +10,16 @@ import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
 import { Box, Button, MenuItem, Grid, TextField, Typography, CircularProgress } from '@mui/material'
 
-import { Invoice, invoiceSchema } from 'src/types'
+import { Construction, Invoice, invoiceSchema } from 'src/types'
 import { createInvoice, updateInvoice } from 'src/graphql/mutations'
 import { DurationUnits, Statuses } from 'src/types/API'
 
 type AddEditProps = {
-  invoice?: Invoice | null
+  invoice?: Invoice | null,
+  constructions?: Construction[],
 }
 
-const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
+const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
   const isAddMode = !invoice
   const router = useRouter()
 
@@ -31,7 +32,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
   }
 
   const methods = useForm<Invoice>(formOptions)
-  const { register, handleSubmit, formState, control } = methods
+  const { handleSubmit, formState, control } = methods
   const { errors } = formState
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
@@ -225,9 +226,9 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
                 helperText={errors.constructionID?.message}
                 fullWidth
               >
-                <MenuItem value={10}>Construction 1</MenuItem>
-                <MenuItem value={20}>Construction 2</MenuItem>
-                <MenuItem value={30}>Construction 3</MenuItem>
+                {constructions?.map(construction =>
+                  <MenuItem key={construction.id} value={construction.id}>{construction.name}</MenuItem>)
+                }
               </TextField>
             )}
           />
