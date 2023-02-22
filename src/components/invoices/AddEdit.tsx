@@ -1,17 +1,18 @@
+import dayjs from 'dayjs'
+import { API } from 'aws-amplify'
 import { useRouter } from 'next/navigation'
-import { SubmitHandler, useForm, UseFormProps, FormProvider, Controller } from 'react-hook-form'
+import { SubmitHandler, useForm, UseFormProps, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { DatePicker } from '@mui/x-date-pickers'
 
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { API } from 'aws-amplify'
-import { Box, Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem, Grid, TextField, Typography, CircularProgress } from '@mui/material'
+import { Box, Button, MenuItem, Grid, TextField, Typography, CircularProgress } from '@mui/material'
 
 import { Invoice, invoiceSchema } from 'src/types'
 import { createInvoice, updateInvoice } from 'src/graphql/mutations'
 import { DurationUnits, Statuses } from 'src/types/API'
-import { DatePicker } from '@mui/x-date-pickers'
 
 type AddEditProps = {
   invoice?: Invoice | null
@@ -116,6 +117,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
             render={({ field }) => (
               <DatePicker
                 {...field}
+                onChange={value => field.onChange(dayjs(value).format('YYYY-MM-DD'))}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -137,6 +139,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
             render={({ field }) => (
               <DatePicker
                 {...field}
+                onChange={value => field.onChange(dayjs(value).format('YYYY-MM-DD'))}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -158,6 +161,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
             render={({ field }) => (
               <DatePicker
                 {...field}
+                onChange={value => field.onChange(dayjs(value).format('YYYY-MM-DD'))}
                 renderInput={(params) => (
                   <TextField
                     {...params}
