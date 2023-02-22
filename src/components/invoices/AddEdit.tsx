@@ -35,7 +35,6 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
   const { errors } = formState
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
-    console.log('data', data)
     return isAddMode
       ? handleCreateInvoice(data)
       : handleUpdateInvoice(invoice.id, data)
@@ -82,8 +81,6 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice }) => {
       alertService.error(getErrorMessage(error))
     }
   }
-
-  console.log('errors', errors)
 
   return (
     <Box

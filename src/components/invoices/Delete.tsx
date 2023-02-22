@@ -4,6 +4,8 @@ import { deleteInvoice } from 'src/graphql/mutations'
 import { alertService } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { useRouter } from 'next/navigation'
+import { IconButton, Tooltip } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 export default function Delete({ id }: { id: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
@@ -28,15 +30,15 @@ export default function Delete({ id }: { id: string }) {
   }
 
   return (
-    // https://mui.com/material-ui/react-tooltip/
-    <button
-      className="btn btn-sm btn-danger btn-construction"
-      onClick={() => handleDelete(id)}
-      disabled={isPending}
-    >
-      {isDeleting || isPending
-        ? <span className="spinner-border spinner-border-sm"></span>
-        : <span>Delete</span>}
-    </button>
+    <Tooltip title="Delete">
+      <IconButton
+        onClick={() => handleDelete(id)}
+        disabled={isPending}
+      >
+        {isDeleting || isPending ? <span className="spinner-border spinner-border-sm"></span> : (
+          <DeleteIcon />
+        )}
+      </IconButton>
+    </Tooltip>
   )
 }

@@ -1,14 +1,12 @@
 import { withSSRContext, Amplify } from 'aws-amplify'
+import { IconButton, Tooltip, Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
 
 import { Invoice } from 'src/types'
 import { Link } from 'src/components'
 import Delete from 'src/components/invoices/Delete'
-
 import awsExports from "src/aws-exports"
-
-import { Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
 import { listInvoices } from 'src/graphql/queries'
-
 
 Amplify.configure({ ...awsExports, ssr: true })
 
@@ -26,7 +24,6 @@ export default function Invoices({ invoices }: { invoices: Invoice[] }) {
           <TableHead>
             <TableRow>
               <TableCell>Number</TableCell>
-              <TableCell align="right">Amount</TableCell>
               <TableCell />
               <TableCell align="right">Client</TableCell>
               <TableCell align="right">Construction</TableCell>
@@ -44,16 +41,17 @@ export default function Invoices({ invoices }: { invoices: Invoice[] }) {
                 <TableCell component="th" scope="row">
                   {invoice.number}
                 </TableCell>
-                <TableCell align="right">{invoice.amount}</TableCell>
                 <TableCell align="right">{invoice.status}</TableCell>
                 <TableCell align="right">{invoice.customerID}</TableCell>
                 <TableCell align="right">{invoice.constructionID}</TableCell>
                 <TableCell align="right">{invoice.issueDate}</TableCell>
                 <TableCell align="right">{invoice.expirationDate}</TableCell>
                 <TableCell align="right">
-                  <Button>
-                    <Link href={`/invoices/${invoice.id}`}>Edit</Link>
-                  </Button>
+                  <Tooltip title="Delete">
+                    <IconButton>
+                      <Link href={`/invoices/${invoice.id}`}><EditIcon /></Link>
+                    </IconButton>
+                  </Tooltip>
                   <Delete id={invoice.id} />
                 </TableCell>
               </TableRow>
