@@ -13,19 +13,18 @@ Pour le formulaire j'utilise React-hook-form et Yup.
   - p2 : CRUD devis / facture (sans la personnalisation)
   - p3 : CRUD client
   - p4 : CRUD service
-  - p5 : Menu de navigation chantier,...
+  - p5 : CRUD Gestion de compte
 - 20 juin 2023 : version 0.1.0
-  - p1 : Authentification
-  - p2 : Design
-- 20 aout 2023 : version 0.2.0
-  - p1 : Landing page (sans toutes les pages du footer)
-  - p2 : Gestion de l'abonnement
-- 20 aout 2023 : version 0.3.0
-  - p1 : Finir la navigation
-  - p2 : Gestion de compte
-- 20 septembre 2023 : version 1.0.0
   - p1 : Envoi du mail de devis / facture
-  - p2 : Newsletter
+  - p1 : Landing page
+  - p2 : Gestion de l'abonnement
+- 20 aout 2023 : version 0.2.0
+  - p1 : Refaire la Navigation
+  - p3 : Newsletter
+- 20 aout 2023 : version 0.3.0
+  - p1 : Authentification --> Migrer vers NextAuth + Prisma
+  - p2 : Design --> Miger vers MUI
+  - p3 : API --> Migrer vers Prisma
 
 # Specs
 
@@ -87,10 +86,3 @@ Pour le formulaire j'utilise React-hook-form et Yup.
 - Envoie du mail de devis / facture
   - Pouvoir envoyer le devis / facture par mail depuis la liste des chantiers
   - Pouvoir personaliser le mail
-
-du coup euh ils ne mettent pas les infos des lots et des services dans le chantier mais dans le devis
-du coup c'est plus souple en plus les select sont directement lié au ressources client, bibliotheque ...
-je sais pas si j'aurai fais mieux
-j'aurai probablement fait la meme chose
-bah en faite pour le faire le devis tu as besoin du client et des lots et des services
-donc je sais pas trop sur quoi comment faire autrement qu'une vu client, un vue chantier, une vue devis et une vue services
