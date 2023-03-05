@@ -1,10 +1,13 @@
-import { object, number, string, array, date, ObjectSchema } from 'yup'
+import { object, number, string, array, ObjectSchema } from 'yup'
 import { DeepOmit } from './DeepOmit'
 import {
   Construction as C,
   Invoice as I,
-  Statuses,
-  DurationUnits
+  Units,
+  DurationUnits,
+  Line,
+  LineTypes,
+  Section as S
 } from './API'
 
 export type Construction = DeepOmit<
@@ -22,8 +25,14 @@ export type InvoiceForm = DeepOmit<
   'id' | 'status'
 >
 
+export type Section = DeepOmit<
+  Exclude<S, null>,
+  '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
+>
 
-const invoiceSchema: ObjectSchema<InvoiceForm> = object({
+// TODO : validate with types
+// const invoiceSchema : ObjectSchema<InvoiceForm>= object({
+const invoiceSchema = object({
   number: string(),
   issueDate: string(),
   expirationDate: string(),
@@ -32,6 +41,20 @@ const invoiceSchema: ObjectSchema<InvoiceForm> = object({
   workDurationUnit: string().oneOf(Object.values(DurationUnits)),
   customerID: string(),
   constructionID: string(),
+  section: object<Section>().shape({
+    name: string(),
+    order: number(),
+    lines: array<Line>().of(object({
+      name: string(),
+      type : string().oneOf(Object.values(LineTypes)),
+      text : string(),
+      order: number(),
+      quantity: number(),
+      unit : string().oneOf(Object.values(Units)),
+      price: number(),
+      elements: array().of(string())
+    }))
+  })
 })
 
 const constructionSchema: ObjectSchema<Construction> = object({

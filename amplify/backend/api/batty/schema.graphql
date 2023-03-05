@@ -1,3 +1,25 @@
+type Line {
+  name: String
+  type: LineTypes
+  text: String
+  quantity: Float
+  unit: Units
+  price: Float
+  order: String
+  elements: [String]
+}
+
+enum LineTypes {
+  TEXT
+  LINE
+}
+
+type Section {
+  name: String
+  order: Int
+  lines: [Line]
+}
+
 type Customer @model @auth(rules: [{allow: public}]) {
   id: ID!
   Invoices: [Invoice] @hasMany(indexName: "byCustomer", fields: ["id"])
@@ -30,6 +52,7 @@ type Invoice @model @auth(rules: [{allow: owner}, {allow: public}]) {
   workDurationUnit: DurationUnits
   customerID: ID @index(name: "byCustomer")
   constructionID: ID @index(name: "byConstruction")
+  section: Section
 }
 
 type Construction @model @auth(rules: [{allow: owner}, {allow: public}]) {

@@ -156,6 +156,20 @@ export const createInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
+      section {
+        name
+        order
+        lines {
+          name
+          type
+          text
+          quantity
+          unit
+          price
+          order
+          elements
+        }
+      }
       createdAt
       updatedAt
       owner
@@ -178,6 +192,20 @@ export const updateInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
+      section {
+        name
+        order
+        lines {
+          name
+          type
+          text
+          quantity
+          unit
+          price
+          order
+          elements
+        }
+      }
       createdAt
       updatedAt
       owner
@@ -200,6 +228,20 @@ export const deleteInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
+      section {
+        name
+        order
+        lines {
+          name
+          type
+          text
+          quantity
+          unit
+          price
+          order
+          elements
+        }
+      }
       createdAt
       updatedAt
       owner

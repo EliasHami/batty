@@ -80,6 +80,20 @@ export const getInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
+      section {
+        name
+        order
+        lines {
+          name
+          type
+          text
+          quantity
+          unit
+          price
+          order
+          elements
+        }
+      }
       createdAt
       updatedAt
       owner
@@ -104,6 +118,10 @@ export const listInvoices = /* GraphQL */ `
         workDurationUnit
         customerID
         constructionID
+        section {
+          name
+          order
+        }
         createdAt
         updatedAt
         owner
@@ -138,6 +156,10 @@ export const invoicesByCustomerID = /* GraphQL */ `
         workDurationUnit
         customerID
         constructionID
+        section {
+          name
+          order
+        }
         createdAt
         updatedAt
         owner
@@ -172,6 +194,10 @@ export const invoicesByConstructionID = /* GraphQL */ `
         workDurationUnit
         customerID
         constructionID
+        section {
+          name
+          order
+        }
         createdAt
         updatedAt
         owner
