@@ -41,6 +41,7 @@ const invoiceSchema = object({
   workDurationUnit: string().oneOf(Object.values(DurationUnits)),
   customerID: string(),
   constructionID: string(),
+  title: string(),
   section: object<Section>().shape({
     name: string(),
     order: number(),

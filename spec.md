@@ -9,6 +9,7 @@ Pour le formulaire j'utilise React-hook-form et Yup.
 # Deadline
 
 - 20 avril 2023 : version alpha (MVP) --> à faire tester par assiya et yanis
+  objectif : avoir tout les CRUD pour pouvoir générer un devis / facture
   - p1 : CRUD chantier
   - p2 : CRUD devis / facture (sans la personnalisation)
   - p3 : CRUD client

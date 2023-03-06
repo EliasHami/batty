@@ -18,6 +18,7 @@ export const onCreateCustomer = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner
@@ -61,6 +62,7 @@ export const onUpdateCustomer = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner
@@ -104,6 +106,7 @@ export const onDeleteCustomer = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner
@@ -161,6 +164,7 @@ export const onCreateInvoice = /* GraphQL */ `
           elements
         }
       }
+      title
       createdAt
       updatedAt
       owner
@@ -197,6 +201,7 @@ export const onUpdateInvoice = /* GraphQL */ `
           elements
         }
       }
+      title
       createdAt
       updatedAt
       owner
@@ -233,6 +238,7 @@ export const onDeleteInvoice = /* GraphQL */ `
           elements
         }
       }
+      title
       createdAt
       updatedAt
       owner
@@ -265,6 +271,7 @@ export const onCreateConstruction = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner
@@ -303,6 +310,7 @@ export const onUpdateConstruction = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner
@@ -341,6 +349,7 @@ export const onDeleteConstruction = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner

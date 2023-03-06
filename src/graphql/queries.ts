@@ -18,6 +18,7 @@ export const getCustomer = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner
@@ -94,6 +95,7 @@ export const getInvoice = /* GraphQL */ `
           elements
         }
       }
+      title
       createdAt
       updatedAt
       owner
@@ -122,6 +124,7 @@ export const listInvoices = /* GraphQL */ `
           name
           order
         }
+        title
         createdAt
         updatedAt
         owner
@@ -160,6 +163,7 @@ export const invoicesByCustomerID = /* GraphQL */ `
           name
           order
         }
+        title
         createdAt
         updatedAt
         owner
@@ -198,6 +202,7 @@ export const invoicesByConstructionID = /* GraphQL */ `
           name
           order
         }
+        title
         createdAt
         updatedAt
         owner
@@ -229,6 +234,7 @@ export const getConstruction = /* GraphQL */ `
           workDurationUnit
           customerID
           constructionID
+          title
           createdAt
           updatedAt
           owner

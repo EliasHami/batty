@@ -53,6 +53,7 @@ type Invoice @model @auth(rules: [{allow: owner}, {allow: public}]) {
   customerID: ID @index(name: "byCustomer")
   constructionID: ID @index(name: "byConstruction")
   section: Section
+  title: String
 }
 
 type Construction @model @auth(rules: [{allow: owner}, {allow: public}]) {

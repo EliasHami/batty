@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import { API } from 'aws-amplify'
 import { useRouter } from 'next/navigation'
@@ -8,7 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers'
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { Box, Button, MenuItem, Grid, TextField, Typography, CircularProgress } from '@mui/material'
+import { Box, Button, MenuItem, Grid, TextField, Typography, CircularProgress, Table, TableContainer, Paper, TableHead, TableRow, TableCell } from '@mui/material'
 
 import { Construction, Invoice, invoiceSchema } from 'src/types'
 import { createInvoice, updateInvoice } from 'src/graphql/mutations'
@@ -22,6 +23,7 @@ type AddEditProps = {
 const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
   const isAddMode = !invoice
   const router = useRouter()
+  const [showTitle, setShowTitle] = useState(false)
 
   const formOptions: UseFormProps<Invoice> = {
     resolver: yupResolver(invoiceSchema),
@@ -83,6 +85,8 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
     }
   }
 
+  const handleShowTitle = () => setShowTitle(!showTitle)
+
   return (
     <Box
       component="form"
@@ -90,7 +94,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Link href="/invoices" className="btn btn-link">&#60;- Back</Link>
-      <Typography variant='h3'>{isAddMode ? 'Add Invoice' : invoice.number}</Typography>
+      <Typography sx={{ marginBottom: "10px" }} variant='h3'>{isAddMode ? 'Add Invoice' : invoice.number}</Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Controller
@@ -233,7 +237,9 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
           <Controller
             control={control}
             name="customerID"
@@ -253,6 +259,37 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
               </TextField>
             )}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Button onClick={handleShowTitle}>+ Add a title to the document</Button>
+          {showTitle && (<Controller
+            control={control}
+            name="title"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="title"
+                error={Boolean(errors.title)}
+                helperText={errors.title?.message}
+                fullWidth
+              />
+            )}
+          />)}
+        </Grid>
+        <Grid item xs={12}>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="lines table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Designation</TableCell>
+                  <TableCell>Qty</TableCell>
+                  <TableCell>Unit</TableCell>
+                  <TableCell>Unit Price excl tax</TableCell>
+                  <TableCell>Total excl tax</TableCell>
+                </TableRow>
+              </TableHead>
+            </Table>
+          </TableContainer>
         </Grid>
       </Grid>
       <Button type="submit" disabled={formState.isSubmitting}>
