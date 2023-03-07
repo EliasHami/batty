@@ -81,7 +81,7 @@ export const getInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {
@@ -120,7 +120,7 @@ export const listInvoices = /* GraphQL */ `
         workDurationUnit
         customerID
         constructionID
-        section {
+        sections {
           name
           order
         }
@@ -159,7 +159,7 @@ export const invoicesByCustomerID = /* GraphQL */ `
         workDurationUnit
         customerID
         constructionID
-        section {
+        sections {
           name
           order
         }
@@ -198,7 +198,7 @@ export const invoicesByConstructionID = /* GraphQL */ `
         workDurationUnit
         customerID
         constructionID
-        section {
+        sections {
           name
           order
         }

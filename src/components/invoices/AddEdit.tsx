@@ -2,14 +2,15 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import { API } from 'aws-amplify'
 import { useRouter } from 'next/navigation'
-import { SubmitHandler, useForm, UseFormProps, Controller } from 'react-hook-form'
+import { SubmitHandler, useForm, UseFormProps, Controller, useFieldArray } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { DatePicker } from '@mui/x-date-pickers'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 import { alertService, Alert } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 import { Link } from 'src/components'
-import { Box, Button, MenuItem, Grid, TextField, Typography, CircularProgress, Table, TableContainer, Paper, TableHead, TableRow, TableCell } from '@mui/material'
+import { Box, Button, MenuItem, Grid, TextField, Typography, CircularProgress, Table, TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Tooltip, IconButton } from '@mui/material'
 
 import { Construction, Invoice, invoiceSchema } from 'src/types'
 import { createInvoice, updateInvoice } from 'src/graphql/mutations'
@@ -36,6 +37,11 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
   const methods = useForm<Invoice>(formOptions)
   const { handleSubmit, formState, control } = methods
   const { errors } = formState
+
+  const { fields: sections, append: addSection, remove: deleteSection } = useFieldArray({
+    control,
+    name: "sections"
+  })
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
     return isAddMode
@@ -86,6 +92,8 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
   }
 
   const handleShowTitle = () => setShowTitle(!showTitle)
+
+  // const handleAddSection = () => {
 
   return (
     <Box
@@ -288,8 +296,42 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
                   <TableCell>Total excl tax</TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                {sections?.map((section, i) => (
+                  <TableRow
+                    key={section?.name}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell colSpan={4}>
+                      <Controller
+                        control={control}
+                        name={`sections.${i}.name`}
+                        render={({ field }) => (
+                          <TextField
+                            {...field}
+                            id={`sections.${i}.name`}
+                            variant="standard"
+                            error={Boolean(errors?.sections?.[i]?.name)}
+                            helperText={errors?.sections?.[i]?.name?.message}
+                            fullWidth
+                          />
+                        )}
+                      />
+                    </TableCell>
+                    <TableCell>
+
+                      <Tooltip title="Delete">
+                        <IconButton onClick={() => deleteSection(i)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
+          <Button onClick={() => addSection({ name: "" })}>+ Add a section</Button>
         </Grid>
       </Grid>
       <Button type="submit" disabled={formState.isSubmitting}>

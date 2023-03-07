@@ -159,7 +159,7 @@ export const createInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {
@@ -196,7 +196,7 @@ export const updateInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {
@@ -233,7 +233,7 @@ export const deleteInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {

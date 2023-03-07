@@ -39,7 +39,7 @@ export type Invoice = {
   workDurationUnit?: DurationUnits | null,
   customerID?: string | null,
   constructionID?: string | null,
-  section?: Section | null,
+  sections?:  Array<Section | null > | null,
   title?: string | null,
   createdAt: string,
   updatedAt: string,
@@ -135,7 +135,7 @@ export type CreateInvoiceInput = {
   workDurationUnit?: DurationUnits | null,
   customerID?: string | null,
   constructionID?: string | null,
-  section?: SectionInput | null,
+  sections?: Array< SectionInput | null > | null,
   title?: string | null,
 };
 
@@ -261,7 +261,7 @@ export type UpdateInvoiceInput = {
   workDurationUnit?: DurationUnits | null,
   customerID?: string | null,
   constructionID?: string | null,
-  section?: SectionInput | null,
+  sections?: Array< SectionInput | null > | null,
   title?: string | null,
 };
 
@@ -673,7 +673,7 @@ export type CreateInvoiceMutation = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -688,7 +688,7 @@ export type CreateInvoiceMutation = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -714,7 +714,7 @@ export type UpdateInvoiceMutation = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -729,7 +729,7 @@ export type UpdateInvoiceMutation = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -755,7 +755,7 @@ export type DeleteInvoiceMutation = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -770,7 +770,7 @@ export type DeleteInvoiceMutation = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1051,7 +1051,7 @@ export type GetInvoiceQuery = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -1066,7 +1066,7 @@ export type GetInvoiceQuery = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1095,11 +1095,11 @@ export type ListInvoicesQuery = {
       workDurationUnit?: DurationUnits | null,
       customerID?: string | null,
       constructionID?: string | null,
-      section?:  {
+      sections?:  Array< {
         __typename: "Section",
         name?: string | null,
         order?: number | null,
-      } | null,
+      } | null > | null,
       title?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -1132,11 +1132,11 @@ export type InvoicesByCustomerIDQuery = {
       workDurationUnit?: DurationUnits | null,
       customerID?: string | null,
       constructionID?: string | null,
-      section?:  {
+      sections?:  Array< {
         __typename: "Section",
         name?: string | null,
         order?: number | null,
-      } | null,
+      } | null > | null,
       title?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -1169,11 +1169,11 @@ export type InvoicesByConstructionIDQuery = {
       workDurationUnit?: DurationUnits | null,
       customerID?: string | null,
       constructionID?: string | null,
-      section?:  {
+      sections?:  Array< {
         __typename: "Section",
         name?: string | null,
         order?: number | null,
-      } | null,
+      } | null > | null,
       title?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -1499,7 +1499,7 @@ export type OnCreateInvoiceSubscription = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -1514,7 +1514,7 @@ export type OnCreateInvoiceSubscription = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1540,7 +1540,7 @@ export type OnUpdateInvoiceSubscription = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -1555,7 +1555,7 @@ export type OnUpdateInvoiceSubscription = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1581,7 +1581,7 @@ export type OnDeleteInvoiceSubscription = {
     workDurationUnit?: DurationUnits | null,
     customerID?: string | null,
     constructionID?: string | null,
-    section?:  {
+    sections?:  Array< {
       __typename: "Section",
       name?: string | null,
       order?: number | null,
@@ -1596,7 +1596,7 @@ export type OnDeleteInvoiceSubscription = {
         order?: string | null,
         elements?: Array< string | null > | null,
       } | null > | null,
-    } | null,
+    } | null > | null,
     title?: string | null,
     createdAt: string,
     updatedAt: string,

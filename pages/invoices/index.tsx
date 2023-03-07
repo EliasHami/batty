@@ -47,7 +47,7 @@ export default function Invoices({ invoices }: { invoices: Invoice[] }) {
                 <TableCell align="right">{invoice.issueDate}</TableCell>
                 <TableCell align="right">{invoice.expirationDate}</TableCell>
                 <TableCell align="right">
-                  <Tooltip title="Delete">
+                  <Tooltip title="Edit">
                     <IconButton>
                       <Link href={`/invoices/${invoice.id}`}><EditIcon /></Link>
                     </IconButton>

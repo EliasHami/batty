@@ -52,7 +52,7 @@ type Invoice @model @auth(rules: [{allow: owner}, {allow: public}]) {
   workDurationUnit: DurationUnits
   customerID: ID @index(name: "byCustomer")
   constructionID: ID @index(name: "byConstruction")
-  section: Section
+  sections: [Section]
   title: String
 }
 

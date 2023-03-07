@@ -150,7 +150,7 @@ export const onCreateInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {
@@ -187,7 +187,7 @@ export const onUpdateInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {
@@ -224,7 +224,7 @@ export const onDeleteInvoice = /* GraphQL */ `
       workDurationUnit
       customerID
       constructionID
-      section {
+      sections {
         name
         order
         lines {

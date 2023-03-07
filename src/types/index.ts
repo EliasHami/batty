@@ -30,7 +30,7 @@ export type Section = DeepOmit<
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
-// TODO : validate with types
+// TODO : validate with types, maybe easier with prisma generated types
 // const invoiceSchema : ObjectSchema<InvoiceForm>= object({
 const invoiceSchema = object({
   number: string(),
@@ -42,7 +42,7 @@ const invoiceSchema = object({
   customerID: string(),
   constructionID: string(),
   title: string(),
-  section: object<Section>().shape({
+  sections: array<Section>().of(object({
     name: string(),
     order: number(),
     lines: array<Line>().of(object({
@@ -56,7 +56,7 @@ const invoiceSchema = object({
       elements: array().of(string())
     }))
   })
-})
+)})
 
 const constructionSchema: ObjectSchema<Construction> = object({
   id: string().required('Id is required'),
