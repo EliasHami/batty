@@ -48,6 +48,7 @@ const invoiceSchema = object({
     lines: array<Line>().of(object({
       name: string(),
       type : string().oneOf(Object.values(LineTypes)),
+      service: string(),
       text : string(),
       order: number(),
       quantity: number(),
@@ -72,4 +73,4 @@ const constructionSchema: ObjectSchema<Construction> = object({
   }),
 })
 
-export { invoiceSchema, constructionSchema }
+export { invoiceSchema, constructionSchema, LineTypes }

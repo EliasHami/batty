@@ -156,6 +156,7 @@ export const onCreateInvoice = /* GraphQL */ `
         lines {
           name
           type
+          service
           text
           quantity
           unit
@@ -193,6 +194,7 @@ export const onUpdateInvoice = /* GraphQL */ `
         lines {
           name
           type
+          service
           text
           quantity
           unit
@@ -230,6 +232,7 @@ export const onDeleteInvoice = /* GraphQL */ `
         lines {
           name
           type
+          service
           text
           quantity
           unit

@@ -1,6 +1,7 @@
 type Line {
   name: String
   type: LineTypes
+  service: String
   text: String
   quantity: Float
   unit: Units

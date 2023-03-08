@@ -87,6 +87,7 @@ export const getInvoice = /* GraphQL */ `
         lines {
           name
           type
+          service
           text
           quantity
           unit
