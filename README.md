@@ -1,3 +1,10 @@
+# But du projet
+
+Le projet a pour but premier de generer des devis et factures pour des entreprises dans le domaine du génie civil.  
+Par la suite j'ajouterai toutes les fonctionnalités de génie civil. Il sera par exemple possible de générer des rapports de chantier.  
+Il est basé sur le framework Next.js.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -33,48 +40,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-# Project structure
-
-## Constructions
-
-Details about constructions projects  
-
-- name
-- description
-- customer
-- address
-- estimate_validity
-- parts (rooms, kitchen, ...) : {
-  name,
-  provisions : [
-    {
-      quantity,
-      service
-    }]}
-
-## Services
-
-Details about each construction services
-
-- name
-- unit
-- unit_price
-
-## Customers
-
-Details about customers
-
-- name
-- address
-- type (particulier/pro)
-
-## Company
-
-Details about the company
-
-- name
-- address
-- phone number
-- SIRET number
-- email
-- logo
