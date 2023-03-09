@@ -42,17 +42,15 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
             <NumberField
               name={`${lineName}.${i}.price`}
               error={errors?.[i]?.price}
-              //@ts-ignore TODO: fix this
               endAdornment={<InputAdornment position="start">€</InputAdornment>}
             />
           </TableCell>
           <TableCell>
             <NumberField
-              value={10}//{line?.quantity * line?.price} TODO: fix this
+              value={10}//{line?.quantity * line?.price} // TODO: fix this
               InputProps={{
                 readOnly: true,
               }}
-              //@ts-ignore TODO: fix this
               endAdornment={<InputAdornment position="start">€</InputAdornment>}
             />
           </TableCell>
