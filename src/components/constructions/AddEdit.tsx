@@ -1,16 +1,16 @@
-import { useRouter } from 'next/navigation'
-import { SubmitHandler, useForm, UseFormProps, FormProvider } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { API } from 'aws-amplify'
+import { useRouter } from 'next/navigation'
+import { FormProvider, SubmitHandler, useForm, UseFormProps } from 'react-hook-form'
 
-import { alertService, Alert } from 'src/services'
-import { getErrorMessage } from 'src/utils'
-import { Link } from 'src/components'
+import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import { useState } from 'react'
-import { Step, StepLabel, Stepper, Box, Button, Typography } from '@mui/material'
+import { Link } from 'src/components'
+import { Alert, alertService } from 'src/services'
+import { getErrorMessage } from 'src/utils'
 
-import { Construction, constructionSchema } from 'src/types'
 import { createConstruction, updateConstruction } from 'src/graphql/mutations'
+import { Construction, constructionSchema } from 'src/types'
 
 type AddEditProps = {
   construction?: Construction | null
@@ -24,7 +24,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   const [activeStep, setActiveStep] = useState(0)
 
   const formOptions: UseFormProps<Construction> = {
-    resolver: yupResolver(constructionSchema),
+    resolver: zodResolver(constructionSchema),
   }
 
   if (!isAddMode) {
