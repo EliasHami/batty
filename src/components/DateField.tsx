@@ -1,7 +1,7 @@
-import { useFormContext, Controller } from 'react-hook-form'
 import { TextField, TextFieldProps } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
+import { Controller, useFormContext } from 'react-hook-form'
 
 type Props = TextFieldProps & {
   name: string
@@ -9,9 +9,10 @@ type Props = TextFieldProps & {
   variant?: any
 }
 
-export default function DateField(
-  { name, error, ...props }: Props): React.ReactElement {
+const DateField: React.FC<Props> = ({ name, error, ...props }) => {
   const { control } = useFormContext()
+
+  if (!name) return null
 
   return (
     <Controller
@@ -37,3 +38,5 @@ export default function DateField(
     />
   )
 }
+
+export default DateField

@@ -1,5 +1,5 @@
-import { useFormContext, Controller } from 'react-hook-form'
 import { TextField } from '@mui/material'
+import { Controller, useFormContext } from 'react-hook-form'
 
 type Props = {
   name: string
@@ -7,9 +7,10 @@ type Props = {
   options: any
 }
 
-export default function SelectField(
-  { name, error, options, ...props }: Props): React.ReactElement {
+const SelectField: React.FC<Props> = ({ name, error, options, ...props }) => {
   const { control } = useFormContext()
+
+  if (!name) return null
 
   return (
     <Controller
@@ -31,3 +32,5 @@ export default function SelectField(
     />
   )
 }
+
+export default SelectField

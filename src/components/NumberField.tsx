@@ -8,9 +8,7 @@ type Props = TextFieldProps & {
 const NumberField: React.FC<Props> = ({ name, error, ...props }) => {
   const { control } = useFormContext()
 
-
   if (!name) return null
-  console.log({ control, name, error, props })
 
   return (
     <Controller

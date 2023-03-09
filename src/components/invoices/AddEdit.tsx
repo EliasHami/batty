@@ -93,8 +93,6 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
 
   const handleShowTitle = () => setShowTitle(!showTitle)
 
-  // const handleAddSection = () => {
-
   return (
     <>
       <FormProvider {...methods}>
@@ -186,7 +184,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
                             </Tooltip>
                           </TableCell>
                         </TableRow>
-                        <Lines control={control} errors={errors?.sections?.[i]?.lines} sectionIndex={i} />
+                        <Lines errors={errors?.sections?.[i]?.lines} sectionIndex={i} />
                       </>
                     ))}
                   </TableBody>

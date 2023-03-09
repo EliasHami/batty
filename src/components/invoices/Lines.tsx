@@ -1,19 +1,18 @@
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { NumberField, SelectField, TextField } from 'src/components';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, IconButton, InputAdornment, MenuItem, TableCell, TableRow, Tooltip } from '@mui/material';
 
 type Props = {
-  control: any
   errors: any
   sectionIndex: number
 }
 
-export default function Lines({ control, errors, sectionIndex }: Props): React.ReactElement<Props> {
+export default function Lines({ errors, sectionIndex }: Props): React.ReactElement<Props> {
   const lineName = `sections.${sectionIndex}.lines`
 
-  // const { control } = useFormContext()
+  const { control } = useFormContext()
 
   const { fields: lines, append: addLine, remove: deleteLine } = useFieldArray({
     control,
