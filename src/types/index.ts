@@ -1,14 +1,14 @@
-import { object, number, string, array, ObjectSchema } from 'yup'
-import { DeepOmit } from './DeepOmit'
+import { ObjectSchema, array, number, object, string } from 'yup'
 import {
   Construction as C,
-  Invoice as I,
-  Units,
   DurationUnits,
+  Invoice as I,
   Line,
   LineTypes,
-  Section as S
+  Section as S,
+  Units
 } from './API'
+import { DeepOmit } from './DeepOmit'
 
 export type Construction = DeepOmit<
   Exclude<C, null>,
@@ -30,9 +30,7 @@ export type Section = DeepOmit<
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
-// TODO : validate with types, maybe easier with prisma generated types
-// const invoiceSchema : ObjectSchema<InvoiceForm>= object({
-const invoiceSchema = object({
+const invoiceSchema : ObjectSchema<InvoiceForm>= object({
   number: string(),
   issueDate: string(),
   expirationDate: string(),
@@ -73,4 +71,5 @@ const constructionSchema: ObjectSchema<Construction> = object({
   }),
 })
 
-export { invoiceSchema, constructionSchema, LineTypes }
+export { LineTypes, constructionSchema, invoiceSchema }
+
