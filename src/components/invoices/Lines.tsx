@@ -12,12 +12,26 @@ type Props = {
 export default function Lines({ errors, sectionIndex }: Props): React.ReactElement<Props> {
   const lineName = `sections.${sectionIndex}.lines`
 
-  const { control } = useFormContext()
+  const { control, getValues, setValue } = useFormContext()
 
   const { fields: lines, append: addLine, remove: deleteLine } = useFieldArray({
     control,
     name: lineName
   })
+
+  const onQuantityChange = (event, index) => {
+    const quantity = event.target.value
+    const price = getValues(`${lineName}.${index}.price`)
+    const total = parseInt(quantity) * parseInt(price)
+    setValue(`${lineName}.${index}.total`, total)
+  }
+
+  const onPriceChange = (event, index) => {
+    const price = event.target.value
+    const quantity = getValues(`${lineName}.${index}.quantity`)
+    const total = parseInt(quantity) * parseInt(price)
+    setValue(`${lineName}.${index}.total`, total)
+  }
 
   return (
     <>
@@ -37,18 +51,23 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
             </Box>
           </TableCell>
           <TableCell>
-            <NumberField name={`${lineName}.${i}.quantity`} error={errors?.[i]?.quantity} />
+            <NumberField
+              name={`${lineName}.${i}.quantity`}
+              error={errors?.[i]?.quantity}
+              onChange={(event) => onQuantityChange(event, i)}
+            />
           </TableCell>
           <TableCell>
             <NumberField
               name={`${lineName}.${i}.price`}
               error={errors?.[i]?.price}
+              onChange={(event) => onPriceChange(event, i)}
               endAdornment={<InputAdornment position="start">€</InputAdornment>}
             />
           </TableCell>
           <TableCell>
             <NumberField
-              value={10}//{line?.quantity * line?.price} // TODO: fix this
+              name={`${lineName}.${i}.total`}
               InputProps={{
                 readOnly: true,
               }}

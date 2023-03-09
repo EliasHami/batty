@@ -4,8 +4,9 @@ import { Controller, useFormContext } from 'react-hook-form'
 type Props = TextFieldProps & {
   name: string
   error?: any
+  onChange?: any
 }
-const NumberField: React.FC<Props> = ({ name, error, ...props }) => {
+const NumberField: React.FC<Props> = ({ name, onChange = () => { }, error, ...props }) => {
   const { control } = useFormContext()
 
   if (!name) return null
@@ -17,6 +18,10 @@ const NumberField: React.FC<Props> = ({ name, error, ...props }) => {
       render={({ field }) => (
         <TextField
           {...field}
+          onChange={(event => {
+            field.onChange(event)
+            onChange(event)
+          })}
           id={name}
           type="number"
           error={Boolean(error)}
