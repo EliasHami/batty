@@ -108,52 +108,34 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
         <Typography sx={{ marginBottom: "10px" }} variant='h3'>{isAddMode ? 'Add Invoice' : invoice.number}</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <NumberField name="number" error={errors.number} />
+            <NumberField name="number" error={errors.number} label="Number" />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <DateField name="issueDate" error={errors.issueDate} />
+            <DateField name="issueDate" error={errors.issueDate} label="Issue Date" />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <DateField name="expirationDate" error={errors.expirationDate} />
+            <DateField name="expirationDate" error={errors.expirationDate} label="Expiration Date" />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <DateField name="workStartDate" error={errors.workStartDate} />
+            <DateField name="workStartDate" error={errors.workStartDate} label="Work start date" />
           </Grid>
           <Grid item xs={12}>
-            <NumberField name="workDuration" error={errors.workDuration} />
+            <NumberField name="workDuration" error={errors.workDuration} label="Work duration" />
           </Grid>
           <Grid item xs={12}>
-
             <SelectField
               name="workDurationUnit"
               error={errors.workDurationUnit}
+              label="Work duration unit"
               options={(Object.keys(DurationUnits) as Array<keyof typeof DurationUnits>).map(key =>
                 <MenuItem key={key} value={DurationUnits[key]}>{key}</MenuItem>)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Controller
-              control={control}
-              name="constructionID"
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="constructionID"
-                  select
-                  label="Construction"
-                  error={Boolean(errors.constructionID)}
-                  helperText={errors.constructionID?.message}
-                  fullWidth
-                >
-                  {constructions?.map(construction =>
-                    <MenuItem key={construction.id} value={construction.id}>{construction.name}</MenuItem>)
-                  }
-                </TextField>
-              )}
-            />
             <SelectField
               name="constructionID"
               error={errors.constructionID}
+              label="Construction"
               options={constructions?.map(construction =>
                 <MenuItem key={construction.id} value={construction.id}>{construction.name}</MenuItem>)
               }
@@ -165,6 +147,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
             <SelectField
               name="customerID"
               error={errors.customerID}
+              label="Customer"
               options={<><MenuItem value={10}>Customer 1</MenuItem>
                 <MenuItem value={20}>Customer 2</MenuItem>
                 <MenuItem value={30}>Customer 3</MenuItem></>}

@@ -4,7 +4,6 @@ import Link from './Link'
 import Alert from './Alert'
 import TabPanel from './TabPanel'
 import { getTabProps } from './TabPanel'
-import ContextProvider from './ContextProvider'
 import TextField from 'src/components/TextField'
 import SelectField from 'src/components/SelectField'
 import NumberField from 'src/components/NumberField'
@@ -17,7 +16,6 @@ export {
   Alert,
   TabPanel,
   getTabProps,
-  ContextProvider,
   TextField,
   SelectField,
   NumberField,

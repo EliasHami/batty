@@ -22,6 +22,7 @@ export default function NumberField(
           error={Boolean(error)}
           helperText={error?.message}
           fullWidth
+          {...props}
         />
       )}
     />
