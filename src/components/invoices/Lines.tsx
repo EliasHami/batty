@@ -1,19 +1,19 @@
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import { NumberField, SelectField, TextField } from 'src/components';
-import { LineTypes } from 'src/types';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, IconButton, InputAdornment, MenuItem, TableCell, TableRow, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, MenuItem, TableCell, TableRow, Tooltip } from '@mui/material';
 
 type Props = {
+  control: any
   errors: any
   sectionIndex: number
 }
 
-export default function Lines({ errors, sectionIndex }: Props): React.ReactElement<Props> {
+export default function Lines({ control, errors, sectionIndex }: Props): React.ReactElement<Props> {
   const lineName = `sections.${sectionIndex}.lines`
 
-  const { control } = useFormContext()
+  // const { control } = useFormContext()
 
   const { fields: lines, append: addLine, remove: deleteLine } = useFieldArray({
     control,
@@ -28,12 +28,14 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
           <TableCell>
-            <TextField name={`${lineName}.${i}.name`} error={errors?.[i]?.name} />
-            <SelectField
-              name={`${lineName}.${i}.service`}
-              error={errors?.[i]?.service}
-              options={<MenuItem value={5}>Fourniture</MenuItem>}// TODO: ajouter la liste des services
-            />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <TextField name={`${lineName}.${i}.name`} error={errors?.[i]?.name} />
+              <SelectField
+                name={`${lineName}.${i}.service`}
+                error={errors?.[i]?.service}
+                options={<MenuItem value={5}>Fourniture</MenuItem>}// TODO: ajouter la liste des services
+              />
+            </Box>
           </TableCell>
           <TableCell>
             <NumberField name={`${lineName}.${i}.quantity`} error={errors?.[i]?.quantity} />
@@ -63,8 +65,7 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
           </TableCell>
         </TableRow>
       ))}
-      {/* TODO : fix this */}
-      {/* <Button onClick={() => addLine({ name: "" })}>+ Add a line</Button> */}
+      <Button onClick={() => addLine({ name: "" })}>+ Add a line</Button>
     </>
   );
 }

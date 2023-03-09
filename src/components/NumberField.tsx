@@ -1,14 +1,16 @@
-import { useFormContext, Controller } from 'react-hook-form'
 import { TextField, TextFieldProps } from '@mui/material'
+import { Controller, useFormContext } from 'react-hook-form'
 
 type Props = TextFieldProps & {
   name: string
   error?: any
 }
-
-export default function NumberField(
-  { name, error, ...props }: Props): React.ReactElement {
+const NumberField: React.FC<Props> = ({ name, error, ...props }) => {
   const { control } = useFormContext()
+
+
+  if (!name) return null
+  console.log({ control, name, error, props })
 
   return (
     <Controller
@@ -28,3 +30,5 @@ export default function NumberField(
     />
   )
 }
+
+export default NumberField
