@@ -1,14 +1,9 @@
-import { object, number, string, array, ObjectSchema } from 'yup'
-import { DeepOmit } from './DeepOmit'
+import { z } from 'zod'
 import {
-  Construction as C,
-  Invoice as I,
-  Units,
-  DurationUnits,
-  Line,
-  LineTypes,
-  Section as S
+  Construction as C, DurationUnits, Invoice as I, LineTypes,
+  Section as S, Statuses, Units
 } from './API'
+import { DeepOmit } from './DeepOmit'
 
 export type Construction = DeepOmit<
   Exclude<C, null>,
@@ -30,47 +25,49 @@ export type Section = DeepOmit<
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
-// TODO : validate with types, maybe easier with prisma generated types
-// const invoiceSchema : ObjectSchema<InvoiceForm>= object({
-const invoiceSchema = object({
-  number: string(),
-  issueDate: string(),
-  expirationDate: string(),
-  workStartDate: string(),
-  workDuration: number(),
-  workDurationUnit: string().oneOf(Object.values(DurationUnits)),
-  customerID: string(),
-  constructionID: string(),
-  title: string(),
-  sections: array<Section>().of(object({
-    name: string(),
-    order: number(),
-    lines: array<Line>().of(object({
-      name: string(),
-      type : string().oneOf(Object.values(LineTypes)),
-      service: string(),
-      text : string(),
-      order: number(),
-      quantity: number(),
-      unit : string().oneOf(Object.values(Units)),
-      price: number(),
-      elements: array().of(string())
+const invoiceSchema = z.object({
+  id: z.string(),
+  status: z.nativeEnum(Statuses),
+  number: z.string(),
+  issueDate: z.string(),
+  expirationDate: z.string(),
+  workStartDate: z.string(),
+  workDuration: z.number(),
+  workDurationUnit: z.nativeEnum(DurationUnits),
+  customerID: z.string(),
+  constructionID: z.string(),
+  title: z.string(),
+  sections: z.array(z.object({
+    name: z.string(),
+    order: z.number(),
+    lines: z.array(z.object({
+      name: z.string(),
+      type : z.nativeEnum(LineTypes),
+      service: z.string(),
+      text : z.string(),
+      order: z.string(),
+      quantity: z.number(),
+      unit : z.nativeEnum(Units),
+      price: z.number(),
+      elements: z.array(z.string())
     }))
   })
 )})
 
-const constructionSchema: ObjectSchema<Construction> = object({
-  id: string().required('Id is required'),
-  name: string().required('Name is required'),
-  description: string().required('Description is required'),
-  address: string().required('Address is required'),
-  estimate_validity: number(),
-  parts: string(),
-  number_lot: number(),
-  customerID: string(),
-  Invoices: object({
-    items: array<Invoice>().required() // .of(invoiceSchema) passe tout les sous-champs à optionnel typescript number?:
+const invoiceFormSchema : z.ZodType<InvoiceForm>= invoiceSchema.omit({id:true, status:true})
+
+const constructionSchema:  z.ZodType<Construction> = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  address: z.string(),
+  estimate_validity: z.number(),
+  parts: z.string(),
+  number_lot: z.number(),
+  customerID: z.string(),
+  Invoices: z.object({
+    items: z.array(invoiceSchema),
   }),
 })
 
-export { invoiceSchema, constructionSchema, LineTypes }
+export { invoiceFormSchema, constructionSchema, LineTypes }

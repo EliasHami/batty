@@ -1,19 +1,17 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { DatePicker } from '@mui/x-date-pickers'
 import { API } from 'aws-amplify'
-import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm, UseFormProps } from 'react-hook-form'
+import { FormProvider, SubmitHandler, useFieldArray, useForm, UseFormProps } from 'react-hook-form'
 
 import { Box, Button, CircularProgress, Grid, IconButton, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from '@mui/material'
 import { DateField, Link, NumberField, SelectField } from 'src/components'
 import { Alert, alertService } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { createInvoice, updateInvoice } from 'src/graphql/mutations'
-import { Construction, Invoice, invoiceSchema } from 'src/types'
+import { Construction, Invoice, invoiceFormSchema } from 'src/types'
 import { DurationUnits, Statuses } from 'src/types/API'
 import Lines from './Lines'
 
@@ -29,7 +27,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
   const [showTitle, setShowTitle] = useState(false)
 
   const formOptions: UseFormProps<Invoice> = {
-    resolver: yupResolver(invoiceSchema),
+    resolver: zodResolver(invoiceFormSchema),
   }
 
   if (!isAddMode) {
