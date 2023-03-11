@@ -66,7 +66,7 @@ export enum DurationUnits {
 export type Section = {
   __typename: "Section",
   name?: string | null,
-  order?: number | null,
+  order: number,
   lines?:  Array<Line | null > | null,
 };
 
@@ -79,7 +79,7 @@ export type Line = {
   quantity?: number | null,
   unit?: Units | null,
   price?: number | null,
-  order?: string | null,
+  order: number,
   elements?: Array< string | null > | null,
 };
 
@@ -142,7 +142,7 @@ export type CreateInvoiceInput = {
 
 export type SectionInput = {
   name?: string | null,
-  order?: number | null,
+  order: number,
   lines?: Array< LineInput | null > | null,
 };
 
@@ -154,7 +154,7 @@ export type LineInput = {
   quantity?: number | null,
   unit?: Units | null,
   price?: number | null,
-  order?: string | null,
+  order: number,
   elements?: Array< string | null > | null,
 };
 
@@ -678,7 +678,7 @@ export type CreateInvoiceMutation = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -688,7 +688,7 @@ export type CreateInvoiceMutation = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,
@@ -720,7 +720,7 @@ export type UpdateInvoiceMutation = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -730,7 +730,7 @@ export type UpdateInvoiceMutation = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,
@@ -762,7 +762,7 @@ export type DeleteInvoiceMutation = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -772,7 +772,7 @@ export type DeleteInvoiceMutation = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,
@@ -1059,7 +1059,7 @@ export type GetInvoiceQuery = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -1069,7 +1069,7 @@ export type GetInvoiceQuery = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,
@@ -1104,7 +1104,7 @@ export type ListInvoicesQuery = {
       sections?:  Array< {
         __typename: "Section",
         name?: string | null,
-        order?: number | null,
+        order: number,
       } | null > | null,
       title?: string | null,
       createdAt: string,
@@ -1141,7 +1141,7 @@ export type InvoicesByCustomerIDQuery = {
       sections?:  Array< {
         __typename: "Section",
         name?: string | null,
-        order?: number | null,
+        order: number,
       } | null > | null,
       title?: string | null,
       createdAt: string,
@@ -1178,7 +1178,7 @@ export type InvoicesByConstructionIDQuery = {
       sections?:  Array< {
         __typename: "Section",
         name?: string | null,
-        order?: number | null,
+        order: number,
       } | null > | null,
       title?: string | null,
       createdAt: string,
@@ -1508,7 +1508,7 @@ export type OnCreateInvoiceSubscription = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -1518,7 +1518,7 @@ export type OnCreateInvoiceSubscription = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,
@@ -1550,7 +1550,7 @@ export type OnUpdateInvoiceSubscription = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -1560,7 +1560,7 @@ export type OnUpdateInvoiceSubscription = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,
@@ -1592,7 +1592,7 @@ export type OnDeleteInvoiceSubscription = {
     sections?:  Array< {
       __typename: "Section",
       name?: string | null,
-      order?: number | null,
+      order: number,
       lines?:  Array< {
         __typename: "Line",
         name?: string | null,
@@ -1602,7 +1602,7 @@ export type OnDeleteInvoiceSubscription = {
         quantity?: number | null,
         unit?: Units | null,
         price?: number | null,
-        order?: string | null,
+        order: number,
         elements?: Array< string | null > | null,
       } | null > | null,
     } | null > | null,

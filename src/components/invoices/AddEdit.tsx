@@ -51,6 +51,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
 
   const handleCreateInvoice = async (invoice: Invoice) => {
     try {
+      // if (errors) throw new Error(errors) // TODO - handle errors
       await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createInvoice,
@@ -71,6 +72,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
 
   const handleUpdateInvoice = async (id: string, invoice: Invoice) => {
     try {
+      // if (errors) throw new Error(errors) //TODO fix this
       await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: updateInvoice,
@@ -105,7 +107,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
           <Typography sx={{ marginBottom: "10px" }} variant='h3'>{isAddMode ? 'Add Invoice' : invoice.number}</Typography>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <NumberField name="number" error={errors.number} label="Number" />
+              <TextField name="number" error={errors.number} label="Number" />
             </Grid>
             <Grid item xs={12} sm={6}>
               <DateField name="issueDate" error={errors.issueDate} label="Issue Date" />
@@ -145,9 +147,7 @@ const AddEdit: React.FC<AddEditProps> = ({ invoice, constructions }) => {
                 name="customerID"
                 error={errors.customerID}
                 label="Customer"
-                options={<><MenuItem value={10}>Customer 1</MenuItem>
-                  <MenuItem value={20}>Customer 2</MenuItem>
-                  <MenuItem value={30}>Customer 3</MenuItem></>}
+                options={<MenuItem value={"customer1"}>Customer 1</MenuItem>}
               />
             </Grid>
             <Grid item xs={12}>

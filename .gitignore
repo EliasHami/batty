@@ -59,4 +59,5 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+amplify/backend/api/batty/resolvers/*
 #amplify-do-not-edit-end

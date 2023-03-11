@@ -7,7 +7,7 @@ type Props = TextFieldProps & {
   onChange?: any
 }
 const NumberField: React.FC<Props> = ({ name, onChange = () => { }, error, ...props }) => {
-  const { control } = useFormContext()
+  const { control, setValue } = useFormContext()
 
   if (!name) return null
 
@@ -19,7 +19,7 @@ const NumberField: React.FC<Props> = ({ name, onChange = () => { }, error, ...pr
         <TextField
           {...field}
           onChange={(event => {
-            field.onChange(event)
+            setValue(name, parseInt(event.target.value))
             onChange(event)
           })}
           id={name}

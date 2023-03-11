@@ -39,13 +39,13 @@ const invoiceSchema = z.object({
   title: z.string(),
   sections: z.array(z.object({
     name: z.string(),
-    order: z.number(),
+    order: z.number().default(0),
     lines: z.array(z.object({
       name: z.string(),
       type : z.nativeEnum(LineTypes),
       service: z.string(),
       text : z.string(),
-      order: z.string(),
+      order: z.number().default(0),
       quantity: z.number(),
       unit : z.nativeEnum(Units),
       price: z.number(),

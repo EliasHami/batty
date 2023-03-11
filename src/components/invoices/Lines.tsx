@@ -1,8 +1,8 @@
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { NumberField, SelectField, TextField } from 'src/components';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, IconButton, InputAdornment, MenuItem, TableCell, TableRow, Tooltip } from '@mui/material';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { NumberField, SelectField, TextField } from 'src/components';
+import { Units } from 'src/types/API';
 
 type Props = {
   errors: any
@@ -46,7 +46,7 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
               <SelectField
                 name={`${lineName}.${i}.service`}
                 error={errors?.[i]?.service}
-                options={<MenuItem value={5}>Fourniture</MenuItem>}// TODO: ajouter la liste des services
+                options={<MenuItem value={"Fourniture"}>Fourniture</MenuItem>}// TODO: ajouter la liste des services
               />
             </Box>
           </TableCell>
@@ -55,6 +55,15 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
               name={`${lineName}.${i}.quantity`}
               error={errors?.[i]?.quantity}
               onChange={(event) => onQuantityChange(event, i)}
+            />
+          </TableCell>
+          <TableCell>
+            <SelectField
+              name={`${lineName}.${i}.unit`}
+              error={errors?.[i]?.price}
+              options={Object.keys(Units).map(unit => (
+                <MenuItem key={unit} value={unit}>{Units[unit]}</MenuItem>
+              ))}
             />
           </TableCell>
           <TableCell>

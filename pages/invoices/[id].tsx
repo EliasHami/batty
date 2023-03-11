@@ -1,7 +1,7 @@
 import { graphqlOperation, withSSRContext } from 'aws-amplify'
 
 import AddEdit from 'src/components/invoices/AddEdit'
-import { getInvoice, listConstructions } from 'src/graphql/queries'
+import { getInvoice } from 'src/graphql/queries'
 import { Construction } from 'src/types'
 
 export default AddEdit

@@ -6,7 +6,7 @@ type Line {
   quantity: Float
   unit: Units
   price: Float
-  order: String
+  order: Int!
   elements: [String]
 }
 
@@ -17,7 +17,7 @@ enum LineTypes {
 
 type Section {
   name: String
-  order: Int
+  order: Int!
   lines: [Line]
 }
 
