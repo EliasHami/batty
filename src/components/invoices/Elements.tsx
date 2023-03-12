@@ -27,7 +27,7 @@ export default function Elements({ lineName, errors }: Props) {
           {elements?.map((element, j) => (
             <Box key={element?.id} sx={{ display: 'flex', width: "100%" }}>
               <TextField
-                name={`${elementName}.${j}.name`}
+                name={`${elementName}.${j}`}
                 error={errors?.elements?.[j]}
               />
               <Tooltip title="Delete">
@@ -38,7 +38,7 @@ export default function Elements({ lineName, errors }: Props) {
             </Box>
           ))
           }
-          <Button onClick={() => addElement({ name: "" })}>+ Add an element</Button>
+          <Button onClick={() => addElement("")}>+ Add an element</Button>
         </Box>
       </TableCell>
     </TableRow>

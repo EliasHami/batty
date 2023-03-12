@@ -35,7 +35,7 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
     setValue(`${lineName}.${index}.total`, total)
   }
 
-  console.log({ toto: getValues(`${lineName}.0`) })
+  console.log({ toto: getValues(`${lineName}.0`), errors })
 
   return (
     <>
