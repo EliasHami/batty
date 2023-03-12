@@ -5,7 +5,7 @@ import { FormProvider, SubmitHandler, useForm, UseFormProps } from 'react-hook-f
 
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import { useState } from 'react'
-import { Link } from 'src/components'
+import { Link, NumberField } from 'src/components'
 import { Alert, alertService } from 'src/services'
 import { getErrorMessage } from 'src/utils'
 
@@ -16,7 +16,7 @@ type AddEditProps = {
   construction?: Construction | null
 }
 
-const steps = ["Configuration", "Select Parts"]
+const steps = ["Configuration"]
 
 const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   const isAddMode = !construction
@@ -48,7 +48,10 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
         query: createConstruction,
         variables: {
           input: {
-            ...construction
+            ...construction,
+            Invoices: [],
+            number_lot: 0,
+            parts: [],
           }
         }
       })
@@ -90,8 +93,10 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
   const isStepFailed = (step: number) => {
     if (step === 0) {
       return Boolean(errors.name || errors.address || errors.description || errors.customerID)
-    } else if (step === 1) return Boolean(errors.parts)
+    }
   }
+
+  console.log({ errors })
 
   return (
     <FormProvider {...methods} >
@@ -139,9 +144,7 @@ const AddEdit: React.FC<AddEditProps> = ({ construction }) => {
                 <div className="invalid-feedback">{errors.customerID?.message}</div>
               </div>
               <div className="form-group col">
-                <label>Estimate&apos;s validity</label>
-                <input type="text" {...register("estimate_validity" as never)} className={'form-control' + (errors.estimate_validity ? ' is-invalid' : '')} />
-                <div className="invalid-feedback">{errors.estimate_validity?.message}</div>
+                <NumberField name="estimate_validity" error={errors.estimate_validity} />
               </div>
             </div>)}
           <div className="form-row">

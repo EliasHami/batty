@@ -1,8 +1,9 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Button, IconButton, InputAdornment, MenuItem, TableCell, TableRow, Tooltip } from '@mui/material';
+import { Box, Button, InputAdornment, MenuItem, TableCell, TableRow } from '@mui/material';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { NumberField, SelectField, TextField } from 'src/components';
 import { Units } from 'src/types/API';
+import DeleteLine from './DeleteLine';
+import LineMenu from './LineMenu';
 
 type Props = {
   errors: any
@@ -32,6 +33,8 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
     const total = parseInt(quantity) * parseInt(price)
     setValue(`${lineName}.${index}.total`, total)
   }
+
+  console.log({ toto: getValues(`${lineName}.0`) })
 
   return (
     <>
@@ -84,11 +87,10 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
             />
           </TableCell>
           <TableCell>
-            <Tooltip title="Delete">
-              <IconButton onClick={() => deleteLine(i)}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <DeleteLine onDelete={() => deleteLine(i)} />
+              <LineMenu onDelete={() => deleteLine(i)} onDuplicate={() => addLine({ ...getValues(`${lineName}.${i}`) })} />
+            </Box>
           </TableCell>
         </TableRow>
       ))}
