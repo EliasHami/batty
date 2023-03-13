@@ -1,17 +1,17 @@
 import { z } from 'zod'
 import {
-  Construction as C, DurationUnits, Invoice as I, LineTypes,
-  Section as S, Statuses, Units
+  Construction as ConstructionAPI, DurationUnits, Invoice as InvoiceAPI, LineTypes,
+  Section as SectionAPI, Statuses, Units
 } from './API'
 import { DeepOmit } from './DeepOmit'
 
 export type Construction = DeepOmit<
-  Exclude<C, null>,
+  Exclude<ConstructionAPI, null>,
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
 export type Invoice = DeepOmit<
-  Exclude<I, null>,
+  Exclude<InvoiceAPI, null>,
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
@@ -21,7 +21,7 @@ export type InvoiceForm = DeepOmit<
 >
 
 export type Section = DeepOmit<
-  Exclude<S, null>,
+  Exclude<SectionAPI, null>,
   '__typename' | 'owner' | 'createdAt' | 'updatedAt' |  'nextToken'
 >
 
@@ -41,15 +41,15 @@ const invoiceSchema = z.object({
     name: z.string(),
     order: z.number().default(0),
     lines: z.array(z.object({
-      name: z.string(),
+      name: z.string().optional(),
       type : z.nativeEnum(LineTypes),
-      service: z.string(),
-      text : z.string(),
+      service: z.string().optional(),
+      text : z.string().optional(),
       order: z.number().default(0),
-      quantity: z.number(),
-      unit : z.nativeEnum(Units),
-      price: z.number(),
-      elements: z.array(z.string())
+      quantity: z.number().optional(),
+      unit : z.nativeEnum(Units).optional(),
+      price: z.number().optional(),
+      elements: z.array(z.string()).optional()
     }))
   })
 )})
