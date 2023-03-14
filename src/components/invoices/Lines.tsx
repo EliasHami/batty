@@ -1,4 +1,5 @@
-import { Box, Button, InputAdornment, MenuItem, TableCell, TableRow } from '@mui/material';
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Button, IconButton, InputAdornment, MenuItem, TableCell, TableRow, Tooltip } from '@mui/material';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { NumberField, SelectField, TextField } from 'src/components';
 import { LineTypes, Units } from 'src/types/API';
@@ -109,6 +110,13 @@ export default function Lines({ errors, sectionIndex }: Props): React.ReactEleme
               >
                 <TableCell colSpan={5}>
                   <TextField name={`${lineName}.${i}.text`} error={errors?.[i]?.text} />
+                </TableCell>
+                <TableCell>
+                  <Tooltip title="Delete">
+                    <IconButton onClick={() => deleteLine(i)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             )}
